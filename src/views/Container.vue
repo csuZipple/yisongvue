@@ -9,8 +9,9 @@
 </template>
 
 <script>
+  //Check if the local cache needs to restore the previously crashed page
     export default {
-        name: "Container"
+        name: "Container",
     }
 </script>
 

@@ -1,0 +1,1 @@
+/* constant for state.js */
