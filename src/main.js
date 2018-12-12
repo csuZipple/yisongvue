@@ -4,7 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+// Todo : register a error handler
 
 /* eslint-disable no-new */
 new Vue({
@@ -12,4 +13,4 @@ new Vue({
   router,
   components: { App },
   template: '<App/>'
-})
+});
