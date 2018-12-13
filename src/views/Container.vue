@@ -10,9 +10,10 @@
 
 <script>
   import {getToken} from "../util/util";
-  import {setToken} from "../util/http/util";
+  import {_get, setToken} from "../util/http/util";
   import {mapActions} from "vuex"
   import {registerWeixin,getNearbyStores} from "../util/http/util";
+  import {GET} from "../util/http/constant";
   //Check if the local cache needs to restore the previously crashed page
     export default {
         name: "Container",
@@ -20,11 +21,23 @@
             registerWeixin(function (wx) {
               wx.getLocation({
                 type: 'gcj02',
-                success: function (res) {
+                success(res) {
                   const {latitude,longitude} = res;
-                  getNearbyStores(latitude,longitude,res=>{//res => store list
-                      //todo: Save nearby stores to vuex
+                  _get({
+                    url:GET.NearbyStores,
+                    params:{latitude,longitude}
+                  },res=>{
+                    //todo: Save nearby stores to vuex
+                    console.log(res)
+                  },err=>{
+                    //todo: error
                   })
+                },
+                cancel(res){
+                    console.warn("open your GPS to get nearby store list.")
+                },
+                fail(err){
+                  console.error("failed to get location.")
                 }
               });
             })

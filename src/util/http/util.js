@@ -1,5 +1,6 @@
 import {AUTH} from '../wx/config/constant'
-import httpConfig from './constant'
+import httpConfig ,{GET}from './constant'
+import {createGetRequest} from '../util'
 import wx from 'weixin-jsapi'
 
 //call when the user needs to place an order(in addition to adding goods to the shopping cart)
@@ -52,9 +53,7 @@ function setToken(url,formData,callback) {
  * @param callback
  */
 function registerWeixin(callback){
-  fetch(httpConfig.signature+ window.location.href.split("#")[0], {
-    method: 'GET'
-  }).then(res => {
+  fetch(GET.Signature+ window.location.href.split("#")[0]).then(res => {
     if (res.ok) {
       res.json().then(result=> {
         if (result.code === 200) {
@@ -92,27 +91,31 @@ function registerWeixin(callback){
   });
 }
 
+
 /**
- * Get nearby stores based on latitude and longitude
- * @param lat
- * @param lnt
- * @param callback
+ * Optimized simple get request
+ * _get({url:"",param:{}},()=>{})
+ * @param request
+ * @param success
+ * @param failed
+ * @private
  */
-function getNearbyStores(lat,lnt,callback){
-  console.info("get near stores");
-  fetch(httpConfig.near +`?lnt= ${lnt}&lat=${lat}`, {
-    method: 'GET'
-  }).then(res => {
+function _get(request, success, failed) {
+  const req = createGetRequest(request);
+  fetch(req).then(res => {
     if (res.ok) {
       res.json().then(result=>{
-        if(typeof callback==='function') callback(result.data);
+        if(typeof success==='function') success(result.data);
       })
+    }else{
+      failed(res);
     }
   }).catch(res => {
-    console.log(res);
+    failed(res);
   })
 }
 
+
 export{
-  setToken,wxAuth,registerWeixin,getNearbyStores
+  setToken,wxAuth,registerWeixin,_get
 }

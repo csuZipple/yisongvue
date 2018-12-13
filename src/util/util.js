@@ -24,6 +24,17 @@ function getToken(){
   }
 }
 
+
+function createGetRequest({url,params}){
+  //Todo:check url and param type
+  let req = url+"?";
+  let query = [];
+  Object.keys(params).forEach((key)=>{
+     query.push(encodeURI(key)+"="+encodeURI(params[key]));
+  });
+  return req+query.join("&");
+}
+
 export{
-  getQueryString,getToken
+  getQueryString,getToken,createGetRequest
 }
