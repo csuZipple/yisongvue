@@ -1,6 +1,7 @@
 # yisong_vue
 
 > A wx h5 project for electronic commerce
+需要微信認證的開發者賬號以及相應的scope權限
 
 ## Build Setup
 

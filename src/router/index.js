@@ -6,6 +6,7 @@ import Cart from '../views/cart/cart'
 import Group from '../views/group/Group'
 import Order from '../views/order/Order'
 import User from '../views/user/User'
+import Register from '../views/Register'
 
 Vue.use(Router);
 const routerList = [];//
@@ -34,6 +35,11 @@ const mockRouterList = [
     path: "user",
     name: "user",
     component:User
+  },
+  {
+    path: "register",
+    name: "register",
+    component:Register
   }];
 export default new Router({
   routes: [
