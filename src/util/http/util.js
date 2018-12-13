@@ -1,4 +1,6 @@
 import {AUTH} from '../wx/config/constant'
+import httpConfig from './constant'
+import wx from 'weixin-jsapi'
 
 //call when the user needs to place an order(in addition to adding goods to the shopping cart)
 //before this method must be {if{state.token}{}}
@@ -45,6 +47,72 @@ function setToken(url,formData,callback) {
   });
 }
 
+/**
+ * register weixin js-api
+ * @param callback
+ */
+function registerWeixin(callback){
+  fetch(httpConfig.signature+ window.location.href.split("#")[0], {
+    method: 'GET'
+  }).then(res => {
+    if (res.ok) {
+      res.json().then(result=> {
+        if (result.code === 200) {
+          let data = result.data;
+          wx.config({
+            debug: false,
+            appId: data.appId,
+            timestamp: data.timestamp,
+            nonceStr: data.nonceStr,
+            signature: data.signature,
+            jsApiList: [
+              'openLocation',
+              'getLocation',
+              'showOptionMenu',
+              'closeWindow',
+              'chooseWXPay',
+              'openProductSpecificView',
+              'addCard',
+              'chooseCard',
+              'openCard'
+            ]
+          });
+          wx.ready(()=>{
+            //config success
+            callback(wx);
+          });
+          wx.error(res=>{
+            console.table(res)
+          })
+        }
+      })
+    }
+  }).catch(err => {
+    console.log(err);
+  });
+}
+
+/**
+ * Get nearby stores based on latitude and longitude
+ * @param lat
+ * @param lnt
+ * @param callback
+ */
+function getNearbyStores(lat,lnt,callback){
+  console.info("get near stores");
+  fetch(httpConfig.near +`?lnt= ${lnt}&lat=${lat}`, {
+    method: 'GET'
+  }).then(res => {
+    if (res.ok) {
+      res.json().then(result=>{
+        if(typeof callback==='function') callback(result.data);
+      })
+    }
+  }).catch(res => {
+    console.log(res);
+  })
+}
+
 export{
-  setToken,wxAuth
+  setToken,wxAuth,registerWeixin,getNearbyStores
 }

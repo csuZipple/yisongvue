@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Footer from '../views/Container'
+import Container from '../views/Container'
 import Home from '../views/main/Home'
 import Cart from '../views/cart/cart'
 import Group from '../views/group/Group'
@@ -46,7 +46,7 @@ export default new Router({
     {
       path:"/yisong",
       name:"yisong",
-      component:Footer,
+      component:Container,
       children:mockRouterList
     },{
       path:"/*",

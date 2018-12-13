@@ -10,11 +10,25 @@
 
 <script>
   import {getToken} from "../util/util";
-  import {setToken, wxAuth} from "../util/http/util";
+  import {setToken} from "../util/http/util";
   import {mapActions} from "vuex"
+  import {registerWeixin,getNearbyStores} from "../util/http/util";
   //Check if the local cache needs to restore the previously crashed page
     export default {
         name: "Container",
+       created(){
+            registerWeixin(function (wx) {
+              wx.getLocation({
+                type: 'gcj02',
+                success: function (res) {
+                  const {latitude,longitude} = res;
+                  getNearbyStores(latitude,longitude,res=>{//res => store list
+                      //todo: Save nearby stores to vuex
+                  })
+                }
+              });
+            })
+       },
         mounted(){
           this.initToken();
         },
