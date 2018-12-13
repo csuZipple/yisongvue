@@ -13,8 +13,9 @@ function wxAuth(){
  * Returning token in the background according to the code or token
  * @param url
  * @param formData :code or old token.
+ * @param callback
  */
-function setToken(url,formData) {
+function setToken(url,formData,callback) {
   fetch(url, {
     method: 'POST',
     body: formData
@@ -27,6 +28,9 @@ function setToken(url,formData) {
             console.log("get token success from http");
             localStorage.setItem("token",result.data.token);
             localStorage.setItem("expireTime",result.data.expireTime);
+            if(typeof callback==="function"){
+               callback(result.data.token);
+            }
             break;
           case 400:
             //Re-register the user when using the token as a parameter request to return 400 in the background.

@@ -11,7 +11,7 @@
 <script>
   import {getToken} from "../util/util";
   import {setToken, wxAuth} from "../util/http/util";
-  import httpConfig from '../util/http/constant'
+  import {mapActions} from "vuex"
   //Check if the local cache needs to restore the previously crashed page
     export default {
         name: "Container",
@@ -23,9 +23,16 @@
           initToken(){
               let initToken =getToken();
               console.assert(initToken,"old token not found!");
-              //for test --testing register
-              wxAuth()
-          }
+              /*for test --testing register
+              wxAuth()*/
+              console.log("for testing : init initToken with :a ");
+              initToken = "a";
+              if(initToken){
+                  console.log("init token with action");
+                  this.setToken(initToken);//=> this.$store.dispatch("setToken",initToken)
+              }
+          },
+        ...mapActions(["setToken"])
       }
     }
 </script>
