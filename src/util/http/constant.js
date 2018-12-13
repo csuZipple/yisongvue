@@ -6,6 +6,9 @@ const GET = {
   Signature:domain+'/wechat/jssdk/signature?url=',
   NearbyStores:domain+'/stores/near',//?lnt=&lat='
   Notice:domain+"/stores/notices/",//?storeId
+  Menus:domain+"/stores/menus/",//?storeId
+  FirstCategory:domain+"/categories/rank/first/",
+  Slides:domain+"/stores/slides/",//?storeId
 };
 export default {
   whitelist:"wechat.yisongbld.com",

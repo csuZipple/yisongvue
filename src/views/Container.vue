@@ -25,10 +25,9 @@
                   const {latitude,longitude} = res;
                   _get({
                     url:GET.NearbyStores,
-                    params:{latitude,longitude}
+                    params:{lat:latitude,lnt:longitude}
                   },res=>{
                     //todo: Save nearby stores to vuex
-                    console.log(res)
                   },err=>{
                     //todo: error
                   })
