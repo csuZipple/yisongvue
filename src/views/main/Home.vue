@@ -1,13 +1,13 @@
 <template>
-  <Search/>
+    <p>
+      This is home page
+    </p>
 </template>
 
 <script>
-  import Search from '../../components/container/SearchWrapper'
-  export default {
-    name: "Home",
-    components:{Search}
-  }
+    export default {
+        name: "Home"
+    }
 </script>
 
 <style scoped>
