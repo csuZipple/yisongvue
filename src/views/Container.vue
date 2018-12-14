@@ -12,12 +12,12 @@
   import {getToken} from "../util/util";
   import {_get, setToken} from "../util/http/util";
   import {mapActions} from "vuex"
-  import {registerWeixin,getNearbyStores} from "../util/http/util";
+  import {registerWeixin} from "../util/http/util";
   import {GET} from "../util/http/constant";
   //Check if the local cache needs to restore the previously crashed page
     export default {
         name: "Container",
-       created(){
+        created(){
             registerWeixin(function (wx) {
               wx.getLocation({
                 type: 'gcj02',
@@ -44,7 +44,7 @@
         mounted(){
           this.initToken();
         },
-      methods:{
+        methods:{
           //if the locally cached token has not expired,use it to initialize the state
           initToken(){
               let initToken =getToken();
@@ -59,7 +59,7 @@
               }
           },
         ...mapActions(["setToken"])
-      }
+      },
     }
 </script>
 
