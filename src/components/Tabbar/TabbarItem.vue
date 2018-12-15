@@ -5,7 +5,7 @@
       <slot name="icon-active" v-if="!simple && hasActiveIcon && isActive"></slot>
       <sup v-if="badge"><Badge :text="badge"></Badge></sup>
     </div>
-    <p class="ys-tab-item-label">
+    <p class="ys-tab-item-label" :class="{'active':isActive}">
       <slot name="label"></slot>
     </p>
   </a>
@@ -49,7 +49,8 @@
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+  @import "../../assets/style/color.less";
   .ys-tab-item{
     display: block;
     -webkit-box-flex: 1;
@@ -61,24 +62,28 @@
     text-align: center;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
+  .active{
+    color: @ys-theme-color !important;
+  }
   .ys-tab-item-icon{
     position: relative;/*for dot position*/
     display: inline-block;
     width: 27px;
     height: 27px;
-  }
-  .ys-tab-item-icon img{
-    width: 100%;
-    height: 100%;
-  }
-  .ys-tab-item-icon >sup{
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    &>sup{
     position: absolute;
     top: -8px;
     left: 100%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     z-index: 101;
+    }
   }
+
   .ys-tab-item-label{
     text-align: center;
     color: #999;
