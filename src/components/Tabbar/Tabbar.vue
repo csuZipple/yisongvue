@@ -22,5 +22,6 @@
     justify-content: space-around;
     align-items: center;
     border-top: 1px solid rgba(200,200,200,0.36);
+    background: #fff;
   }
 </style>
