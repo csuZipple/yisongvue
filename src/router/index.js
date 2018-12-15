@@ -4,6 +4,8 @@ import Container from '../views/Container'
 import Home from '../views/main/Home'
 import Cart from '../views/cart/cart'
 import Order from '../views/order/Order'
+import Group from '../views/group/Group'
+import Product from '../views/product/Product'
 import User from '../views/user/User'
 import Search from '../views/Search/Search'
 import SelectStore from '../views/SelectStore/SelectStore'
@@ -42,6 +44,14 @@ export default new Router({
       path:"/selectStore",//lnt and lat
       name:"select",
       component:SelectStore
+    },{
+      path:"/group",
+      name:"group",
+      component:Group
+    },{
+      path:"/product",
+      name:"product",
+      component:Product
     },{
       path:"/*",
       redirect:{

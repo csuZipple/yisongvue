@@ -1,5 +1,5 @@
 <template>
-
+  <p>I will select store then</p>
 </template>
 
 <script>

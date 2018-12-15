@@ -12,6 +12,12 @@
         icon:{
           type:String,
           default:require("../../../assets/icon/location.svg")
+        },
+        point:{
+          type:Object,
+          validator: function (value) {
+            return value['latitude']&&value['longitude'] //must not be null
+          }
         }
       },
       data(){
@@ -21,7 +27,13 @@
       },
       methods:{
           onLocationClicked(){
-            console.log("clicked!")
+            this.$router.push({
+              path:"/selectStore",
+              query: {
+                latitude: this.point['latitude'],
+                longitude:this.point['longitude']
+              }
+            })
           }
       }
     }
