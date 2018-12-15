@@ -6,6 +6,7 @@ import Cart from '../views/cart/cart'
 import Order from '../views/order/Order'
 import User from '../views/user/User'
 import Search from '../views/Search/Search'
+import SelectStore from '../views/SelectStore/SelectStore'
 
 Vue.use(Router);
 export default new Router({
@@ -37,6 +38,10 @@ export default new Router({
       path:"/search",
       name:"search",
       component:Search
+    },{
+      path:"/selectStore",//lnt and lat
+      name:"select",
+      component:SelectStore
     },{
       path:"/*",
       redirect:{

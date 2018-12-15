@@ -10,11 +10,11 @@
       </div>
 
       <div class="ys-store">
-        <div>
-          <img :src ='logo' alt="yisong">
-          <Locate/>
+        <img :src ='logo' alt="yisong" class="ys-logo">
+        <div class="wrapper" style="padding-left: 30%" >
+          <Location />
         </div>
-        <div>
+        <div class="wrapper">
           <Notice/>
         </div>
       </div>
@@ -24,11 +24,11 @@
 <script>
     import Search from "./components/Search";
     import Swiper from "./components/Swiper";
-    import Locate from "./components/Locate";
+    import Location from "./components/Location";
     import Notice from "./components/Notice";
     export default {
         name: "Home",
-        components: {Notice, Locate, Swiper, Search},
+        components: {Notice, Location, Swiper, Search},
       data(){
           return{
             logo:require("../../assets/image/logo.svg"),
@@ -63,7 +63,24 @@
   }
 
   .ys-store{
-    height: 100px;
+    position: relative;
+    height: 140px;
     padding:5px 20px ;
+
+    .ys-logo{
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      top: -50%;
+      z-index: 10;
+      transform:translateY(50%);
+
+      padding: 5px;
+      background: #fff;
+    }
+
+    .wrapper{
+      display: flex;
+    }
   }
 </style>
