@@ -19,7 +19,7 @@
 </script>
 
 <style lang="less" scoped>
-  @height:50px;
+  @height:30px;
   .ys-search{
     width: 80%;
     height: @height;
