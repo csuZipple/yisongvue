@@ -1,10 +1,32 @@
 <template>
-  <footer>
+  <div>
     <router-view/>
-    <p class=".footer">
-      I'm footer container!
-    </p>
-  </footer>
+    <tabbar>
+      <tabbar-item link="/nav/index" :selected="$route.path === '/nav/index'">
+        <img slot="icon" src="../assets/icon/index.svg">
+        <img slot="icon-active" src="../assets/icon/index-selected.svg">
+        <span slot="label">首页</span>
+      </tabbar-item>
+
+      <tabbar-item badge="3" link="/nav/cart" :selected="$route.path === '/nav/cart'">
+        <img slot="icon" src="../assets/icon/cart.svg">
+        <img slot="icon-active" src="../assets/icon/cart-selected.svg">
+        <span slot="label">购物车</span>
+      </tabbar-item>
+
+      <tabbar-item link="/nav/order" :selected="$route.path === '/nav/order'">
+        <img slot="icon" src="../assets/icon/order.svg">
+        <img slot="icon-active" src="../assets/icon/order-selected.svg">
+        <span slot="label">订单</span>
+      </tabbar-item>
+
+      <tabbar-item show-dot link="/nav/user" :selected="$route.path === '/nav/user'">
+        <img slot="icon" src="../assets/icon/user.svg">
+        <img slot="icon-active" src="../assets/icon/user-selected.svg">
+        <span slot="label">我的</span>
+      </tabbar-item>
+    </tabbar>
+  </div>
 
 </template>
 
@@ -14,10 +36,13 @@
   import {mapActions} from "vuex"
   import {registerWeixin} from "../util/http/util";
   import {GET} from "../util/http/constant";
+  import Tabbar from "../components/Tabbar/Tabbar";
+  import TabbarItem from "../components/Tabbar/TabbarItem";
   //Check if the local cache needs to restore the previously crashed page
     export default {
         name: "Container",
-       created(){
+      components: {TabbarItem, Tabbar},
+      created(){
             registerWeixin(function (wx) {
               wx.getLocation({
                 type: 'gcj02',
@@ -51,8 +76,6 @@
               console.assert(initToken,"old token not found!");
               /*for test --testing register
               wxAuth()*/
-              console.log("for testing : init initToken with :a ");
-              initToken = "a";
               if(initToken){
                   console.log("init token with action");
                   this.setToken(initToken);//=> this.$store.dispatch("setToken",initToken)

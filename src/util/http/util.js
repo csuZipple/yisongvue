@@ -108,10 +108,10 @@ function _get(request, success, failed) {
         if(typeof success==='function') success(result.data);
       })
     }else{
-      failed(res);
+      if(typeof failed ==='function') failed(res);
     }
   }).catch(res => {
-    failed(res);
+    if(typeof failed ==='function') failed(res);
   })
 }
 
