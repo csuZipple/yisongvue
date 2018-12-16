@@ -96,23 +96,11 @@ function registerWeixin(callback){
  * Optimized simple get request
  * _get({url:"",param:{}},()=>{})
  * @param request
- * @param success
- * @param failed
- * @private
+ * @return promise
  */
-function _get(request, success, failed) {
+function _get(request) {
   const req = createGetRequest(request);
-  fetch(req).then(res => {
-    if (res.ok) {
-      res.json().then(result=>{
-        if(typeof success==='function') success(result.data);
-      })
-    }else{
-      if(typeof failed ==='function') failed(res);
-    }
-  }).catch(res => {
-    if(typeof failed ==='function') failed(res);
-  })
+  return fetch(req);
 }
 
 

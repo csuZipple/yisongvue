@@ -6,6 +6,8 @@
 </template>
 
 <script>
+  import {_get} from "../../../util/http/util";
+  import {GET} from "../../../util/http/constant";
     export default {
         name: "Location",
       props:{
@@ -22,7 +24,7 @@
       },
       data(){
           return{
-             location: "世纪大厦店"
+             location: "默认地址"
           }
       },
       methods:{
@@ -34,7 +36,15 @@
                 longitude:this.point['longitude']
               }
             })
-          }
+          },
+        getStores(){
+          _get({
+            url:GET.NearbyStores,
+            params:{lat:this.point.latitude,lnt:this.point.longitude}
+          }).then(res =>{
+            return res.json();
+          })
+        }
       }
     }
 </script>

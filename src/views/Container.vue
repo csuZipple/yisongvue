@@ -32,40 +32,14 @@
 
 <script>
   import {getToken} from "../util/util";
-  import {_get, setToken} from "../util/http/util";
+  import {setToken} from "../util/http/util";
   import {mapActions} from "vuex"
-  import {registerWeixin} from "../util/http/util";
-  import {GET} from "../util/http/constant";
   import Tabbar from "../components/Tabbar/Tabbar";
   import TabbarItem from "../components/Tabbar/TabbarItem";
   //Check if the local cache needs to restore the previously crashed page
     export default {
         name: "Container",
-      components: {TabbarItem, Tabbar},
-      created(){
-            registerWeixin(function (wx) {
-              wx.getLocation({
-                type: 'gcj02',
-                success(res) {
-                  const {latitude,longitude} = res;
-                  _get({
-                    url:GET.NearbyStores,
-                    params:{lat:latitude,lnt:longitude}
-                  },res=>{
-                    //todo: Save nearby stores to vuex
-                  },err=>{
-                    //todo: error
-                  })
-                },
-                cancel(res){
-                    console.warn("open your GPS to get nearby store list.")
-                },
-                fail(err){
-                  console.error("failed to get location.")
-                }
-              });
-            })
-       },
+        components: {TabbarItem, Tabbar},
         mounted(){
           this.initToken();
         },

@@ -40,6 +40,9 @@
     import CategoryCard from "./components/CategoryCard";
     import Divider from "./components/Divider";
     import Product from "./components/Product";
+
+    import {registerWeixin} from "../../util/http/util";
+
     export default {
         name: "Home",
         components: {Product, Divider, Notice, Location, Swiper, Search,CategoryCard},
@@ -108,6 +111,35 @@
             }]
           }
       },
+      created(){
+          this.requestData();//async
+      },
+      methods:{
+          async requestData(){
+              this.point = await this.getLocation();
+              console.log("get location success！");
+          },
+         getLocation(){
+            return new Promise((resolve,reject)=>{
+              registerWeixin(function (wx) {
+                wx.getLocation({
+                  type: 'gcj02',
+                  success(res) {
+                    resolve(res);
+                  },
+                  cancel(res){
+                    console.warn("open your GPS to get nearby store list.");
+                    reject(res);
+                  },
+                  fail(err){
+                    console.error("failed to get location.");
+                    reject(err);
+                  }
+                });
+              })
+            });
+        }
+      }
     }
 </script>
 
