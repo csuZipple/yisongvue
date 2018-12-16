@@ -1,7 +1,7 @@
 const data = {
   token:"testToken",
-  location:{latitude:"28.11415",longitude:"112.98977"},//lat and lnt
-  storeId:"1535356045336",
+  location:{latitude:"28",longitude:"112"},//lat and lnt
+  storeId:"",//1535356045336
   swiperList:[{
       id:0,
       src:require("../assets/image/banner.svg"),

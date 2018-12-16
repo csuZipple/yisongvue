@@ -8,68 +8,65 @@
 <script>
   import {_get} from "../../../util/http/util";
   import {GET} from "../../../util/http/constant";
-    export default {
-        name: "Location",
-      props:{
-        icon:{
-          type:String,
-          default:require("../../../assets/icon/location.svg")
-        },
-        point:{
-          type:Object,
-          validator: function (value) {
-            return value['latitude']&&value['longitude'] //must not be null
-          }
-        }
+  export default {
+    name: "Location",
+    props:{
+      icon:{
+        type:String,
+        default:require("../../../assets/icon/location.svg")
       },
-      data(){
-          return{
-             location: "默认地址"
+      latitude:[String,Number],
+      longitude:[String,Number]
+    },
+    data(){
+      return{
+        location: "默认地址"
+      }
+    },
+    methods:{
+      onLocationClicked(){
+        let vm = this;
+        this.$router.push({
+          path:"/selectStore",
+          query: {
+            latitude:vm.latitude,
+            longitude:vm.longitude,
           }
+        })
       },
-      methods:{
-          onLocationClicked(){
-            this.$router.push({
-              path:"/selectStore",
-              query: {
-                latitude: this.point['latitude'],
-                longitude:this.point['longitude']
-              }
-            })
-          },
-        getStores(){
-          _get({
-            url:GET.NearbyStores,
-            params:{lat:this.point.latitude,lnt:this.point.longitude}
-          }).then(res =>{
-            return res.json();
-          })
-        }
+      getStores(){
+        _get({
+          url:GET.NearbyStores,
+          params:{lat:this.point.latitude,lnt:this.point.longitude}
+        }).then(res =>{
+          return res.json();
+        })
       }
     }
+  }
 </script>
 
 <style lang="less" scoped>
-.ys-location{
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .ys-location{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  padding: 10px;
-  color: #161616;
-  font-size: 1.4rem;
-  font-weight: 400;
+    padding: 10px;
+    color: #161616;
+    font-size: 1.4rem;
+    font-weight: 400;
 
-  img{
-    width: 16px;
-    object-fit: contain;
+    img{
+      width: 16px;
+      object-fit: contain;
+    }
+
+
+    span{
+      padding: 0 12px;
+    }
+
   }
-
-
-  span{
-    padding: 0 12px;
-  }
-
-}
 </style>

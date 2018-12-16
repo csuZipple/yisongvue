@@ -41,9 +41,10 @@ export default new Router({
       name:"search",
       component:Search
     },{
-      path:"/selectStore",//lnt and lat
+      path:"/selectStore/:latitude/:longitude",//lnt and lat
       name:"select",
-      component:SelectStore
+      component:SelectStore,
+      props:true
     },{
       path:"/group",
       name:"group",

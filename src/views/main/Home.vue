@@ -5,14 +5,14 @@
           <Search link="/search" placeholder="干脆面"/>
         </div>
         <div class="wrapper swiper">
-          <swiper :list='swiperList'/> <!--todo: finish the component-->
+          <swiper :list='swiperList'/>
         </div>
       </div>
 
       <div class="ys-store">
         <img :src ='logo' alt="yisong" class="ys-logo">
         <div class="wrapper" style="padding-left: 20%" >
-          <Location v-bind="point"/>
+          <Location v-bind="location"/>
         </div>
         <div class="wrapper">
           <Notice/>
@@ -41,7 +41,6 @@
     import Divider from "./components/Divider";
     import Product from "./components/Product";
 
-    import {registerWeixin} from "../../util/http/util";
     import { createNamespacedHelpers } from 'vuex'
 
     const { mapState, mapActions } = createNamespacedHelpers('data');
@@ -50,11 +49,7 @@
         components: {Product, Divider, Notice, Location, Swiper, Search,CategoryCard},
       data(){
           return{
-            logo:require("../../assets/image/logo.svg"),
-            point:{
-              latitude:"111",
-              longitude:"111"
-            },//todo:lat and lnt (must not be null)
+            logo:require("../../assets/image/logo.svg"),//todo: check whether the logo is returned from the server or not
             categories:[{
               id:0,
               image:require("../../assets/icon/optimal.svg"),
@@ -110,38 +105,28 @@
           }
       },
       created(){
-          // this.requestData();//async
-        this.setSwiper({ root: false });
+          this.requestData();//async
       },
       methods:{
           async requestData(){
-              this.point = await this.getLocation();
-              console.log("get location success！");
+            console.log("Have I chosen a store? ",Boolean(this.storeId));
+            const{latitude,longitude} = await this.setLocation({root: false});
+              if(!Boolean(this.storeId)){
+                this.$router.push({
+                  path:`/selectStore/${latitude}/${longitude}`
+                })
+              }else{
+                console.log("yes, I have! continue requesting data..");
+                this.setSwiper({ root: false });
+              }
           },
-         getLocation(){
-            return new Promise((resolve,reject)=>{
-              registerWeixin(function (wx) {
-                wx.getLocation({
-                  type: 'gcj02',
-                  success(res) {
-                    resolve(res);
-                  },
-                  cancel(res){
-                    console.warn("open your GPS to get nearby store list.");
-                    reject(res);
-                  },
-                  fail(err){
-                    console.error("failed to get location.");
-                    reject(err);
-                  }
-                });
-              })
-            });
-        },
-        ...mapActions(["setSwiper"])
+        ...mapActions(["setSwiper",'setLocation'])
+      },
+      mounted(){
+
       },
       computed:{
-        ...mapState(['swiperList'])
+        ...mapState(['swiperList','location','storeId'])
       }
     }
 </script>
