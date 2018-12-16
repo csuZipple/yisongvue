@@ -42,17 +42,15 @@
     import Product from "./components/Product";
 
     import {registerWeixin} from "../../util/http/util";
+    import { createNamespacedHelpers } from 'vuex'
 
+    const { mapState, mapActions } = createNamespacedHelpers('data');
     export default {
         name: "Home",
         components: {Product, Divider, Notice, Location, Swiper, Search,CategoryCard},
       data(){
           return{
             logo:require("../../assets/image/logo.svg"),
-            swiperList:[{
-              src:require("../../assets/image/banner.svg"),
-              alt:"default"
-            }],
             point:{
               latitude:"111",
               longitude:"111"
@@ -113,6 +111,7 @@
       },
       created(){
           this.requestData();//async
+        // this.setSwiper({ root: false });
       },
       methods:{
           async requestData(){
@@ -138,7 +137,11 @@
                 });
               })
             });
-        }
+        },
+        ...mapActions(["setSwiper"])
+      },
+      computed:{
+        ...mapState(['swiperList'])
       }
     }
 </script>

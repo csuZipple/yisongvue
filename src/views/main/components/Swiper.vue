@@ -22,9 +22,34 @@
         }
       }
     },
+    created(){
+      console.log("created SwipeList");
+      console.log(this.list)
+    },
+    mounted(){
+      console.log("mounted SwipeList");
+      console.log(this.list)
+    },
+    beforeUpdate(){
+      console.log("beforeUpdate SwipeList");
+      console.log(this.list)
+    },
+    updated(){
+      console.log("updated SwipeList");
+      console.log(this.list)
+    },
     computed:{
       showDot(){
-        return this.length>1;
+        return this.list.length>1;
+      }
+    },
+    watch:{
+      list:{
+        handler(n,o){
+          console.log('list-n',n);
+          console.log('list-o',n);
+        },
+        deep:true
       }
     }
   }

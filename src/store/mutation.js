@@ -1,8 +1,30 @@
-import{SET_TOKEN} from "../util/state/constant";
+import{SET_STOREID,SET_TOKEN,SET_SWIPER_LIST,SET_LOCATION,SET_INDEX_PRODUCTS,SET_CATEGORIES} from "../util/state/constant";
 
-const mutations = {
-    [SET_TOKEN](state,newToken){
+const dataMutations = {
+  [SET_STOREID](state,storeId){
+       state.storeId = storeId;
+    },
+  [SET_TOKEN](state,newToken){
        state.token = newToken;
-    }
+    },
+  [SET_SWIPER_LIST](state,list){
+       state.swiperList = list;
+       console.log(state.swiperList);
+       console.log("success set SwiperList")
+    },
+  [SET_LOCATION](state,newToken){
+       state.categories = newToken;
+    },
+  [SET_INDEX_PRODUCTS](state,newToken){
+       state.token = newToken;
+    },
+  [SET_CATEGORIES](state,newToken){
+       state.token = newToken;
+    },
 };
-export default mutations;
+const statusMutations = {
+
+};
+export {
+  dataMutations,statusMutations
+};

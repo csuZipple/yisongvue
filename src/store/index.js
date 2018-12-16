@@ -1,14 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import state from './state'
-import mutations from './mutation'
-import actions from './action'
+import {data,status} from './state'
+import {dataMutations} from './mutation'
+import {dataActions} from './action'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state,mutations,actions,
-    getters:{
+    modules:{
+      data:{
+        namespaced:true,
+        state:data,
+        mutations:dataMutations,
+        actions:dataActions,
+        getters:{
 
+        }
+      },
+      status:{
+        namespaced:true,
+        state:status
+      }
     }
 })

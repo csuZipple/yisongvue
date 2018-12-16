@@ -96,7 +96,7 @@ function registerWeixin(callback){
  * Optimized simple get request
  * _get({url:"",param:{}},()=>{})
  * @param request
- * @return promise
+ * @return Promise<Response>
  */
 function _get(request) {
   const req = createGetRequest(request);
