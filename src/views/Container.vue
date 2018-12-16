@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <router-view/>
+  <div class="ys-index">
+    <router-view style="padding-bottom: 53px"/>
     <tabbar>
       <tabbar-item link="/nav/index" :selected="$route.path === '/nav/index'">
         <img slot="icon" src="../assets/icon/index.svg">
@@ -87,8 +87,5 @@
 </script>
 
 <style scoped>
-  .footer{
-    position: fixed;
-    bottom: 0;
-  }
+
 </style>
