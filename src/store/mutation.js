@@ -9,8 +9,6 @@ const dataMutations = {
     },
   [SET_SWIPER_LIST](state,list){
        state.swiperList = list;
-       console.log(state.swiperList);
-       console.log("success set SwiperList")
     },
   [SET_LOCATION](state,newToken){
        state.categories = newToken;

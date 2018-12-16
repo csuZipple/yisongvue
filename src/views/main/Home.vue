@@ -110,8 +110,8 @@
           }
       },
       created(){
-          this.requestData();//async
-        // this.setSwiper({ root: false });
+          // this.requestData();//async
+        this.setSwiper({ root: false });
       },
       methods:{
           async requestData(){
