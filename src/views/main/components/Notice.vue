@@ -18,19 +18,17 @@
     },
     data(){
       return {
-        timer:null,
         currentIndex:0
       }
     },
     mounted(){
       if(this.notices.length>1){
-        this.timer = setInterval(this.updateNotices,3000);
+        let timer = setInterval(this.updateNotices,3000);
+        this.$once('hook:beforeDestroy',()=>{
+          clearInterval(timer);
+        })
       }
     },
-    beforeDestroy(){
-      this.timer && clearInterval(this.timer);
-    },
-
     methods:{
       updateNotices(){
         this.currentIndex = (this.currentIndex+1)%this.notices.length;
