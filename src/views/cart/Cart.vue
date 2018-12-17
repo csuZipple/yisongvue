@@ -1,34 +1,40 @@
 <template>
-   <div>
-     <div class="ys-cart-header">
-       购物车
-     </div>
-   </div>
+  <div>
+    <YsHeader :show-back="false" :show-right-text="true" :right-text="rightText" v-on:onRightClicked="manage">购物车</YsHeader>
+    <ul>
+      <CartItem  v-for="(item,index) in list" v-bind:key="index" v-bind="item"></CartItem>
+    </ul>
+
+  </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-    export default {
-        name: "Cart",
-        methods:{
-          checkOut(){
+  import YsHeader from "../../components/Header";
+  import CartItem from "./componets/CartItem";
+  export default {
+    name: "Cart",
+    components: {CartItem, YsHeader},
+    methods:{
+      manage(){
+        console.log("clicked! cart")
+      },
+      checkOut(){
 
-           },
-          auth(success,failed){
-              //Check whether the user logs in before the shopping cart settles or not
-              if(this.token){
-                  if(typeof success==='function') success(this.token);
-              }else{
-                 //expired or first enter in this application.
-                //Check whether the local cache has a token or not
-                if(typeof failed==='function') failed();
-              }
-           }
-          },
-        computed:{
-          ...mapState(["token"])
-        }
+      }
+    },
+    data(){
+      return{
+        rightText:"管理",
+        list:[
+          {
+            title:"卫龙辣条原味150g-我是这条街最亮的星",
+            price:2.5,
+            quantity:2,
+          }
+        ]
+      }
     }
+  }
 </script>
 
 <style scoped>
