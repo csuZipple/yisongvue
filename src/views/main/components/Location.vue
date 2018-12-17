@@ -1,7 +1,7 @@
 <template>
   <a href="javascript:;" class="ys-location" @click='onLocationClicked'>
     <img :src="icon" alt="">
-    <span>{{location}}</span>
+    <span>{{storeName}}</span>
   </a>
 </template>
 
@@ -16,12 +16,8 @@
         default:require("../../../assets/icon/location.svg")
       },
       latitude:[String,Number],
-      longitude:[String,Number]
-    },
-    data(){
-      return{
-        location: "默认地址"
-      }
+      longitude:[String,Number],
+      storeName:[String]
     },
     methods:{
       onLocationClicked(){

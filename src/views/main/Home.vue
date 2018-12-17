@@ -12,7 +12,7 @@
       <div class="ys-store">
         <img :src ='logo' alt="yisong" class="ys-logo">
         <div class="wrapper" style="padding-left: 20%" >
-          <Location v-bind="location"/>
+          <Location v-bind="location" :storeName="storeName"/>
         </div>
         <div class="wrapper">
           <Notice/>
@@ -126,7 +126,7 @@
 
       },
       computed:{
-        ...mapState(['swiperList','location','storeId'])
+        ...mapState(['swiperList','location','storeId','storeName'])
       }
     }
 </script>

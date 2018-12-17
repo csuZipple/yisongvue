@@ -1,8 +1,11 @@
-import{SET_STOREID,SET_TOKEN,SET_SWIPER_LIST,SET_LOCATION,SET_INDEX_PRODUCTS,SET_CATEGORIES} from "../util/state/constant";
+import{SET_STOREID,SET_TOKEN,SET_SWIPER_LIST,SET_LOCATION,SET_INDEX_PRODUCTS,SET_CATEGORIES,SET_STORENAME} from "../util/state/constant";
 
 const dataMutations = {
   [SET_STOREID](state,storeId){
        state.storeId = storeId;
+    },
+  [SET_STORENAME](state,storeName){
+       state.storeName = storeName;
     },
   [SET_TOKEN](state,newToken){
        state.token = newToken;

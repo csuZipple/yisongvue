@@ -4,7 +4,8 @@ import {
   SET_LOCATION,
   SET_INDEX_PRODUCTS,
   SET_CATEGORIES,
-  SET_STOREID
+  SET_STOREID,
+  SET_STORENAME
 } from "../util/state/constant";
 import {_get} from "../util/http/util";
 import {GET} from "../util/http/constant";
@@ -16,6 +17,9 @@ const dataActions = {
   },
   setStoreId({commit},storeId){
     commit(SET_STOREID,storeId);
+  },
+  setStoreName({commit},storeName){
+    commit(SET_STORENAME,storeName)
   },
   setSwiper({commit,state},context){
     _get({

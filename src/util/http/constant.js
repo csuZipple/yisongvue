@@ -8,7 +8,7 @@ const GET = {
   Notice:domain+"/stores/notices/",//?storeId
   Menus:domain+"/stores/menus/",//?storeId
   FirstCategory:domain+"/categories/rank/first/",
-  Slides:domain+"/stores/slides/p",//?storeId
+  Slides:domain+"/stores/slides/",//?storeId
 };
 export default {
   whitelist:"wechat.yisongbld.com",

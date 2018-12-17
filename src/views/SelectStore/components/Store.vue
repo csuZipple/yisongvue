@@ -1,6 +1,6 @@
 <template>
   <ul class="ys-select">
-    <li v-for="item in storeList" v-bind:key="item.id" @click="select(item.storeId)">
+    <li v-for="item in storeList" v-bind:key="item.id" @click="select(item.storeId,item.storeName)">
       <div class="wrapper">
         <div class="storeName">
           <img src="../../../assets/icon/shop.svg" alt="icon"/>
@@ -31,13 +31,14 @@
       latitude:String
     },
     methods:{
-      select(id){
+      select(id,storeName){
         this.setStoreId(id);
+        this.setStoreName(storeName);
         this.$router.push({
           name:"index"
         })
       },
-      ...mapActions(['setStoreId'])
+      ...mapActions(['setStoreId','setStoreName'])
     },
 
   }
