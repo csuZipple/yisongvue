@@ -27,17 +27,29 @@ const data = {
   indexProducts:[
     {
     id:0,
-    title:"默认数据",
+    type:"热销小吃",
     products:[
       {
-        id:2,
+        id:0,
         image:require("../assets/image/product_wangzai.svg"),
         alt:"旺仔小馒头",
         title:"旺仔小馒头原味16g",
         sales:48,
         price:1.5
       }]
-  }],
+  },{
+    id:1,
+    type:"今日推荐",
+    products:[
+      {
+        id:0,
+        image:require("../assets/image/product_wangzai.svg"),
+        alt:"旺仔小馒头",
+        title:"旺仔小馒头原味16g",
+        sales:48,
+        price:1.5
+      }]
+  }]
 };
 
 const status={

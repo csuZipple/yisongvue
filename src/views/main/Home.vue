@@ -23,10 +23,15 @@
           <CategoryCard v-for="item in categories" :link="item.link" :image="item.image" :key="item.id">{{item.text}}</CategoryCard>
       </div>
 
-      <Divider>热销小吃</Divider>
-      <div class="ys-products">
-        <Product v-for="item in products"  :image="item.image" :key="item.id" :title="item.title" :alt="item.alt" :sales="item.sales" :price="item.price"/>
+      <div v-for="(indexProduct,index) in indexProducts" v-bind:key="index">
+        <Divider>{{indexProduct.type}}</Divider>
+        <div class="ys-products">
+          <Product v-for="item in indexProduct.products"  :image="item.image" :key="item.name+item.id" :title="item.title" :alt="item.alt" :sales="item.sales" :price="item.price"/>
+        </div>
       </div>
+
+      <Divider>我也是有底线的</Divider>
+
 
     </div>
 </template>
@@ -49,7 +54,8 @@
       data(){
           return{
             logo:require("../../assets/image/logo.svg"),//todo: check whether the logo is returned from the server or not
-            categories:[{
+            categories:[
+              {
               id:0,
               image:require("../../assets/icon/optimal.svg"),
               text:"壹送优选",
@@ -65,42 +71,6 @@
               text:"全部产品",
               link:"/product"
             }],
-            products:[{
-              id:0,
-              image:require("../../assets/image/product_wangzai.svg"),
-              alt:"旺仔小馒头",
-              title:"旺仔小馒头原味16g",
-              sales:48,
-              price:1.5
-            },{
-              id:1,
-              image:require("../../assets/image/product_wangzai.svg"),
-              alt:"旺仔小馒头",
-              title:"旺仔小馒头原味16g",
-              sales:48,
-              price:1.5
-            },{
-              id:2,
-              image:require("../../assets/image/product_wangzai.svg"),
-              alt:"旺仔小馒头",
-              title:"旺仔小馒头原味16g",
-              sales:48,
-              price:1.5
-            },{
-              id:3,
-              image:require("../../assets/image/product_wangzai.svg"),
-              alt:"旺仔小馒头",
-              title:"旺仔小馒头原味16g",
-              sales:48,
-              price:1.5
-            },{
-              id:4,
-              image:require("../../assets/image/product_wangzai.svg"),
-              alt:"旺仔小馒头",
-              title:"旺仔小馒头原味16g",
-              sales:48,
-              price:1.5
-            }]
           }
       },
       created(){
@@ -109,24 +79,25 @@
       methods:{
           async requestData(){
             console.log("Have I chosen a store? ",Boolean(this.storeId));
-            const{latitude,longitude} = await this.setLocation(this);
               if(!Boolean(this.storeId)){
+                const{latitude,longitude} = await this.setLocation(this);
                 this.$router.push({
                   path:`/selectStore/${latitude}/${longitude}`
                 })
               }else{
                 console.log("yes, I have! continue requesting data..");
                 this.setSwiper(this);
-                this.setNotices({storeId:this.storeId,context:this});
+                this.setNotices(this);
+                this.setIndexProducts(this);
               }
           },
-        ...mapActions(["setSwiper",'setLocation','setNotices'])
+        ...mapActions(["setSwiper",'setLocation','setNotices','setIndexProducts'])
       },
       mounted(){
 
       },
       computed:{
-        ...mapState(['swiperList','location','storeId','storeName','notices'])
+        ...mapState(['swiperList','location','storeId','storeName','notices','indexProducts'])
       }
     }
 </script>

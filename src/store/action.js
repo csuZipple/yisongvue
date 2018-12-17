@@ -68,8 +68,8 @@ const dataActions = {
       })
     })
   },
-  setNotices({commit},dto){
-    _get({url:`${GET.Notice}${dto.storeId}`}).then(res=>res.json()).then(data=>{
+  setNotices({commit,state},context){
+    _get({url:`${GET.Notice}${state.storeId}`}).then(res=>res.json()).then(data=>{
       let list =[];
       if(data['data']&&data['data'].length){
         let id = 0;
@@ -93,13 +93,21 @@ const dataActions = {
         });
         commit(SET_NOTICES,list);
       }else{
-        dto.context.$toast(`can't get notices because it is null`);
+        context.$toast(`can't get notices because it is null`);
         console.warn(`can't get notices because it is null`)
       }
     }).catch(err=>{
-      dto.context.$toast(`network err, ${err}`);
+      context.$toast(`network err, ${err}`);
       console.error("failed to get notice."+err);
     })
+  },
+  setIndexProducts({commit,state},context){
+    const req = GET.Hot(state.storeId);
+      _get({url:req}).then(res=> res.json()).then(data=>{
+         commit(SET_INDEX_PRODUCTS,data['data'])
+      }).catch(err=>{
+        console.warn("failed get index products:"+err)
+      })
   }
 };
 export {

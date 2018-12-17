@@ -40,14 +40,12 @@
 
     methods:{
       animation(){
-        console.log("Switch!@");
         // this.list.push(this.list.shift()); -- error: will call the watcher!
         this.currentIndex = (this.currentIndex+1)%this.list.length;
       }
     },
     watch:{
       list:function (n,o) {
-        console.log(n);
         if(n.length>1){
           this.timer = setInterval(this.animation,3000);
         }

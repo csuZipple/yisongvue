@@ -9,6 +9,12 @@ const GET = {
   Menus:domain+"/stores/menus/",//?storeId
   FirstCategory:domain+"/categories/rank/first/",
   Slides:domain+"/stores/slides/",//?storeId
+  /**
+   * @return {string}
+   */
+  Hot:function (storeId) {
+    return domain+`/store/${storeId}/goods/hot`
+  }
 };
 export default {
   whitelist:"wechat.yisongbld.com",
