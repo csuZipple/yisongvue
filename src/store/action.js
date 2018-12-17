@@ -17,12 +17,12 @@ const dataActions = {
   setStoreId({commit},storeId){
     commit(SET_STOREID,storeId);
   },
-  setSwiper({commit,state}){
+  setSwiper({commit,state},context){
     _get({
       url:`${GET.Slides}${state.storeId}`
     }).then(res=>res.json()).then(data=>{
       let list = [];
-      if(data['data']){
+      if(data['data'].length){
         data['data'].forEach((item,index)=>{
           list.push({
             id:index,
@@ -32,13 +32,15 @@ const dataActions = {
         });
         commit(SET_SWIPER_LIST,list);
       }else{
+        context.$toast(`can't get the swiper data! data is null!`);
         console.warn("swiper list is null!");
       }
     }).catch(err=>{
-      console.error("Failed get swiperList!",err)
+       context.$toast(`Failed get swiperList! err: ${err}`);
+       console.error("Failed get swiperList!",err)
     });
   },
-  setLocation({commit}){
+  setLocation({commit},context){
     return new Promise((resolve,reject)=>{
       registerWeixin(function (wx) {
         wx.getLocation({
@@ -49,10 +51,12 @@ const dataActions = {
             resolve(res);
           },
           cancel(res){
+            context.$toast(`open your GPS to get nearby store list.`);
             console.warn("open your GPS to get nearby store list.");
             reject(res);
           },
           fail(err){
+            context.$toast(`network err, ${err}`);
             console.error("failed to get location.");
             reject(err);
           }

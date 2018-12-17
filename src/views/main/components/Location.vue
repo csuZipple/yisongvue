@@ -27,21 +27,9 @@
       onLocationClicked(){
         let vm = this;
         this.$router.push({
-          path:"/selectStore",
-          query: {
-            latitude:vm.latitude,
-            longitude:vm.longitude,
-          }
+          path:`/selectStore/${vm.latitude}/${vm.longitude}`
         })
       },
-      getStores(){
-        _get({
-          url:GET.NearbyStores,
-          params:{lat:this.point.latitude,lnt:this.point.longitude}
-        }).then(res =>{
-          return res.json();
-        })
-      }
     }
   }
 </script>

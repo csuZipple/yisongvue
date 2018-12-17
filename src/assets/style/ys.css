@@ -1,0 +1,22 @@
+.ys-toast{
+  background: rgba(0,0,0,0.8);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius:10px;
+  font-size:1.5rem;
+
+  max-width: 80%;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 20;
+}
+.ys-toast-top{
+  top: 20%;
+}
+
+.ys-toast-bottom{
+  bottom: 20%;
+}

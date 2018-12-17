@@ -12,4 +12,5 @@ export default {
 
 <style>
   @import "assets/style/reset.css";
+  @import "assets/style/ys.css";
 </style>

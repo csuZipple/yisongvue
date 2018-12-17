@@ -110,14 +110,14 @@
       methods:{
           async requestData(){
             console.log("Have I chosen a store? ",Boolean(this.storeId));
-            const{latitude,longitude} = await this.setLocation({root: false});
+            const{latitude,longitude} = await this.setLocation(this);
               if(!Boolean(this.storeId)){
                 this.$router.push({
                   path:`/selectStore/${latitude}/${longitude}`
                 })
               }else{
                 console.log("yes, I have! continue requesting data..");
-                this.setSwiper({ root: false });
+                this.setSwiper(this);
               }
           },
         ...mapActions(["setSwiper",'setLocation'])
