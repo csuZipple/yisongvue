@@ -1,11 +1,11 @@
 <template>
   <div class="ys-header">
-    <a href="javascript:;" @click="onBackClicked" v-show="showBack">
+    <a href="javascript:;" class="left" @click="onBackClicked" v-show="showBack">
     </a>
     <p>
       <slot></slot>
     </p>
-    <a href="javascript:;" @click="onRightClicked" v-show="showRightText"></a>
+    <a href="javascript:;" class="right" @click="onRightClicked" v-show="showRightText">{{rightText}}</a>
   </div>
 </template>
 
@@ -17,7 +17,7 @@
         this.$router.go(-1);
       },
       onRightClicked(){
-        this.showRightText && this.emit("onRightClicked")
+        this.showRightText && this.$emit("onRightClicked")
       }
     },
     props:{
@@ -28,36 +28,49 @@
       showRightText:{
         type:Boolean,
         default:false
-      }
+      },
+      rightText:String
     }
   }
 </script>
 
 <style lang="less" scoped>
   .ys-header{
-    width: 100%;
-    height: 53px;
+    width: 100vw;
+    height: 7vh;
     background: #fff;
     border-bottom: 1px solid #cccccc;
 
     position: relative;
 
+    // Q：设计稿是IOS，测试机是android，两者的viewport本来就不相同 因此按照比例实现的效果图与UI不符
     a{
-      width: 30px;
-      height: 30px;
-      background: url("../assets/icon/back.svg") center no-repeat;
-      background-size: contain;
+      min-width: 4.8vw;
+      height: 4vh;
       z-index: 10;
       position: absolute;
-      left: 8px;
+
       top: 50%;
       transform: translateY(-50%);
     }
+    a.left{
+      left: 4.3vw;
+      background: url("../assets/icon/back.svg") center no-repeat;
+      background-size: contain;
+    }
+    a.right{
+      right: 4vw;
+      color: #333333;
+      font-size: 3.4vw;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     p{
-      padding: 5px 10px;
       height: 100%;
       color: #161616;
-      font-size: 1.8rem;
+      font-size: 4vw;
       font-weight: 400;
 
       display: flex;
