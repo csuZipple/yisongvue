@@ -1,7 +1,9 @@
 <template>
-   <p>
-     I'm cart !
-   </p>
+   <div>
+     <div class="ys-cart-header">
+       购物车
+     </div>
+   </div>
 </template>
 
 <script>

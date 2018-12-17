@@ -49,7 +49,16 @@ const data = {
         sales:48,
         price:1.5
       }]
-  }]
+  }],
+  cartItem:[
+    {
+      title:"旺仔小馒头原味16g",
+      price:1.00,
+      quantity:1,
+      image:"",
+      alt:"旺仔小馒头"
+    }
+  ],//cart items will be stored locally -- localStorage
 };
 
 const status={

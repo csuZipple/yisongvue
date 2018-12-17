@@ -1,10 +1,11 @@
 <template>
   <div class="ys-header">
-    <a href="javascript:;" @click="onItemClicked">
+    <a href="javascript:;" @click="onBackClicked" v-show="showBack">
     </a>
     <p>
       <slot></slot>
     </p>
+    <a href="javascript:;" @click="onRightClicked" v-show="showRightText"></a>
   </div>
 </template>
 
@@ -12,8 +13,21 @@
   export default {
     name: "ys-header",
     methods:{
-      onItemClicked(){
+      onBackClicked(){
         this.$router.go(-1);
+      },
+      onRightClicked(){
+        this.showRightText && this.emit("onRightClicked")
+      }
+    },
+    props:{
+      showBack:{
+        type:Boolean,
+        default:true
+      },
+      showRightText:{
+        type:Boolean,
+        default:false
       }
     }
   }
@@ -31,7 +45,7 @@
     a{
       width: 30px;
       height: 30px;
-      background: url("../../../assets/icon/back.svg") center no-repeat;
+      background: url("../assets/icon/back.svg") center no-repeat;
       background-size: contain;
       z-index: 10;
       position: absolute;

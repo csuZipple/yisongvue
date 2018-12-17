@@ -25,7 +25,7 @@
   import { createNamespacedHelpers } from 'vuex'
   import {_get} from "../../util/http/util";
   import {GET} from "../../util/http/constant";
-  import YsHeader from "./components/Header";
+  import YsHeader from "../../components/Header";
   import Store from "./components/Store";
 
   const { mapState, mapActions } = createNamespacedHelpers('data');
