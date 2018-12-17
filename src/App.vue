@@ -13,4 +13,7 @@ export default {
 <style>
   @import "assets/style/reset.css";
   @import "assets/style/ys.css";
+  #app{
+    height: 100%;
+  }
 </style>

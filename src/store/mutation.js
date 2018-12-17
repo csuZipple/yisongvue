@@ -1,4 +1,6 @@
-import{SET_STOREID,SET_TOKEN,SET_SWIPER_LIST,SET_LOCATION,SET_INDEX_PRODUCTS,SET_CATEGORIES,SET_STORENAME,SET_NOTICES} from "../util/state/constant";
+import{SET_STOREID,SET_TOKEN,SET_SWIPER_LIST,SET_LOCATION,SET_INDEX_PRODUCTS,SET_CATEGORIES,SET_STORENAME,SET_NOTICES,
+        SET_CART_ITEM_LIST
+} from "../util/state/constant";
 
 const dataMutations = {
   [SET_STOREID](state,storeId){
@@ -25,6 +27,10 @@ const dataMutations = {
   [SET_CATEGORIES](state,categories){
        state.categories = categories;
     },
+  [SET_CART_ITEM_LIST](state,list){
+    state.cartItem = list;
+  }
+
 };
 const statusMutations = {
 

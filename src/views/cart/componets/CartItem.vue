@@ -1,8 +1,8 @@
 <template>
   <li>
-    <div class="ys-product"  @click="selected = !selected">
+    <div class="ys-product"  @click="handleCheck">
       <a href="javascript:;" class="check" :class="{'check-active':selected}"></a>
-      <img :src="images" alt="">
+      <img :src="image" :alt="alt">
       <div>
         <p class="title">{{title}}</p>
         <p class="price">￥ {{price}}</p>
@@ -10,9 +10,9 @@
     </div>
 
     <div class="ys-number">
-      <a href="javascript:;" @click="quantity&&--quantity">-</a>
+      <a href="javascript:;" @click="handleQuantity('-')">-</a>
       <input type="text" disabled v-bind:value="quantity" title=""/>
-      <a href="javascript:;" @click="++quantity" >+</a>
+      <a href="javascript:;" @click="handleQuantity" >+</a>
     </div>
   </li>
 </template>
@@ -21,7 +21,8 @@
   export default {
     name: "CartItem",
     props:{
-      images:{
+      id:String,
+      image:{
         type:String,
         default(){
           return require("../../../assets/image/product_wangzai.svg")
@@ -30,10 +31,16 @@
       title:String,
       price:Number,
       quantity:Number,
+      selected:Boolean,
+      alt:String
     },
-    data(){
-      return{
-        selected:false
+    methods:{
+      handleCheck(){
+        this.$emit("handleSelect",[this.id,!this.selected]);
+      },
+      handleQuantity(type){
+        if(type==='-')this.quantity&&this.$emit("handleQuantity",[this.id,this.quantity-1]);
+        else this.$emit("handleQuantity",[this.id,this.quantity+1]);
       }
     }
   }

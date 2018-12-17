@@ -61,5 +61,7 @@
 </script>
 
 <style scoped>
-
+.ys-index{
+  height: 100%;
+}
 </style>

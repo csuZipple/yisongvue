@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <Divider>我也是有底线的</Divider>
+      <Divider style="color: #aaa;">我也是有底线的</Divider>
 
 
     </div>

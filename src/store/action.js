@@ -5,7 +5,9 @@ import {
   SET_INDEX_PRODUCTS,
   SET_CATEGORIES,
   SET_STOREID,
-  SET_STORENAME, SET_NOTICES
+  SET_STORENAME,
+  SET_NOTICES,
+  SET_CART_ITEM_LIST
 } from "../util/state/constant";
 import {_get} from "../util/http/util";
 import {GET} from "../util/http/constant";
@@ -108,7 +110,19 @@ const dataActions = {
       }).catch(err=>{
         console.warn("failed get index products:"+err)
       })
+  },
+
+  initCartItemList({commit}){
+    let list = JSON.parse(localStorage.getItem("cartItemList"));
+    console.log("init cart item");
+    console.log(list);
+    commit(SET_CART_ITEM_LIST,list);
+  },
+
+  setCartItemList({commit},list){
+    commit(SET_CART_ITEM_LIST,list);
   }
+
 };
 export {
   dataActions
