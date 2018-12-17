@@ -3,25 +3,29 @@ const data = {
   location:{latitude:"28",longitude:"112"},//lat and lnt
   storeId:"",//1535356045336
   storeName:"",
-  notices:[{
+  notices:[
+    {
     id:0,
     notice:"下单闪电配送，平均20分钟送达!"
   },{
     id:1,
     notice:"这是第二条测试数据"
   }],
-  swiperList:[{
+  swiperList:[
+    {
       id:0,
       src:require("../assets/image/banner.svg"),
       alt:"轮播图"
   }],
-  categories:[{
+  categories:[
+    {
     id:0,
     image:require("../assets/icon/optimal.svg"),
     text:"壹送优选",
     link:"/optimal"
   }],
-  indexProducts:[{
+  indexProducts:[
+    {
     id:0,
     title:"默认数据",
     products:[

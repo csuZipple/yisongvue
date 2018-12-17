@@ -34,8 +34,7 @@
 <style lang="less" scoped>
  .ys-card{
    width:100%;
-   padding: 2px 5px;
-   margin: 8px 3px;
+   padding: 0 5px;
 
    display: inline-block;
    background:rgba(255,255,255,1);

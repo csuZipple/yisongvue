@@ -24,7 +24,6 @@
       </div>
 
       <Divider>热销小吃</Divider>
-
       <div class="ys-products">
         <Product v-for="item in products"  :image="item.image" :key="item.id" :title="item.title" :alt="item.alt" :sales="item.sales" :price="item.price"/>
       </div>
@@ -180,11 +179,12 @@
   }
 
   .ys-products{
-    padding:5px 20px;
+    padding:0 20px;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-column-gap:5px;
+    grid-row-gap:5px;
     /*grid-template-rows: auto*/
   }
 </style>
