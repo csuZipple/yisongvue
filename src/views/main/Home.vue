@@ -15,7 +15,7 @@
           <Location v-bind="location" :storeName="storeName"/>
         </div>
         <div class="wrapper">
-          <Notice/>
+          <Notice :notices="notices"/>
         </div>
       </div>
 
@@ -118,15 +118,16 @@
               }else{
                 console.log("yes, I have! continue requesting data..");
                 this.setSwiper(this);
+                this.setNotices({storeId:this.storeId,context:this});
               }
           },
-        ...mapActions(["setSwiper",'setLocation'])
+        ...mapActions(["setSwiper",'setLocation','setNotices'])
       },
       mounted(){
 
       },
       computed:{
-        ...mapState(['swiperList','location','storeId','storeName'])
+        ...mapState(['swiperList','location','storeId','storeName','notices'])
       }
     }
 </script>

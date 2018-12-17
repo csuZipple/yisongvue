@@ -5,7 +5,7 @@ import {
   SET_INDEX_PRODUCTS,
   SET_CATEGORIES,
   SET_STOREID,
-  SET_STORENAME
+  SET_STORENAME, SET_NOTICES
 } from "../util/state/constant";
 import {_get} from "../util/http/util";
 import {GET} from "../util/http/constant";
@@ -26,7 +26,7 @@ const dataActions = {
       url:`${GET.Slides}${state.storeId}`
     }).then(res=>res.json()).then(data=>{
       let list = [];
-      if(data['data'].length){
+      if(data['data']&&data['data'].length){
         data['data'].forEach((item,index)=>{
           list.push({
             id:index,
@@ -40,8 +40,8 @@ const dataActions = {
         console.warn("swiper list is null!");
       }
     }).catch(err=>{
-       context.$toast(`Failed get swiperList! err: ${err}`);
-       console.error("Failed get swiperList!",err)
+      context.$toast(`Failed get swiperList! err: ${err}`);
+      console.error("Failed get swiperList!",err)
     });
   },
   setLocation({commit},context){
@@ -67,7 +67,39 @@ const dataActions = {
         });
       })
     })
-
+  },
+  setNotices({commit},dto){
+    _get({url:`${GET.Notice}${dto.storeId}`}).then(res=>res.json()).then(data=>{
+      let list =[];
+      if(data['data']&&data['data'].length){
+        let id = 0;
+        data['data'].forEach(item=>{
+          let notices = [];
+          let size = 20;
+          let len = item['content'].length;
+          for(let i=0;i<( item['content'].length/size);i++){
+            if((i+1)*size > len){
+              notices.push(item['content'].substring(i*size,len));
+            }else{
+              notices.push(item['content'].substring(i*size,(i+1)*size));
+            }
+          }
+          notices.forEach(n=>{
+            list.push({
+              id:id++,
+              notice:n,
+            });
+          });
+        });
+        commit(SET_NOTICES,list);
+      }else{
+        dto.context.$toast(`can't get notices because it is null`);
+        console.warn(`can't get notices because it is null`)
+      }
+    }).catch(err=>{
+      dto.context.$toast(`network err, ${err}`);
+      console.error("failed to get notice."+err);
+    })
   }
 };
 export {
