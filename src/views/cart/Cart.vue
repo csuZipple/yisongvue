@@ -6,7 +6,7 @@
       <ul v-if="!isNull">
         <CartItem  v-for="(item,index) in cartItem" v-bind:key="index" v-bind="item" @handleSelect="onItemSelected" @handleQuantity="onQuantityChange" ></CartItem>
       </ul>
-        <NoData v-else pageName="index"/>
+      <NoData v-else pageName="index">购物车空空如也~</NoData>
     </div>
     <CartBottom :checked="selectedAll" v-bind:total="getTotal" class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="confirm"/>
 

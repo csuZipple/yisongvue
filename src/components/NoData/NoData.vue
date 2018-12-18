@@ -3,10 +3,10 @@
     <figure>
       <img src="../../assets/image/no-goods.png" alt="购物车空空如也~">
       <figcaption>
-        购物车空空如也
+        <slot></slot>
       </figcaption>
     </figure>
-    <a href="javascript:;" @click="jump">前往购买</a>
+    <a href="javascript:;" @click="jump">{{btnText}}</a>
   </div>
 
 </template>
@@ -15,7 +15,11 @@
   export default {
     name: "NoData",
     props:{
-      pageName:String
+      pageName:String,
+      btnText:{
+        type:String,
+        default:"去逛逛"
+      }
     },
     methods:{
       jump(){
