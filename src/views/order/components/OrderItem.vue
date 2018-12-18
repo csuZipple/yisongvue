@@ -13,7 +13,7 @@
           </figcaption>
         </figure>
       </div>
-      <a class="link" href="javascript:;" @click="">
+      <a class="link" href="javascript:;" @click="more">
 
       </a>
     </div>
@@ -37,6 +37,11 @@
       products:Array,
       orderId:[String,Number],
       time:String
+    },
+    methods:{
+      more(){
+        this.$emit("getMore",this.orderId)
+      }
     }
   }
 </script>

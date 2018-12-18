@@ -2,7 +2,7 @@
   <div>
     <Tab class="tab"/>
     <div class="ys-order" v-if="orderList.length!==0">
-      <OrderItem v-for="(item,index) in orderList" v-bind="item" v-bind:key="index"/>
+      <OrderItem v-for="(item,index) in orderList" v-bind="item" v-bind:key="index" @getMore="getMore"/>
     </div>
     <NoData v-else pageName="index">
       <p style="color: #666666; font-size: 3vw;font-weight: 500;">您当前还没有点餐</p>
@@ -23,6 +23,11 @@
     components: {NoData, OrderItem, Tab},
     computed:{
       ...mapState(['orderList'])
+    },
+    methods:{
+      getMore(orderId){
+        //todo: jump to order detail page
+      }
     }
   }
 </script>
