@@ -74,6 +74,31 @@ const data = {
   orderList:[
     {
       shopName:"壹送便利店（全丰小区店）",
+      status:1,
+      state:['订单交易中','未付款','交易完成'],
+      products:[
+        {
+          id:"123",
+          title:"旺仔小馒头原味16g",
+          price:1.00,
+          quantity:1,
+          image:require('../assets/image/products-mini.png'),
+          alt:"旺仔小馒头",
+        },
+        {
+          id:"321",
+          title:"旺仔小馒头原味16g",
+          price:1.00,
+          quantity:1,
+          image:require('../assets/image/products-mini.png'),
+          alt:"旺仔小馒头",
+        }
+      ],
+      orderId:458975574253689,
+      time:'2018-11/17 11:10'
+    },
+    {
+      shopName:"壹送便利店（全丰小区店）",
       status:2,
       state:['订单交易中','未付款','交易完成'],
       products:[

@@ -6,7 +6,7 @@
     </p>
     <div class="product-wrapper">
       <div class="product">
-        <figure class="item" v-for="(item,index) in products" v-bind:key="index">
+        <figure class="item" :class="{'expired':status!==1}" v-for="(item,index) in products" v-bind:key="index">
           <img :src="item.image" :alt="item.alt">
           <figcaption>
             {{item.title}}
@@ -46,10 +46,11 @@
   @beforeWidth:1vw;
   .ys-order-item{
     border-radius:8px;
-    box-shadow:0 0 30px 3px rgba(0,0,0,0.1);
+    box-shadow:0 0 20px 0 rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    margin: 0 0 12px ;
 
     p{
       padding: 1vw @width;
@@ -75,6 +76,7 @@
     }
     .product{
       display: flex;
+      min-height: 100px;
       justify-content: space-around;
 
       .item{
@@ -140,6 +142,14 @@
 
     .desc{
       padding-left: 3vw;
+      &:last-child{
+        padding-bottom: 10px;
+      }
+    }
+    .expired{
+      img{
+        filter: grayscale(100%);
+      }
     }
   }
 </style>
