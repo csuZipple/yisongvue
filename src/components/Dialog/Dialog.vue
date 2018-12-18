@@ -1,15 +1,15 @@
 <template>
-  <div class="ys-mask">
+  <div class="ys-mask" @click="handleMaskClick">
     <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <div v-show="isShow" class="dialog">
+      <div v-show="isShow" class="dialog" @click.stop="handleDialogClicked">
         <slot name="icon" v-show="!simple"></slot> <!--todo: set icon -->
         <p>
           {{title}}
         </p>
         <slot name="describe" v-show="hasDesc"></slot>
         <div class="btn-wrapper">
-          <a href="javascript:;" @click="handleClick('cancel')">{{leftBtnText}}</a>
-          <a href="javascript:;" @click="handleClick">{{rightBtnText}}</a>
+          <a href="javascript:;" @click.stop="handleClick('cancel')">{{leftBtnText}}</a>
+          <a href="javascript:;" @click.stop="handleClick">{{rightBtnText}}</a>
         </div>
       </div>
     </transition>
@@ -37,6 +37,12 @@
     methods:{
       handleClick(type){
         type==='cancel'?this.$emit("cancel"):this.$emit("ok");
+      },
+      handleMaskClick(){
+        this.$emit("maskClicked")
+      },
+      handleDialogClicked(){
+        //do nothing
       }
     },
     data(){
