@@ -74,7 +74,7 @@ const data = {
   orderList:[
     {
       shopName:"壹送便利店（全丰小区店）",
-      status:1,
+      status:0,
       state:['订单交易中','未付款','交易完成'],
       products:[
         {

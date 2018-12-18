@@ -6,7 +6,7 @@
     </p>
     <div class="product-wrapper">
       <div class="product">
-        <figure class="item" :class="{'expired':status!==1}" v-for="(item,index) in products" v-bind:key="index">
+        <figure class="item" :class="{'expired':status!==0}" v-for="(item,index) in products" v-bind:key="index">
           <img :src="item.image" :alt="item.alt">
           <figcaption>
             {{item.title}}
