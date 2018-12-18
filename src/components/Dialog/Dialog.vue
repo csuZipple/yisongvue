@@ -1,24 +1,26 @@
 <template>
-  <div class="ys-mask">
-    <div class="dialog">
-      <slot name="icon" v-show="!simple"></slot> <!--todo: set icon -->
-      <p>
-        {{title}}
-      </p>
-      <slot name="describe" v-show="hasDesc"></slot>
-      <div>
-        <a href="javascript:;" @click="handleClick('cancel')">{{leftBtnText}}</a>
-        <a href="javascript:;" @click="handleClick">{{rightBtnText}}</a>
+  <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+    <div class="ys-mask">
+      <div class="dialog">
+        <slot name="icon" v-show="!simple"></slot> <!--todo: set icon -->
+        <p>
+          {{title}}
+        </p>
+        <slot name="describe" v-show="hasDesc"></slot>
+        <div class="btn-wrapper">
+          <a href="javascript:;" @click="handleClick('cancel')">{{leftBtnText}}</a>
+          <a href="javascript:;" @click="handleClick">{{rightBtnText}}</a>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
+  import animated from 'animate.css'
   export default {
     name: "Dialog",
     props:{
-      icon:String,
       title:String,
       leftBtnText:String,
       rightBtnText:String
@@ -60,6 +62,27 @@
   .dialog{
     background: #ffffff;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img{
+      padding: 8px;
+    }
+
+    p{
+      color: #000;
+      font-size: 5vw;
+    }
+
+    .describe{
+      color: #999999;
+      font-size: 3vw;
+    }
+
+    .btn-wrapper{
+
+    }
   }
 }
 </style>

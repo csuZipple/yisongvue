@@ -16,7 +16,9 @@
         <a href="javascript:;" @click="goIndex">前往购买</a>
       </template>
     </div>
-    <CartBottom v-bind:total="getTotal" class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="onDelete"/>
+    <CartBottom v-bind:total="getTotal" class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="confirm"/>
+
+    <Dialog v-show="showDialog" title="确认删除该商品吗" left-btn-text="我再想想" right-btn-text="确认" @cancel="cancel" @ok="ok"/>
 
   </div>
 </template>
@@ -26,10 +28,11 @@
   import CartItem from "./components/CartItem";
   import CartBottom from "./components/CartBottom";
   import { createNamespacedHelpers } from 'vuex'
+  import Dialog from "../../components/Dialog/Dialog";
   const { mapState, mapActions } = createNamespacedHelpers('data');
   export default {
     name: "Cart",
-    components: {CartBottom, CartItem, YsHeader},
+    components: {Dialog, CartBottom, CartItem, YsHeader},
     methods:{
       manage(){
         if(this.rightText==='管理'){
@@ -47,6 +50,17 @@
           }else{
             this.$toast("Nothing to check out!");
           }
+      },
+      cancel(){
+        this.showDialog = false;
+        this.$toast("取消删除~");
+      },
+      ok(){
+        this.onDelete();
+        this.showDialog = false;
+      },
+      confirm(){
+        this.showDialog = true;
       },
       onDelete(){
         const list = this.cartItem.filter(item=>{
@@ -69,11 +83,9 @@
         })
       },
       onItemSelected(item){
-        console.log(item);
         this.cartItem.filter(res=>{
           if(res['id']===item[0]){
             res['selected'] = item[1];
-            console.log(res);
           }
         })
       },
@@ -96,7 +108,8 @@
     data(){
       return{
         rightText:"管理",
-        showDelete:false
+        showDelete:false,
+        showDialog:false
       }
     },
     computed:{
