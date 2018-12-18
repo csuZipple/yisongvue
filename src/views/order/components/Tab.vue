@@ -9,8 +9,10 @@
     name: "Tab",
     methods:{
       changeTab(index){
-        this.currentIndex = index;
-        this.$emit('changeTab',index);
+        if(index!==this.currentIndex){
+          this.currentIndex = index;
+          this.$emit('changeTab',index);
+        }
       }
     },
     data(){
