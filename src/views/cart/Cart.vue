@@ -6,15 +6,7 @@
       <ul v-if="!isNull">
         <CartItem  v-for="(item,index) in cartItem" v-bind:key="index" v-bind="item" @handleSelect="onItemSelected" @handleQuantity="onQuantityChange" ></CartItem>
       </ul>
-      <template v-else>
-        <figure>
-          <img src="../../assets/image/no-goods.png" alt="购物车空空如也~">
-          <figcaption>
-            购物车空空如也
-          </figcaption>
-        </figure>
-        <a href="javascript:;" @click="goIndex">前往购买</a>
-      </template>
+        <NoData v-else pageName="index"/>
     </div>
     <CartBottom :checked="selectedAll" v-bind:total="getTotal" class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="confirm"/>
 
@@ -29,10 +21,11 @@
   import CartBottom from "./components/CartBottom";
   import { createNamespacedHelpers } from 'vuex'
   import Dialog from "../../components/Dialog/Dialog";
+  import NoData from "../../components/NoData/NoData";
   const { mapState, mapActions } = createNamespacedHelpers('data');
   export default {
     name: "Cart",
-    components: {Dialog, CartBottom, CartItem, YsHeader},
+    components: {NoData, Dialog, CartBottom, CartItem, YsHeader},
     methods:{
       manage(){
         if(this.cartItem.length){
@@ -100,11 +93,6 @@
         }
         this.selectedAll = isSelectAll;
       },
-      goIndex(){
-        this.$router.push({
-          name:"index"
-        })
-      },
       getSelectedCartItemList(){
         return this.cartItem.filter(item=>{
           return !(item['selected']);
@@ -169,25 +157,6 @@
       flex-direction: column;
       align-items: center;
 
-      figure{
-        padding: 30px;
-
-        figcaption{
-          padding: 8px;
-          text-align: center;
-
-          font-weight: 500;
-          font-size:4.5vw;
-          color: #666666;
-        }
-      }
-      a{
-        background: #FFDF5C;
-        color: #333333;
-        font-size: 4.5vw;
-        padding: 8px 30px;
-        border-radius:30px;
-      }
     }
     .bottom{
       flex: 0 0 auto;
