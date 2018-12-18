@@ -49,9 +49,7 @@
       checkOut(){
         if(this.cartItem.length){
           //todo:go to checkOut
-          const list = this.cartItem.filter(item=>{
-            return !(item['selected']);
-          });
+          const list = this.getSelectedCartItemList();
           if(list.length!==this.cartItem.length){
             this.$toast("check out!");
           }else{
@@ -77,9 +75,7 @@
         this.showDialog = false;
       },
       confirm(){
-        const list = this.cartItem.filter(item=>{
-          return !(item['selected']);
-        });
+        const list = this.getSelectedCartItemList();
         if(list.length!==this.cartItem.length){
           this.showDialog = true;
         }else{
@@ -87,9 +83,7 @@
         }
       },
       onDelete(){
-        const list = this.cartItem.filter(item=>{
-          return !(item['selected']);
-        });
+        const list = this.getSelectedCartItemList();
         this.setCartItemList(list);
         if (!list.length) {
           this.rightText = '管理';
@@ -97,24 +91,14 @@
         }
       },
       onQuantityChange(item){//id=item[0] quantity=item[1];
-        this.cartItem.filter(res=>{//Modify the original array with a reference type
-          if(res['id']===item[0]){
-            res['quantity'] = item[1];
-          }
-        })
+        this.updateCartItemList(item,'quantity');
       },
       onItemSelected(item){
-        this.cartItem.filter(res=>{
-          if(res['id']===item[0]){
-            res['selected'] = item[1];
-          }
-        })
+        this.updateCartItemList(item,'selected');
       },
       handleSelectAll(isSelectAll){
         if(this.cartItem.length){
-          this.cartItem.filter(res=>{
-            res['selected']=isSelectAll;
-          })
+         this.updateCartItemList(isSelectAll,'selected');
         }
         this.selectedAll = isSelectAll;
       },
@@ -122,6 +106,24 @@
         this.$router.push({
           name:"index"
         })
+      },
+      getSelectedCartItemList(){
+        return this.cartItem.filter(item=>{
+          return !(item['selected']);
+        });
+      },
+      updateCartItemList(item,key){
+        if(Object.prototype.toString.call(item)==='[object Array]'){
+          this.cartItem.filter(res=>{//Modify the original array with a reference type
+            if(res['id']===item[0]){
+              res[`${key}`] = item[1];
+            }
+          })
+        }else{
+          this.cartItem.filter(res=>{
+            res[`${key}`]=item;//item must be boolean;
+          })
+        }
       },
       ...mapActions(['setCartItemList'])
     },
