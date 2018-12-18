@@ -39,8 +39,7 @@
         this.$emit("handleSelect",[this.id,!this.selected]);
       },
       handleQuantity(type){
-        if(type==='-')this.quantity>1&&this.$emit("handleQuantity",[this.id,this.quantity-1]);
-        else this.$emit("handleQuantity",[this.id,this.quantity+1]);
+        type==='-'?this.quantity>1&&this.$emit("handleQuantity",[this.id,this.quantity-1]):this.$emit("handleQuantity",[this.id,this.quantity+1])
       }
     }
   }
