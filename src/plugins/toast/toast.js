@@ -19,12 +19,10 @@ Toast.install = function(Vue,options){
     Vue.prototype.$toast = op=>{
       let temp = "";
       if(typeof op ==='string'){
-        console.log("string");
         temp = `<div class="ys-toast animated fadeIn ys-toast-middle">
                         <p>${op}</p>
                     </div>`;
       }else if(typeof op ==='object'){
-        console.log("object");
         temp = `<div class="ys-toast animated fadeIn ys-toast-${op.position}">
                         <p>${op.text}</p>
                     </div>`
