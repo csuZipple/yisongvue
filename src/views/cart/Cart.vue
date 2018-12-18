@@ -16,9 +16,9 @@
         <a href="javascript:;" @click="goIndex">前往购买</a>
       </template>
     </div>
-    <CartBottom v-bind:total="getTotal" class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="confirm"/>
+    <CartBottom :checked="selectedAll" v-bind:total="getTotal" class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="confirm"/>
 
-    <Dialog v-show="showDialog" :isShow="showDialog" title="确认删除该商品吗?" left-btn-text="我再想想" right-btn-text="确认" @cancel="cancel" @ok="ok"/>
+    <Dialog v-show="showDialog" :isShow="showDialog" title="大人，三思而后行啊~" left-btn-text="我再想想" right-btn-text="确认" @cancel="cancel" @ok="ok" @maskClicked="maskClicked"/>
 
   </div>
 </template>
@@ -39,6 +39,7 @@
           if(this.rightText==='管理'){
             this.rightText = '完成';
             this.handleSelectAll(false);
+            this.selectedAll = false;
           }else{
             this.rightText = '管理';
           }
@@ -52,6 +53,9 @@
         }else{
           this.$toast("Nothing to check out!");
         }
+      },
+      maskClicked(){
+        this.showDialog = false;
       },
       cancel(){
         this.showDialog = false;
@@ -82,6 +86,7 @@
         this.setCartItemList(list);
         if (!list.length) {
           this.rightText = '管理';
+          this.selectedAll = false;
         }
       },
       onQuantityChange(item){//id=item[0] quantity=item[1];
@@ -104,6 +109,7 @@
             res['selected']=isSelectAll;
           })
         }
+        this.selectedAll = isSelectAll;
       },
       goIndex(){
         this.$router.push({
@@ -116,7 +122,8 @@
       return{
         rightText:"管理",
         showDelete:false,
-        showDialog:false
+        showDialog:false,
+        selectedAll:false
       }
     },
     computed:{
