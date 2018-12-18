@@ -49,7 +49,14 @@
       checkOut(){
         if(this.cartItem.length){
           //todo:go to checkOut
-
+          const list = this.cartItem.filter(item=>{
+            return !(item['selected']);
+          });
+          if(list.length!==this.cartItem.length){
+            this.$toast("check out!");
+          }else{
+            this.$toast("You need to select the item before checkOut.");
+          }
         }else{
           this.$toast("Nothing to check out!");
         }
@@ -132,7 +139,11 @@
       },
       getTotal(){
         return this.cartItem.reduce((total,current)=>{
-          return total+current['price']*current['quantity'];
+          if(current['selected']){
+            return total+current['price']*current['quantity'];
+          }else{
+            return total;
+          }
         },0)//set init to 0 allows the array index to start at 0.
       },
       ...mapState(['cartItem'])
