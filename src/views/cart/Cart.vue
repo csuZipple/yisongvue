@@ -23,8 +23,8 @@
 
 <script>
   import YsHeader from "../../components/Header";
-  import CartItem from "./componets/CartItem";
-  import CartBottom from "./componets/CartBottom";
+  import CartItem from "./components/CartItem";
+  import CartBottom from "./components/CartBottom";
   import { createNamespacedHelpers } from 'vuex'
   const { mapState, mapActions } = createNamespacedHelpers('data');
   export default {
