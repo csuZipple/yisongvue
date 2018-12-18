@@ -18,7 +18,7 @@
     </div>
     <CartBottom v-bind:total="getTotal" class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="confirm"/>
 
-    <Dialog v-show="showDialog" title="确认删除该商品吗" left-btn-text="我再想想" right-btn-text="确认" @cancel="cancel" @ok="ok"/>
+    <Dialog v-show="showDialog" :isShow="showDialog" title="确认删除该商品吗?" left-btn-text="我再想想" right-btn-text="确认" @cancel="cancel" @ok="ok"/>
 
   </div>
 </template>
@@ -35,21 +35,23 @@
     components: {Dialog, CartBottom, CartItem, YsHeader},
     methods:{
       manage(){
-        if(this.rightText==='管理'){
-          this.rightText = '完成';
-          this.handleSelectAll(false);
-        }else{
-          this.rightText = '管理';
+        if(this.cartItem.length){
+          if(this.rightText==='管理'){
+            this.rightText = '完成';
+            this.handleSelectAll(false);
+          }else{
+            this.rightText = '管理';
+          }
+          this.showDelete = !this.showDelete;
         }
-        this.showDelete = !this.showDelete;
       },
       checkOut(){
-          if(this.cartItem.length){
-            //todo:go to checkOut
+        if(this.cartItem.length){
+          //todo:go to checkOut
 
-          }else{
-            this.$toast("Nothing to check out!");
-          }
+        }else{
+          this.$toast("Nothing to check out!");
+        }
       },
       cancel(){
         this.showDialog = false;
@@ -64,19 +66,22 @@
         this.showDialog = false;
       },
       confirm(){
-        this.showDialog = true;
+        const list = this.cartItem.filter(item=>{
+          return !(item['selected']);
+        });
+        if(list.length!==this.cartItem.length){
+          this.showDialog = true;
+        }else{
+          this.$toast("You need to select the item before deleting.");
+        }
       },
       onDelete(){
         const list = this.cartItem.filter(item=>{
           return !(item['selected']);
         });
-        if(list.length!==this.cartItem.length){
-          this.setCartItemList(list);
-          if (!list.length) {
-            this.manage();
-          }
-        }else{
-          this.$toast("You need to select the item before deleting.");
+        this.setCartItemList(list);
+        if (!list.length) {
+          this.rightText = '管理';
         }
       },
       onQuantityChange(item){//id=item[0] quantity=item[1];
@@ -98,8 +103,6 @@
           this.cartItem.filter(res=>{
             res['selected']=isSelectAll;
           })
-        }else{
-          this.$toast("select nothing!");
         }
       },
       goIndex(){
@@ -121,9 +124,9 @@
         return this.cartItem.length===0;
       },
       getTotal(){
-          return this.cartItem.reduce((total,current)=>{
-            return total+current['price']*current['quantity'];
-          },0)//set init to 0 allows the array index to start at 0.
+        return this.cartItem.reduce((total,current)=>{
+          return total+current['price']*current['quantity'];
+        },0)//set init to 0 allows the array index to start at 0.
       },
       ...mapState(['cartItem'])
     }

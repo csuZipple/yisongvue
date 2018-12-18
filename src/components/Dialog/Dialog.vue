@@ -1,7 +1,7 @@
 <template>
-  <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-    <div class="ys-mask">
-      <div class="dialog">
+  <div class="ys-mask">
+    <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <div v-show="isShow" class="dialog">
         <slot name="icon" v-show="!simple"></slot> <!--todo: set icon -->
         <p>
           {{title}}
@@ -12,8 +12,8 @@
           <a href="javascript:;" @click="handleClick">{{rightBtnText}}</a>
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -21,6 +21,7 @@
   export default {
     name: "Dialog",
     props:{
+      isShow:Boolean,
       title:String,
       leftBtnText:String,
       rightBtnText:String
@@ -48,41 +49,60 @@
 </script>
 
 <style lang="less" scoped>
-.ys-mask{
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
+  .ys-mask{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
 
-  background: rgba(0,0,0,.2);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .dialog{
-    background: #ffffff;
+    background: rgba(0,0,0,.2);
+    z-index: 20;
 
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 
-    img{
-      padding: 8px;
-    }
+    .dialog{
+      background: #ffffff;
+      border-radius:12px;
 
-    p{
-      color: #000;
-      font-size: 5vw;
-    }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-    .describe{
-      color: #999999;
-      font-size: 3vw;
-    }
+      img{
+        padding: 8px;
+      }
 
-    .btn-wrapper{
+      p{
+        color: #333333;
+        font-size: 5vw;
+        padding: 9vw;
+      }
 
+      .describe{
+        color: #999999;
+        font-size: 3vw;
+      }
+
+      .btn-wrapper{
+        background: rgb(255,223,92);
+        width: 100%;
+        height: 45px;
+        display: flex;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+
+        a{
+          width: 50%;
+          height: 100%;
+          color: #000;
+          font-size: 4vw;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
   }
-}
 </style>
