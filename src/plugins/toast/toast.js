@@ -32,7 +32,7 @@ Toast.install = function(Vue,options){
       }
 
       let toastTemplate = Vue.extend({
-        template: `<div class="ys-toast animated fadeIn">
+        template: `<div class="ys-toast animated fadeIn ys-toast-${opt.position}">
                         <p>${opt.text}</p>
                     </div>`
       });

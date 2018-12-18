@@ -53,7 +53,11 @@
       },
       cancel(){
         this.showDialog = false;
-        this.$toast("取消删除~");
+        this.$toast({
+          text:"取消删除~",
+          position:"bottom",
+          duration:1000
+        });
       },
       ok(){
         this.onDelete();
