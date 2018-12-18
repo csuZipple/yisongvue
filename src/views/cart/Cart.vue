@@ -1,6 +1,6 @@
 <template>
   <div class="ys-cart-wrapper">
-    <YsHeader class="header" :show-back="false" :show-right-text="true" :right-text="rightText" @onRightClicked="manage">购物车</YsHeader>
+    <YsHeader class="header" :show-back="false" :show-right-text="true" :right-text="rightText[currentRightIndex]" @onRightClicked="manage">购物车</YsHeader>
 
     <div class="cart">
       <ul v-if="!isNull">
@@ -36,12 +36,10 @@
     methods:{
       manage(){
         if(this.cartItem.length){
-          if(this.rightText==='管理'){
-            this.rightText = '完成';
+          this.currentRightIndex = (this.currentRightIndex+1)%this.rightText.length;
+          if(this.currentRightIndex){
             this.handleSelectAll(false);
-            this.selectedAll = false;
-          }else{
-            this.rightText = '管理';
+            this.selectedAll = false
           }
           this.showDelete = !this.showDelete;
         }
@@ -86,7 +84,7 @@
         const list = this.getSelectedCartItemList();
         this.setCartItemList(list);
         if (!list.length) {
-          this.rightText = '管理';
+          this.currentRightIndex = 0;
           this.selectedAll = false;
         }
       },
@@ -129,7 +127,8 @@
     },
     data(){
       return{
-        rightText:"管理",
+        rightText:["管理","完成"],
+        currentRightIndex:0,
         showDelete:false,
         showDialog:false,
         selectedAll:false
