@@ -1,14 +1,14 @@
 <template>
   <div class="ys-cart-wrapper">
-    <YsHeader class="header" :show-back="false" :show-right-text="true" :right-text="rightText" v-on:onRightClicked="manage">购物车</YsHeader>
+    <YsHeader class="header" :show-back="false" :show-right-text="true" :right-text="rightText" @onRightClicked="manage">购物车</YsHeader>
 
     <div class="cart">
       <ul>
-        <CartItem  v-for="(item,index) in cartItem" v-bind:key="index" v-bind="item" v-on:handleSelect="onItemSelected" v-on:handleQuantity="onQuantityChange" ></CartItem>
+        <CartItem  v-for="(item,index) in cartItem" v-bind:key="index" v-bind="item" @handleSelect="onItemSelected" @handleQuantity="onQuantityChange" ></CartItem>
       </ul>
     </div>
 
-    <CartBottom class="bottom"/>
+    <CartBottom class="bottom" @selectAll="handleSelectAll"/>
 
   </div>
 </template>
@@ -42,11 +42,16 @@
       },
       onItemSelected(item){
         console.log(item);
-        this.cartItem.filter(res=>{//Modify the original array with a reference type
+        this.cartItem.filter(res=>{
           if(res['id']===item[0]){
             res['selected'] = item[1];
             console.log(res);
           }
+        })
+      },
+      handleSelectAll(isSelectAll){
+        this.cartItem.filter(res=>{
+          res['selected']=isSelectAll;
         })
       }
     },

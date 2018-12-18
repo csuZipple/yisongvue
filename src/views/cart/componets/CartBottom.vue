@@ -1,6 +1,6 @@
 <template>
   <div class="ys-cart-bottom">
-    <a class="ys-select-all" :class="{'active':selected}" @click="selectAll" href="javascript:;">全选</a>
+    <a class="ys-select-all" :class="{'active':selected}" @click="selectAll" href="javascript:;">{{selectText}}</a>
     <div class="checkOut" v-show="!showDelete">
       <span style="margin-right: 3vw;">合计：<span style="color: #f00;">￥16.00</span></span>
       <a href="javascript:;" @click="checkOut" class="btn"></a>
@@ -15,7 +15,7 @@
     methods:{
       selectAll(){
         this.selected = !this.selected;
-        this.$emit("selectAll");
+        this.$emit("selectAll",this.selected)
       },
       onDeleteClicked(){
          this.$emit("delete")
@@ -32,7 +32,8 @@
     },
     data(){
       return{
-        selected:false
+        selected:false,
+        selectText:"全选"
       }
     }
   }
