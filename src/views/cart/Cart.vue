@@ -16,7 +16,7 @@
         <a href="javascript:;" @click="goIndex">前往购买</a>
       </template>
     </div>
-    <CartBottom class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="onDelete"/>
+    <CartBottom v-bind:total="getTotal" class="bottom" :show-delete="showDelete" @selectAll="handleSelectAll" @checkOut="checkOut" @delete="onDelete"/>
 
   </div>
 </template>
@@ -54,7 +54,6 @@
         });
         if(list.length!==this.cartItem.length){
           this.setCartItemList(list);
-          console.log(list.length);
           if (!list.length) {
             this.manage();
           }
@@ -103,6 +102,11 @@
     computed:{
       isNull(){
         return this.cartItem.length===0;
+      },
+      getTotal(){
+          return this.cartItem.reduce((total,current)=>{
+            return total+current['price']*current['quantity'];
+          },0)//set init to 0 allows the array index to start at 0.
       },
       ...mapState(['cartItem'])
     }

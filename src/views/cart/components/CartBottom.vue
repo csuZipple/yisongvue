@@ -2,7 +2,7 @@
   <div class="ys-cart-bottom">
     <a class="ys-select-all" :class="{'active':selected}" @click="selectAll" href="javascript:;">{{selectText}}</a>
     <div class="checkOut" v-show="!showDelete">
-      <span style="margin-right: 3vw;">合计：<span style="color: #f00;">￥16.00</span></span>
+      <span style="margin-right: 3vw;">合计：<span style="color: #f00;">￥{{total}}</span></span>
       <a href="javascript:;" @click="checkOut" class="btn"></a>
     </div>
     <div class="delete" v-show="showDelete" @click="onDeleteClicked">删除</div>
@@ -28,7 +28,8 @@
       showDelete:{
         type:Boolean,
         default:false
-      }
+      },
+      total:Number
     },
     data(){
       return{
