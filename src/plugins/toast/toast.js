@@ -6,7 +6,7 @@ Toast.install = function(Vue,options){
       type:"text",
       text:"这是一条默认的toast",
       position:"middle",
-      duration:"2500"
+      duration:2500
     };
 
     if(options){
@@ -17,30 +17,35 @@ Toast.install = function(Vue,options){
     }
 
     Vue.prototype.$toast = op=>{
-
+      let temp = "";
       if(typeof op ==='string'){
-        opt.text = op;
+        console.log("string");
+        temp = `<div class="ys-toast animated fadeIn ys-toast-middle">
+                        <p>${op}</p>
+                    </div>`;
       }else if(typeof op ==='object'){
-        Object.keys(op).forEach(key =>{
-          opt[key] = op[key];
-        });
+        console.log("object");
+        temp = `<div class="ys-toast animated fadeIn ys-toast-${op.position}">
+                        <p>${op.text}</p>
+                    </div>`
       }
 
-
+      let toastTemplate = Vue.extend({
+        template: temp});
       if(document.getElementsByClassName("ys-toast").length){
         return;
       }
 
-      let toastTemplate = Vue.extend({
-        template: `<div class="ys-toast animated fadeIn ys-toast-${opt.position}">
-                        <p>${opt.text}</p>
-                    </div>`
-      });
       let toastEle = new toastTemplate().$mount().$el;
       document.body.appendChild(toastEle);
+      let duration = op.duration;//init
+      if(!op.duration){
+        duration = opt.duration;
+      }
+
       setTimeout(function () {
         document.body.removeChild(toastEle);
-      },opt.duration);
+      },duration);
     }
 
 };
