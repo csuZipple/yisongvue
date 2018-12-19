@@ -28,17 +28,18 @@
     position: relative;
     color: rgb(199,199,199);
     line-height: @height;
-    padding-left: 94px;
+    padding-left: 50px;
     border: 1px solid #eee;
+    font-size:3vw;
 
     &:after{
       content: '';
       width: 22px;
       height: 22px;
       background: url("../../../assets/icon/search.svg") center no-repeat;
-      background-size:contain;
+      background-size:70%;
       position: absolute;
-      left: 40px;
+      left: 20px;
       top: 50%;
       transform:translateY(-50%);
     }

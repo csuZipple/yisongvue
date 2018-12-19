@@ -3,6 +3,8 @@
 > A wx h5 project for electronic commerce
 需要微信認證的開發者賬號以及相應的scope權限
 
+有一些css样式可以抽取出来放入全局css 比如居中 flex
+首页返回顶部
 ## Build Setup
 
 ``` bash
