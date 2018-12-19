@@ -17,6 +17,8 @@
   import animated from 'animate.css'
   import SearchTips from "./components/SearchTips";
   import YsHeader from "../../components/Header";
+  import {throttle} from "../../util/util";
+
   export default {
     name: "Search",
     components: {YsHeader, SearchTips},
@@ -24,6 +26,9 @@
       onSearch(){
         console.log("search---",this.keyword);
         this.keyword = '';
+      },
+      onInputSearch(keyword){
+        console.log("throttle input search:",keyword);
       }
     },
     data(){
@@ -57,6 +62,11 @@
             name:'汤达人'
           }
         ]
+      }
+    },
+    watch:{
+      keyword(cur){
+        throttle(this.onInputSearch,null,[cur])
       }
     }
   }
