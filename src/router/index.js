@@ -9,6 +9,7 @@ import Product from '../views/product/Product'
 import User from '../views/user/User'
 import Search from '../views/Search/Search'
 import SelectStore from '../views/SelectStore/SelectStore'
+import OrderDetail from "../views/order/orderDetail"
 
 Vue.use(Router);
 export default new Router({
@@ -53,6 +54,11 @@ export default new Router({
       path:"/product",
       name:"product",
       component:Product
+    },{
+      path:"/orderDetail/:orderId",
+      name:"orderDetail",
+      props:true,
+      component:OrderDetail
     },{
       path:"/*",
       redirect:{

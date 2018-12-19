@@ -43,7 +43,9 @@
     methods:{
       getMore(orderId){
         //todo: jump to order detail page
-        console.log("jum page!")
+        this.$router.push({
+          path:`/orderDetail/${orderId}`
+        })
       },
       switchTabs(index){
         this.currentIndex = index;

@@ -29,7 +29,7 @@
         }
       },
       title:String,
-      price:Number,
+      price:String,
       quantity:Number,
       selected:Boolean,
       alt:String

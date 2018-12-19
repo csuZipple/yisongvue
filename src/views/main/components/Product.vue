@@ -26,7 +26,7 @@
       alt:String,
       title:String,
       sales:Number,// >0
-      price:Number
+      price:[String,Number]
     }
   }
 </script>
