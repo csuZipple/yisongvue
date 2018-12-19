@@ -3,6 +3,7 @@
     <YsHeader :show-back="showBack">订单详情</YsHeader>
     <Preview/>
     <Product/>
+    <Total/>
   </div>
 </template>
 
@@ -11,10 +12,11 @@
   import { createNamespacedHelpers } from 'vuex'
   import Preview from "./components/Preview";
   import Product from "./components/Product";
+  import Total from "./components/Total";
   const { mapState, mapActions } = createNamespacedHelpers('data');
   export default {
     name: "orderDetail",
-    components: {Product, Preview, YsHeader},
+    components: {Total, Product, Preview, YsHeader},
     props:['orderId'],
     data(){
       return{
