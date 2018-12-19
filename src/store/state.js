@@ -136,7 +136,24 @@ const data = {
       price:18.5,//original price
       createTime:"2018-12-19 16:17:31"
     }
-  ]
+  ],
+
+  user:{
+    username:"Zipple",
+    phone:18373151083,
+    avatar:"",
+    addressList:[
+      {
+        contact:"Zipple",
+        phone:"18373151083",
+        gender:0,
+        address:"长沙通泰梅岭苑",
+        lat:"",
+        lnt:"",
+        extra:"2单元604"
+      }
+    ]
+  }
 };
 
 const status={

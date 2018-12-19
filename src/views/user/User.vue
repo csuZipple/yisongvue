@@ -1,13 +1,20 @@
 <template>
-  <p>
-    This is User zone!
-  </p>
+  <div>
+    <Avatar v-bind:username="user.username" v-bind:phone="user.phone"/>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "User"
+  import Avatar from "./components/Avatar";
+  import {createNamespacedHelpers} from 'vuex'
+  const {mapState,mapActions} = createNamespacedHelpers("data");
+  export default {
+    name: "User",
+    components: {Avatar},
+    computed:{
+      ...mapState(['user'])
     }
+  }
 </script>
 
 <style scoped>
