@@ -1,5 +1,5 @@
 <template>
-  <div class="ys-cart-item">
+  <div class="ys-cart-item" @click="handleClick">
     <img :src="icon" alt="icon">
     <div>
       <p>{{title}}</p>
@@ -18,6 +18,11 @@
       },
       title:String,
       desc:String
+    },
+    methods:{
+      handleClick(){
+        this.$emit("itemClick")
+      }
     }
   }
 </script>

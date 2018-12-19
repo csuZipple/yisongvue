@@ -2,7 +2,7 @@
   <div>
     <Avatar v-bind:username="user.username" v-bind:phone="user.phone"/>
     <div class="ys-card">
-      <Card v-for="(item,index) in cardList" v-bind:key="index" v-bind="item"/>
+      <Card v-for="(item,index) in cardList" v-bind:key="index" v-bind="item" @itemClick="handleCardClick(index)"/>
     </div>
   </div>
 </template>
@@ -17,6 +17,11 @@
     components: {Card, Avatar},
     computed:{
       ...mapState(['user'])
+    },
+    methods:{
+      handleCardClick(index){
+        console.log(index);
+      }
     },
     data(){
       return{
