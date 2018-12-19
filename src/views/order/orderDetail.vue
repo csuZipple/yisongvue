@@ -27,7 +27,7 @@
       list(){
         return this.orderList.filter(res => {
           return res['orderId'] === Number(this.orderId);
-        })[0];
+        })[0];//must be unique
       },
       product(){
         return this.list.products;

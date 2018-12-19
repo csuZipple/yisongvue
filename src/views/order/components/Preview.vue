@@ -1,21 +1,42 @@
 <template>
   <div class="ys-preview">
-    <div class="info">
-      <p>订单配送至</p>
-      <div class="address" @click="goMap">
-        <p>{{address}}</p>
-        <img src="../../../assets/icon/right.svg" alt="">
+    <template v-if="status===2">
+      <div class="info">
+        <p>订单配送至</p>
+        <div class="address" @click="goMap">
+          <p>{{address}}</p>
+          <img src="../../../assets/icon/right.svg" alt="">
+        </div>
+        <p>{{username}} （{{sex[gender]}}）{{phone}}</p>
       </div>
-      <p>{{username}} （{{sex[gender]}}）{{phone}}</p>
-    </div>
-    <p>
-      <span>送达时间</span>
-      <span>尽快送达 ({{time.slice(-5)}})</span>
-    </p>
-    <p>
-      <span>支付方式</span>
-      <span>{{pay[payType]}}</span>
-    </p>
+      <p>
+        <span>送达时间</span>
+        <span>尽快送达 ({{time.slice(-5)}})</span>
+      </p>
+      <p>
+        <span>支付方式</span>
+        <span>{{pay[payType]}}</span>
+      </p>
+    </template>
+    <template v-else>
+      <div class="wrapper">
+        <div>
+          <span>{{statusText[status]}}</span>
+          <a class="yellow-btn" href="javascript:;" @click="getOneMore">再来一单</a>
+        </div>
+        <div v-if="status===0">
+           <span>
+               预计 <span style="color: #F1C616;">{{time.slice(-5)}}</span> 送达
+           </span>
+
+          <div class="btn">
+            <a href="javascript:;">申请售后</a>
+            <a href="javascript:;">致电商家</a>
+          </div>
+        </div>
+      </div>
+    </template>
+
   </div>
 </template>
 
@@ -25,9 +46,14 @@
     methods:{
       goMap(){
         console.log("see map detail! and modify address maybe@");//todo: map detail
+      },
+      getOneMore(){
+        console.log("one more order!");
+        this.$emit("getOneMore");
       }
     },
     props:{
+      status:Number,
       address:String,
       username:String,
       gender:Number,
@@ -38,7 +64,8 @@
     data(){
       return{
         sex:["先生","女士"],
-        pay:["在线支付","货到付款","钱包支付"]
+        pay:["在线支付","货到付款","钱包支付"],
+        statusText:['卖家已接单','订单已完成']
       }
     }
   }
@@ -94,6 +121,40 @@
     }
     &>p:last-child{
       border-bottom: none;
+    }
+
+    .wrapper{
+      padding: 0 12px;
+      color: #161616;
+      font-size: 5vw;
+      &>div{
+        padding: 12px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      &>div:last-child{
+        font-size: 4vw;
+      }
+
+
+      .btn{
+        a{
+          padding: 5px;
+          margin: 0 5px;
+          border: 1px solid rgb(176,176,176);
+          font-size: 3vw;
+          color: #000000;
+          border-radius:5px;
+        }
+      }
+    }
+    .yellow-btn{
+      background: #FFDF5C;
+      border-radius:6vw;
+      font-size: 4.5vw;
+      color: #333333;
+      padding: 8px 20px;
     }
   }
 </style>
