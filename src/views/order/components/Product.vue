@@ -21,24 +21,7 @@
     name: "Product",
     props:{
       list:{
-        type:Array,
-        default(){
-          return [  {
-            id:"123",
-            title:"旺仔小馒头原味16g",
-            price:"1.00",
-            quantity:1,
-            image:'../assets/image/products-mini.png',
-            alt:"旺仔小馒头",
-          },{
-            id:"123",
-            title:"旺仔小馒头原味16g",
-            price:"1.00",
-            quantity:1,
-            image:'../assets/image/products-mini.png',
-            alt:"旺仔小馒头",
-          }]
-        }
+        type:Array
       }
     }
   }

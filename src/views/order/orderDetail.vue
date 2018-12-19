@@ -2,8 +2,8 @@
   <div>
     <YsHeader :show-back="showBack">订单详情</YsHeader>
     <Preview v-bind="list"/>
-    <Product/>
-    <Total/>
+    <Product v-bind:list="product"/>
+    <Total v-bind:total="list.payPrice" v-bind:agio="list.price-list.payPrice"/>
   </div>
 </template>
 
@@ -27,7 +27,10 @@
       list(){
         return this.orderList.filter(res => {
           return res['orderId'] === Number(this.orderId);
-        });
+        })[0];
+      },
+      product(){
+        return this.list.products;
       },
       ...mapState(['orderList'])
     }

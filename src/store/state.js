@@ -100,7 +100,7 @@ const data = {
       gender:1,//[0 for man,1 for woman]
       phone:"15366302980",
       payType:0,//[1线上,2货到付款,3钱包]
-      payPrice:16.00,//actual price
+      payPrice:"16.00",//actual price
       price:18.5,//original price
     },
     {
@@ -131,7 +131,7 @@ const data = {
       gender:1,//[0 for man,1 for woman]
       phone:"15366302980",
       payType:0,//[1线上,2货到付款,3钱包]
-      payPrice:16.00,//actual price
+      payPrice:"16.00",//actual price
       price:18.5,//original price
     }
   ]
