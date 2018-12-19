@@ -30,8 +30,8 @@
            </span>
 
           <div class="btn">
-            <a href="javascript:;">申请售后</a>
-            <a href="javascript:;">致电商家</a>
+            <a href="javascript:;" @click="applySaleAfter">申请售后</a>
+            <a href="tel:10086" @click="call">致电商家</a>
           </div>
         </div>
       </div>
@@ -50,6 +50,10 @@
       getOneMore(){
         console.log("one more order!");
         this.$emit("getOneMore");
+      },
+      applySaleAfter(){
+        console.log("callSaleAfter!");
+        this.emit("callSaleAfter")
       }
     },
     props:{
