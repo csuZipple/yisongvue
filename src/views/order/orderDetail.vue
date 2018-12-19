@@ -1,7 +1,7 @@
 <template>
   <div>
     <YsHeader :show-back="showBack">订单详情</YsHeader>
-    <Preview/>
+    <Preview v-bind="list"/>
     <Product/>
     <Total/>
   </div>
@@ -25,9 +25,9 @@
     },
     computed:{
       list(){
-        return this.orderList.filter(res=>{
-          return res['orderId']===this.orderId;
-        })
+        return this.orderList.filter(res => {
+          return res['orderId'] === Number(this.orderId);
+        });
       },
       ...mapState(['orderList'])
     }

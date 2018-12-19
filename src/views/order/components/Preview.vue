@@ -3,18 +3,18 @@
     <div class="info">
       <p>订单配送至</p>
       <div class="address" @click="goMap">
-        <p>长沙市雨花区万家丽南路960号 长沙理工大学</p>
+        <p>{{address}}</p>
         <img src="../../../assets/icon/right.svg" alt="">
       </div>
-      <p>凌宝 （女士）15366302980</p>
+      <p>{{username}} （{{sex[gender]}}）{{phone}}</p>
     </div>
     <p>
       <span>送达时间</span>
-      <span>尽快送达 (17:14 送达)</span>
+      <span>尽快送达 ({{time.slice(-5)}})</span>
     </p>
     <p>
       <span>支付方式</span>
-      <span>在线支付</span>
+      <span>{{pay[payType]}}</span>
     </p>
   </div>
 </template>
@@ -24,7 +24,21 @@
     name: "Preview",
     methods:{
       goMap(){
-        console.log("see map detail!");//todo: map detail
+        console.log("see map detail! and modify address maybe@");//todo: map detail
+      }
+    },
+    props:{
+      address:String,
+      username:String,
+      gender:Number,
+      phone:[String,Number],
+      time:String,
+      payType:Number
+    },
+    data(){
+      return{
+        sex:["先生","女士"],
+        pay:["在线支付","货到付款","钱包支付"]
       }
     }
   }
