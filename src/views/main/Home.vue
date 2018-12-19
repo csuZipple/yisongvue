@@ -153,7 +153,7 @@
     padding:0 20px;
 
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap:5px;
     grid-row-gap:5px;
     /*grid-template-rows: auto*/
