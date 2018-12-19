@@ -79,7 +79,7 @@ const data = {
         {
           id:"123",
           title:"旺仔小馒头原味16g",
-          price:1.00,
+          price:"1.00",
           quantity:1,
           image:require('../assets/image/products-mini.png'),
           alt:"旺仔小馒头",
@@ -102,6 +102,7 @@ const data = {
       payType:0,//[1线上,2货到付款,3钱包]
       payPrice:"16.00",//actual price
       price:18.5,//original price
+      createTime:"2018-12-19 16:17:31"
     },
     {
       shopName:"壹送便利店（全丰小区店）",
@@ -118,7 +119,7 @@ const data = {
         {
           id:"321",
           title:"旺仔小馒头原味16g",
-          price:1.00,
+          price:"1.00",
           quantity:1,
           image:require('../assets/image/products-mini.png'),
           alt:"旺仔小馒头",
@@ -133,6 +134,7 @@ const data = {
       payType:0,//[1线上,2货到付款,3钱包]
       payPrice:"16.00",//actual price
       price:18.5,//original price
+      createTime:"2018-12-19 16:17:31"
     }
   ]
 };

@@ -3,7 +3,8 @@
     <YsHeader :show-back="showBack">订单详情</YsHeader>
     <Preview v-bind="list"/>
     <Product v-bind:list="product"/>
-    <Total v-bind:total="list.payPrice" v-bind:agio="list.price-list.payPrice"/>
+    <Total v-bind:total="list.payPrice" v-bind:agio="list.price-list.payPrice" v-if="list.status===2"/>
+    <OrderDetailInfo v-bind="list" v-else/>
   </div>
 </template>
 
@@ -13,10 +14,11 @@
   import Preview from "./components/Preview";
   import Product from "./components/Product";
   import Total from "./components/Total";
+  import OrderDetailInfo from "./components/OrderDetailInfo";
   const { mapState, mapActions } = createNamespacedHelpers('data');
   export default {
     name: "orderDetail",
-    components: {Total, Product, Preview, YsHeader},
+    components: {OrderDetailInfo, Total, Product, Preview, YsHeader},
     props:['orderId'],
     data(){
       return{
