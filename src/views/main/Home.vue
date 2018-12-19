@@ -11,7 +11,7 @@
 
       <div class="ys-store">
         <img :src ='logo' alt="yisong" class="ys-logo">
-        <div class="wrapper" style="padding-left: 20%" >
+        <div class="wrapper" style="padding-left: 80px;" >
           <Location v-bind="location" :storeName="storeName"/>
         </div>
         <div class="wrapper">
@@ -154,8 +154,8 @@
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap:5px;
-    grid-row-gap:5px;
+    grid-column-gap:1vw;
+    grid-row-gap:1vw;
     /*grid-template-rows: auto*/
   }
 </style>

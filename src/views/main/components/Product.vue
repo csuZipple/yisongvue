@@ -9,11 +9,11 @@
         <p class="sales">
           售量：{{sales}}
         </p>
+        <p class="bottom">
+          <span class="price">￥: {{price}}</span>
+          <span class="add"></span>
+        </p>
       </figcaption>
-      <p class="bottom">
-        <span class="price">￥: {{price}}</span>
-        <span class="add"></span>
-      </p>
     </figure>
   </div>
 </template>
@@ -34,7 +34,7 @@
 <style lang="less" scoped>
  .ys-card{
    width:100%;
-   padding: 0 5px;
+   padding: 5px;
 
    display: inline-block;
    background:rgba(255,255,255,1);
@@ -55,13 +55,15 @@
        object-fit: contain;
      }
      figcaption{
+       width: 100%;
+       padding: 2px 5px;
        color: #4A4A4A;
        font-size:0.8rem;
      }
      .bottom{
        width: 100%;
        display: flex;
-       padding: 0 3px;
+       padding: 3px 0;
        justify-content: space-between;
 
        .price{
