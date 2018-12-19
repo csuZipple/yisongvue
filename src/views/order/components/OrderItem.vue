@@ -1,5 +1,5 @@
 <template>
-  <div class="ys-order-item">
+  <div class="ys-order-item animated fadeIn">
     <p class="title">
       <span style="font-weight: 500;">{{shopName}}</span>
       <span style="color: #FFB93D;font-size:3vw;">{{state[status]}}</span>
