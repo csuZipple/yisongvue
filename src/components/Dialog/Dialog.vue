@@ -1,6 +1,6 @@
 <template>
   <div class="ys-mask" @click="handleMaskClick">
-    <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+    <transition enter-active-class="animated pulse" leave-active-class="animated fadeOut">
       <div v-show="isShow" class="dialog" @click.stop="handleDialogClicked">
         <slot name="icon" v-show="!simple"></slot> <!--todo: set icon -->
         <p>
