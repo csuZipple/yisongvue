@@ -1,7 +1,7 @@
 <template>
   <div class="ys-search-item">
     <img :src="image" alt="旺仔小馒头">
-    <div class="info">
+    <div :class="['info',{'small':small}]">
       <p class="title">{{title}}</p>
       <p class="sales">售量：{{sales}}</p>
       <p class="price">￥{{price}}</p>
@@ -39,6 +39,10 @@
       image:{
         type:String,
         default:require("../assets/image/product_wangzai.svg")
+      },
+      small:{
+        type:Boolean,
+        default:false
       }
     },
     methods:{
@@ -96,6 +100,11 @@
         font-size: 3vw;
       }
     }
+
+    .small{
+      font-size: 3vw;
+    }
+
     .btn-wrapper{
       width: 60px;
       .margin();

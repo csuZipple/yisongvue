@@ -9,15 +9,19 @@
     <div class="content">
 
       <div class="tab-wrapper">
-
+          <div v-for="item in 100" :class="{'active':item===2}">{{item}}元特惠</div>
       </div>
 
       <div class="item-wrapper">
+        <div style="background: #ffffff;overflow: hidden">
+          <ProductItem class="item" small v-for="(item,index) in mockData.products" v-bind:key="index" v-bind="item" @add="addToCart" @sub="subToCart"/>
+        </div>
+
+        <Divider style="color: #666666;">这是我的底线</Divider>
 
       </div>
 
     </div>
-
     <div class="fixed">
       <FloatingCart v-bind:total="0"/>
     </div>
@@ -29,10 +33,11 @@
   import Tab from "../../components/Tab/Tab";
   import TabItem from "../../components/Tab/TabItem";
   import FloatingCart from "../../components/FloatingCart/FloatingCart";
-  import SearchItem from "../../components/ProductItem";
+  import ProductItem from "../../components/ProductItem";
+  import Divider from "../../components/Divider";
   export default {
     name: "Product",
-    components: {SearchItem, FloatingCart, TabItem, Tab, YsHeader},
+    components: {Divider, ProductItem, FloatingCart, TabItem, Tab, YsHeader},
     methods:{
       search(){
         console.log("go to search!")
@@ -44,6 +49,12 @@
         console.log("switch to ",index);
         //todo:fetch data!
         this.currentCategory = index;
+      },
+      addToCart(){
+
+      },
+      subToCart(){
+
       }
     },
     data(){
@@ -74,7 +85,22 @@
               text:"辣条"
             }
           ],
-
+          products:[
+            {
+              id:"123",
+              title:"旺仔小馒头原味16g",
+              price:"1.5",
+              image:require("../../assets/image/product_wangzai.svg"),
+              alt:"旺仔小馒头",
+            },
+            {
+              id:"321",
+              title:"旺仔小馒头原味16g",
+              price:"1.00",
+              image:"",
+              alt:"旺仔小馒头",
+            }
+          ],
         }
       }
     }
@@ -84,10 +110,43 @@
 <style lang="less" scoped>
   .ys-product-list{
     background: #F4F4F4;
-    height: 100%;
+    min-height: 100%;
 
     .content{
+      margin: 3px 0;
       display: flex;
+      justify-content: space-between;
+
+      .tab-wrapper{
+        width: 100px;
+        font-size: 4vw;
+        color: #333333;
+
+        &>div{
+          height: 50px;
+          padding: 8px;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #ffffff;
+        }
+
+        .active{
+          background: transparent;
+          font-weight: 500;
+        }
+      }
+      .item-wrapper{
+        margin: 0 9px;
+
+        .item{
+          margin: 20px 8px;
+        }
+        .item:first-child{
+          margin-top: 10px;
+        }
+      }
     }
 
     .fixed{
