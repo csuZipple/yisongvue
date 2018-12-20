@@ -17,7 +17,7 @@
         this.$router.go(-1);
       },
       onRightClicked(){
-        this.showRightText && this.$emit("onRightClicked")
+        (this.showRightText||this.showRightIcon) && this.$emit("onRightClicked")
       }
     },
     props:{
