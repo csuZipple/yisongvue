@@ -23,3 +23,10 @@
 .ys-toast-bottom{
   bottom: 20%;
 }
+
+
+.fixed{
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+}

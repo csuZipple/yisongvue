@@ -114,6 +114,7 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../assets/style/ys.css";
   .ys-product-list{
     background: #F4F4F4;
     min-height: 100%;
@@ -153,12 +154,6 @@
           margin-top: 10px;
         }
       }
-    }
-
-    .fixed{
-      position: fixed;
-      bottom: 20px;
-      width: 100%;
     }
   }
 </style>
