@@ -58,6 +58,16 @@
         })
       }
     },
+    computed:{
+      filterTitle(){
+        if(this.keyword!==''){
+          console.log("keyword ",this.keyword);
+          //todo:finish this filter function.
+        }else{
+          console.log("no keyword")
+        }
+      }
+    },
     data(){
       return{
         quantity:0
