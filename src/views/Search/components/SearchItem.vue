@@ -100,7 +100,8 @@
       width: 60px;
       .margin();
       align-self: flex-end;
-      float: right;
+      display: flex;
+      justify-content: flex-end;
       &>a{
         color: #ffffff;
         width: 20px;
