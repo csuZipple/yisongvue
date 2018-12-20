@@ -1,6 +1,6 @@
 <template>
   <div class="bottom">
-    <div>
+    <div :class="{'active':isActive}" @click="onCartClicked">
       ￥{{total}} <!--todo:compute current total-->
     </div>
     <div @click="checkOut">
@@ -13,17 +13,35 @@
   export default {
     name: "FloatingCart",
     props:{
-      total:[Number,String]
+      total:{
+        type:Number,
+        default:0
+      }
     },
     methods:{
       checkOut(){
         this.$emit("checkout")
+      },
+      onCartClicked(){
+        this.$emit("cartClicked");
+      }
+    },
+    computed:{
+      isActive(){
+        console.log(Boolean(this.total));
+        return Boolean(this.total)
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
+
+  .active{
+    &:before{
+      background-image: url("../../assets/icon/shopping-cart.svg") !important;
+    }
+  }
 
   .bottom{
     height: 50px;
@@ -47,7 +65,7 @@
         content: '';
         width: 80px;
         height: 70px;
-        background: url("../../assets/icon/shopping-cart.svg") center no-repeat;
+        background: url("../../assets/icon/shopping-cart-nothing.svg") center no-repeat;
         background-size: 100%;
         position: absolute;
         left: 5%;

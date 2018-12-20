@@ -47,6 +47,7 @@
         this.handleTotalChanges(1,item);
       },
       handleTotalChanges(type,item){
+        //todo: total will be cart total. re code soon!
         this.currentTotal = this.searchTips.reduce((total,cur)=>{
           if(cur['id']===item[0]){
             return total = !type?total+(+cur['price']):total-cur['price'];
