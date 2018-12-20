@@ -9,7 +9,7 @@
     <div class="content">
 
       <div class="tab-wrapper">
-          <div v-for="item in 100" :class="{'active':item===2}">{{item}}元特惠</div>
+          <div v-for="item in 100" :class="{'active':item===currentSubType}" @click="onSubTypeClicked(item)">{{item}}元特惠</div>
       </div>
 
       <div class="item-wrapper">
@@ -40,7 +40,9 @@
     components: {Divider, ProductItem, FloatingCart, TabItem, Tab, YsHeader},
     methods:{
       search(){
-        console.log("go to search!")
+        this.$router.push({
+          path:`/search`
+        })
       },
       onItemClick(i){
         console.log("clicked at ",i);
@@ -55,11 +57,15 @@
       },
       subToCart(){
 
+      },
+      onSubTypeClicked(index){
+        this.currentSubType = index;
       }
     },
     data(){
       return{
         currentCategory:0,
+        currentSubType:1,
         mockData:{
           types:[
             {

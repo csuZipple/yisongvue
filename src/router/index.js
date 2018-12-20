@@ -6,6 +6,7 @@ import Cart from '../views/cart/cart'
 import Order from '../views/order/Order'
 import Group from '../views/group/Group'
 import Product from '../views/product/Product'
+import ProductDetail from '../views/product/ProductDetail'
 import User from '../views/user/User'
 import Search from '../views/Search/Search'
 import SelectStore from '../views/SelectStore/SelectStore'
@@ -54,6 +55,11 @@ export default new Router({
       path:"/product",
       name:"product",
       component:Product
+    },{
+      path:"/productDetail/:productId",
+      name:"productDetail",
+      component:ProductDetail,
+      props:true
     },{
       path:"/orderDetail/:orderId",
       name:"orderDetail",

@@ -1,5 +1,5 @@
 <template>
-  <div class="ys-search-item">
+  <div class="ys-search-item" @click="getDetail">
     <img :src="image" alt="旺仔小馒头">
     <div :class="['info',{'small':small}]">
       <p class="title">{{title}}</p>
@@ -8,13 +8,13 @@
     </div>
 
     <div class="btn-wrapper">
-      <a href="javascript:;" @click="addToCart" v-if="!quantity">
+      <a href="javascript:;" @click.stop="addToCart" v-if="!quantity">
         +
       </a>
       <div class="ys-number" v-else>
-        <a href="javascript:;" @click="handleQuantity('-')">-</a>
+        <a href="javascript:;" @click.stop="handleQuantity('-')">-</a>
         <div>{{this.quantity}}</div>
-        <a href="javascript:;" @click="handleQuantity" >+</a>
+        <a href="javascript:;" @click.stop="handleQuantity" >+</a>
       </div>
     </div>
 
@@ -51,6 +51,11 @@
       },
       handleQuantity(type){
         type==='-'?this.quantity&&this.$emit("sub",[this.id,--this.quantity]):this.$emit("add",[this.id,++this.quantity])
+      },
+      getDetail(){
+        this.$router.push({
+          path:`/productDetail/${this.id}`
+        })
       }
     },
     data(){
