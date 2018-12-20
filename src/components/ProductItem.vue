@@ -23,7 +23,7 @@
 
 <script>
   export default {
-    name: "SearchItem",
+    name: "ProductItem",
     props:{
       id:[String,Number],
       title:{
@@ -38,7 +38,7 @@
       price:[String,Number],
       image:{
         type:String,
-        default:require("../../../assets/image/product_wangzai.svg")
+        default:require("../assets/image/product_wangzai.svg")
       }
     },
     methods:{

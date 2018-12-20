@@ -25,7 +25,7 @@
   import SearchTips from "./components/SearchTips";
   import YsHeader from "../../components/Header";
   import {throttle} from "../../util/util";
-  import SearchItem from "./components/SearchItem";
+  import SearchItem from "../../components/ProductItem";
   import FloatingCart from "../../components/FloatingCart/FloatingCart";
 
   export default {
