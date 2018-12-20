@@ -42,7 +42,7 @@
     import Location from "./components/Location";
     import Notice from "./components/Notice";
     import CategoryCard from "./components/CategoryCard";
-    import Divider from "./components/Divider";
+    import Divider from "../../components/Divider";
     import Product from "./components/Product";
 
     import { createNamespacedHelpers } from 'vuex'
