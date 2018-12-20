@@ -9,15 +9,13 @@
     </YsHeader>
     <div v-if="keyword===''">
       <SearchTips title="热门搜索" v-bind:data="mockData"/>
-      <!--<transition leave-active-class="animated fadeOut">-->
       <SearchTips v-if="showHistory" title="历史记录" :show-delete="true" @delete="showHistory = !showHistory"/>
-      <!--</transition>-->
     </div>
     <div class="tips-wrapper" v-else>
       <div class="tips">
-        <SearchItem v-for="(item,index) in searchTips" v-bind:key="index" v-bind="item" @add="updateCart" @sub="updateCart"/>
+        <SearchItem v-for="(item,index) in searchTips" v-bind:key="index" v-bind="item" @add="addToCart" @sub="subToCart"/>
       </div>
-      <FloatingCart/>
+      <FloatingCart v-bind:total="currentTotal" @checkout="checkOut"/>
     </div>
   </div>
 </template>
@@ -42,8 +40,28 @@
         console.log("throttle input search:",keyword);
         //todo:change this.searchTips to update search item
       },
-      updateCart(item){
+      addToCart(item){
+        this.handleTotalChanges(0,item);
+      },
+      subToCart(item){
+        this.handleTotalChanges(1,item);
+      },
+      handleTotalChanges(type,item){
+        this.currentTotal = this.searchTips.reduce((total,cur)=>{
+          if(cur['id']===item[0]){
+            return total = !type?total+(+cur['price']):total-cur['price'];
+          }
+          return total;
+        },this.currentTotal);
+        this.updateCart(item);
+      },
+      updateCart(item){//item[id,quantity]
         //todo:update cart (add or sub) quantity.
+        console.log("update cart next time!");
+      },
+      checkOut(){
+        console.log("check out!");
+        //todo:check out current item
       }
     },
     data(){
@@ -81,7 +99,7 @@
           {
             id:"123",
             title:"旺仔小馒头原味16g",
-            price:"1.00",
+            price:"1.5",
             image:require("../../assets/image/product_wangzai.svg"),
             alt:"旺仔小馒头",
           },
@@ -92,7 +110,8 @@
             image:"",
             alt:"旺仔小馒头",
           }
-        ]
+        ],
+        currentTotal:0
       }
     },
     watch:{

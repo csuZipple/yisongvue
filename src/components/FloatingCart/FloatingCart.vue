@@ -1,9 +1,9 @@
 <template>
   <div class="bottom">
     <div>
-      ￥1.00 <!--todo:compute current total-->
+      ￥{{total}} <!--todo:compute current total-->
     </div>
-    <div>
+    <div @click="checkOut">
       去结算
     </div>
   </div>
@@ -11,7 +11,15 @@
 
 <script>
   export default {
-    name: "FloatingCart"
+    name: "FloatingCart",
+    props:{
+      total:[Number,String]
+    },
+    methods:{
+      checkOut(){
+        this.$emit("checkout")
+      }
+    }
   }
 </script>
 
