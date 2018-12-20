@@ -1,11 +1,11 @@
 <template>
   <div class="ys-header">
-    <a href="javascript:;" class="left" @click="onBackClicked" v-show="showBack">
-    </a>
+    <a href="javascript:;" class="left" @click="onBackClicked" v-show="showBack"></a>
     <p>
       <slot></slot>
     </p>
-    <a href="javascript:;" class="right" @click="onRightClicked" v-show="showRightText">{{rightText}}</a>
+    <a href="javascript:;" class="right" :class="{'active':showRightIcon}" @click="onRightClicked" v-if="showRightText||showRightIcon">{{rightText}}</a>
+
   </div>
 </template>
 
@@ -29,7 +29,11 @@
         type:Boolean,
         default:false
       },
-      rightText:String
+      rightText:String,
+      showRightIcon:{
+        type:Boolean,
+        default:false
+      }
     }
   }
 </script>
@@ -67,6 +71,12 @@
       align-items: center;
       justify-content: center;
     }
+
+    .active{
+      background: url("../assets/icon/product-list-search.svg") center no-repeat;
+      background-size: contain;
+    }
+
     p{
       height: 100%;
       color: #161616;
