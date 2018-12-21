@@ -20,7 +20,17 @@
     },
     methods:{
       handleCardClick(index){
-        console.log(index);
+        switch(index){
+          case 0:
+            break;
+          case 1:
+            break;
+          case 2:
+            this.$router.push({path:"/address"});
+            break;
+          case 3:
+            break;
+        }
       }
     },
     data(){

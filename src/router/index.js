@@ -11,6 +11,8 @@ import User from '../views/user/User'
 import Search from '../views/Search/Search'
 import SelectStore from '../views/SelectStore/SelectStore'
 import OrderDetail from "../views/order/orderDetail"
+import Address from '../views/address/Address'
+import AddressDetail from '../views/address/AddressDetail'
 
 Vue.use(Router);
 export default new Router({
@@ -65,6 +67,16 @@ export default new Router({
       name:"orderDetail",
       props:true,
       component:OrderDetail
+    },{
+      path:"/address/",
+      name:"address",
+      props:true,
+      component:Address
+    },{
+      path:"/addressDetail/:addressId",
+      name:"addressDetail",
+      props:true,
+      component:AddressDetail
     },{
       path:"/*",
       redirect:{
