@@ -1,11 +1,14 @@
 <template>
   <div class="ys-search-item" @click="getDetail">
-    <img :src="image" alt="旺仔小馒头">
-    <div :class="['info',{'small':small}]">
-      <p class="title" v-html="filterTitle"></p>
-      <p class="sales">售量：{{sales}}</p>
-      <p class="price">￥{{price}}</p>
+    <div>
+      <img :src="image" alt="旺仔小馒头">
+      <div :class="['info',{'small':small}]">
+        <p class="title" v-html="filterTitle"></p>
+        <p class="sales">售量：{{sales}}</p>
+        <p class="price">￥{{price}}</p>
+      </div>
     </div>
+
 
     <div class="btn-wrapper">
       <a href="javascript:;" @click.stop="addToCart" v-if="!quantity">
@@ -88,41 +91,45 @@
     margin: 8px;
   }
   .ys-search-item{
-    height: 65px;
+    height: 80px;
     margin: 8px 12px;
     display: flex;
     justify-content: space-between;
-    img{
-      width: 65px;
-      height: 100%;
-      object-fit: contain;
-      .margin();
-      background: #ffffff;
-      border: 1px solid #eee;
-      padding: 3px 0;
-    }
-    .info{
-      height: 100%;
-      font-size: 4vw;
-      .margin();
-      width: 150px;
-      p{
-        margin: 3px 0;
-      }
 
-      .title{
-        color: #4A4A4A;
+    &>div{
+      display: flex;
+      img{
+        width: 65px;
+        height: 100%;
+        object-fit: contain;
+        .margin();
+        background: #ffffff;
+        border: 1px solid #eee;
+        padding: 3px 0;
       }
+      .info{
+        height: 100%;
+        font-size: 4vw;
+        .margin();
+        p{
+          margin: 3px 0;
+        }
 
-      .sales{
-        color: rgba(0,0,0,.5);
-        font-size: 3vw;
-      }
-      .price{
-        color: #ff0000;
-        font-size: 3vw;
+        .title{
+          color: #4A4A4A;
+        }
+
+        .sales{
+          color: rgba(0,0,0,.5);
+          font-size: 3vw;
+        }
+        .price{
+          color: #ff0000;
+          font-size: 3vw;
+        }
       }
     }
+
 
     .small{
       font-size: 3vw;
