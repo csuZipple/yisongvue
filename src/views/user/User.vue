@@ -29,6 +29,7 @@
             this.$router.push({path:"/address"});
             break;
           case 3:
+            this.$router.push({path:"/help"});
             break;
         }
       }

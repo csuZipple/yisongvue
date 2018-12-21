@@ -14,6 +14,8 @@ import OrderDetail from "../views/order/orderDetail"
 import Address from '../views/address/Address'
 import ModifyDetail from '../views/address/ModifyAddressDetail'
 import AddDetailContainer from '../views/address/AddAddressDetail'
+import Help from '../views/help/HelpList'
+import HelpDetail from '../views/help/HelpDetail'
 
 Vue.use(Router);
 export default new Router({
@@ -82,6 +84,15 @@ export default new Router({
       path:"/addressDetail/new",
       name:"addAddress",
       component:AddDetailContainer
+    },{
+      path:"/help",
+      name:"help",
+      component:Help
+    },{
+      path:"/helpDetail/:id",
+      name:"helpDetail",
+      component:HelpDetail,
+      props:true
     },{
       path:"/*",
       redirect:{
