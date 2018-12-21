@@ -22,8 +22,10 @@
       handleCardClick(index){
         switch(index){
           case 0:
+            this.$toast("暂不支持此功能`");
             break;
           case 1:
+            this.$toast("暂不支持此功能`");
             break;
           case 2:
             this.$router.push({path:"/address"});
