@@ -13,7 +13,7 @@
         未选购商品
       </div>
       <div style="background: rgba(51,51,51,0.6); font-size: 3vw;color: #ffffff;">
-        ￥1元起送
+        还差{{tip}}元起送
       </div>
     </div>
 
@@ -40,7 +40,15 @@
     computed:{
       isActive(){
         console.log(Boolean(this.total));
-        return Boolean(this.total)
+        return this.total-this.tips>0
+      },
+      tip(){
+        return this.total-this.tips<0?this.tips-this.total:this.tips;
+      }
+    },
+    data(){
+      return {
+        tips:1
       }
     }
   }
