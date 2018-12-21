@@ -2,7 +2,7 @@
   <div class="ys-search-item" @click="getDetail">
     <img :src="image" alt="旺仔小馒头">
     <div :class="['info',{'small':small}]">
-      <p class="title">{{title}}</p>
+      <p class="title" v-html="filterTitle"></p>
       <p class="sales">售量：{{sales}}</p>
       <p class="price">￥{{price}}</p>
     </div>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+  import {removeHtmlTag} from "../util/util";
+
   export default {
     name: "ProductItem",
     props:{
@@ -34,7 +36,10 @@
         type:Number,
         default:1
       },
-      keyword:String,
+      keyword:{
+        type:String,
+        default:""
+      },
       price:[String,Number],
       image:{
         type:String,
@@ -60,11 +65,13 @@
     },
     computed:{
       filterTitle(){
+        let securityTitle = removeHtmlTag(this.title);
         if(this.keyword!==''){
-          console.log("keyword ",this.keyword);
           //todo:finish this filter function.
+          let reg = new RegExp(this.keyword,'g');
+          return securityTitle.replace(reg,`<font color='red'>${this.keyword}</font>`);
         }else{
-          console.log("no keyword")
+          return securityTitle;//may cause security question
         }
       }
     },
@@ -84,7 +91,7 @@
     height: 65px;
     margin: 8px 12px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     img{
       width: 65px;
       height: 100%;
@@ -98,6 +105,7 @@
       height: 100%;
       font-size: 4vw;
       .margin();
+      width: 150px;
       p{
         margin: 3px 0;
       }

@@ -13,7 +13,7 @@
     </div>
     <div class="tips-wrapper" v-else>
       <div class="tips">
-        <SearchItem v-for="(item,index) in searchTips" v-bind:key="index" v-bind="item" @add="addToCart" @sub="subToCart"/>
+        <SearchItem :keyword="keyword" v-for="(item,index) in searchTips" v-bind:key="index" v-bind="item" @add="addToCart" @sub="subToCart"/>
       </div>
       <FloatingCart v-bind:total="currentTotal" @checkout="checkOut"/>
     </div>
@@ -106,7 +106,7 @@
           },
           {
             id:"321",
-            title:"旺仔小馒头原味16g",
+            title:"<p>我是p标签</p>",
             price:"1.00",
             image:"",
             alt:"旺仔小馒头",

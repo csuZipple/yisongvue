@@ -51,6 +51,13 @@ function throttle(fn,context,param=[],delay=500,mustApplyTime=1000){
   }
 }
 
+function removeHtmlTag(str){
+  str = str.replace(/<\/?[^>]*>/g,'');
+  str = str.replace(/[ | ]*\n/g,'\n');
+  str=str.replace(/&nbsp;/ig,'');
+  return str;
+}
+
 export{
-  getQueryString,getToken,createGetRequest,throttle
+  getQueryString,getToken,createGetRequest,throttle,removeHtmlTag
 }
