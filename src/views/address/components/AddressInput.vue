@@ -23,6 +23,7 @@
 <style lang="less" scoped>
   .ys-address-input{
     margin: 15px 0;
+    padding: 3px 0;
     border-bottom: 1px solid #D8D8D8;
     display: flex;
     span{
