@@ -42,9 +42,8 @@
     },
     data(){
       return {
-        //data 和 props 在created 方法里创建 暂时还不清楚谁先谁后
         info:{
-          username:this.username||"default",
+          username:this.username||"",
           phone:this.phone||"",
           address:this.address||"",
           addressDetail:this.addressDetail||"",
