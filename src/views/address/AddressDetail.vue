@@ -1,12 +1,13 @@
 <template>
   <div>
-    地址详细信息
+    {{addressId}}
   </div>
 </template>
 
 <script>
   export default {
-    name: "AddressDetail"
+    name: "AddressDetail",
+    props:['addressId']
   }
 </script>
 
