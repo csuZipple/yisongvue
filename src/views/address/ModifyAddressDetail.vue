@@ -1,7 +1,7 @@
 <template>
   <div>
     <YsHeader>修改收货地址</YsHeader>
-    <wrapper @onOkClicked="submit" v-bind="address"/>
+    <wrapper @onOkClicked="submit" v-bind="data"/>
   </div>
 </template>
 
@@ -20,7 +20,7 @@
     },
     data(){
       return{
-        address: { //get data from mapState by id
+        data: { //get data from mapState by id
           id:2,
           username:"漠叹尘",
           phone:"18337151083",
