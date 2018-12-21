@@ -155,10 +155,6 @@
       input{
         background: transparent;
       }
-      input:focus{
-        border: none;
-        outline: none;
-      }
     }
 
     .tips-wrapper{

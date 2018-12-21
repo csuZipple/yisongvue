@@ -22,10 +22,11 @@
         this.$toast("已选中当前地址~");
       },
       modifyAddress(id){
-        this.$router.push({path:`/addressDetail/${id}`})
+        this.$router.push({path:`/addressDetail/modify/${id}`})
       },
       addAddress(){
-        console.log("to add address!")
+        console.log("to add address!");
+        this.$router.push({path:`/addressDetail/new`})
       }
     },
     data(){
@@ -36,6 +37,7 @@
             username:"凌莫莫",
             phone:"18945671256",
             address:"长沙市雨花区万家丽南路960号 长沙理工大学云塘校区 凌宝宝收",
+            addressDetail:"",
             gender:1
           },
           {
@@ -43,6 +45,7 @@
             username:"漠叹尘",
             phone:"18337151083",
             address:"长沙市天心区韶山南路 中南大学铁道学院 邹博收",
+            addressDetail:"",
             gender:1
           }
         ],

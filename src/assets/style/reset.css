@@ -30,6 +30,10 @@ input, select,textarea {
   -webkit-appearance: none;
   appearance:none;
 }
+input:focus{
+  border: none;
+  outline: none;
+}
 ol, ul {
   list-style: none;
 }

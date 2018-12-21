@@ -12,7 +12,8 @@ import Search from '../views/Search/Search'
 import SelectStore from '../views/SelectStore/SelectStore'
 import OrderDetail from "../views/order/orderDetail"
 import Address from '../views/address/Address'
-import AddressDetail from '../views/address/AddressDetail'
+import ModifyDetail from '../views/address/ModifyAddressDetail'
+import AddDetailContainer from '../views/address/AddAddressDetail'
 
 Vue.use(Router);
 export default new Router({
@@ -73,10 +74,14 @@ export default new Router({
       props:true,
       component:Address
     },{
-      path:"/addressDetail/:addressId",
-      name:"addressDetail",
+      path:"/addressDetail/modify/:id",
+      name:"modifyAddress",
       props:true,
-      component:AddressDetail
+      component:ModifyDetail,
+    },{
+      path:"/addressDetail/new",
+      name:"addAddress",
+      component:AddDetailContainer
     },{
       path:"/*",
       redirect:{
