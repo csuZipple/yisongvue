@@ -17,7 +17,7 @@
     <div class="ys-search-address">
       <img class="back" src="../../assets/icon/back.svg" alt="back" @click="onBackClick">
       <div class="ys-search-wrapper">
-        <input type="text" v-model="searchValue" title="" id="suggestId" placeholder="定位不准确？试试手动输入">
+        <input type="text" v-model="searchValue" title="" id="suggestId" placeholder="定位不准？试试手动输入">
         <img src="../../assets/icon/close.svg" alt="search" @click="searchValue=''">
       </div>
       <a class="okBtn" href="javascript:;" @click="onOkClick">确定</a>
@@ -92,7 +92,7 @@
       /**
        * Attention: 解析地址会有异常--有时候会解析正确，有时候只会解析到区
        * point.lng = (112.995443,28.143792);//梅岭苑
-       * @param point
+       * @param point lng and lat
        */
       analyze(point){//point:{lat:"",lng:""}
         const geoc = new BMap.Geocoder();
@@ -103,6 +103,9 @@
           vm.poiKeyword = rs.street||rs.address;
         });
       },
+      /**
+       * search tips
+       */
       getSuggestion(){
         let ac = new BMap.Autocomplete({"input" : "suggestId","location" : this.map});
         ac.addEventListener("onconfirm", e=> {
@@ -112,7 +115,7 @@
         });
       },
       selectAddress(item){
-        console.log("select",item);
+        //todo: return item the same as onOkClicked function
       },
       setPlace(val){
         let map = this.map;
@@ -136,6 +139,8 @@
       },
       onOkClick(){
         //todo: get this address and return.
+        console.log("已选中当前位置!");
+        console.log(this.currentAddress,this.point)
       }
     },
     data(){
