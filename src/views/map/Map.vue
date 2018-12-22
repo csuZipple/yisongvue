@@ -2,7 +2,11 @@
   <!--todo: return address to AddAddressDetail and ModifyAddressDetail by using vuex.-->
   <div class="ys-map">
 
-    <div id="map"></div>
+    <div class="map-wrapper">
+      <div id="map"></div>
+      <img class="position" src="../../assets/icon/position.svg" alt="position">
+      <img class="nowposition" @click="locate" src="../../assets/icon/nowposition.svg" alt="nowposition">
+    </div>
 
     <div id="tips">
       <AddressItem :title="'当前位置'" :address="currentAddress" :extra="'(以图上标记位置为准)'"/>
@@ -11,10 +15,12 @@
     </div>
 
     <div class="ys-search-address">
+      <img class="back" src="../../assets/icon/back.svg" alt="back" @click="onBackClick">
       <div class="ys-search-wrapper">
         <input type="text" v-model="searchValue" title="" id="suggestId" placeholder="定位不准确？试试手动输入">
         <img src="../../assets/icon/close.svg" alt="search" @click="searchValue=''">
       </div>
+      <a class="okBtn" href="javascript:;" @click="onOkClick">确定</a>
     </div>
 
     <div class="search-tips" id="result">
@@ -29,6 +35,7 @@
     name: "Map",
     components: {AddressItem},
     mounted(){
+      this.$toast({text:"点击或拖动选址~",position:"top"});
       this.$nextTick(()=>{
         this.initMaps();
         this.locate();
@@ -40,6 +47,12 @@
         this.map = new BMap.Map("map");
         let mPoint = new BMap.Point(116.404, 39.915);//Tiananmen Square
         this.map.centerAndZoom(mPoint,18);
+        this.map.addEventListener("click", this.onMapClicked);
+        this.map.addEventListener('dragend',()=>{
+          let pixel = this.map.pointToOverlayPixel(this.map.getCenter());
+          let point = this.map.overlayPixelToPoint({x:pixel.x,y:pixel.y});
+          this.analyze(point);
+        })
       },
       locate(){
         let map = this.map;
@@ -76,19 +89,20 @@
         });
         local.searchNearby(keyword,mPoint,1000);
       },
+      /**
+       * Attention: 解析地址会有异常--有时候会解析正确，有时候只会解析到区
+       * point.lng = (112.995443,28.143792);//梅岭苑
+       * @param point
+       */
       analyze(point){//point:{lat:"",lng:""}
         const geoc = new BMap.Geocoder();
         const vm = this;
-        //解析地址会有异常--有时候会解析正确，有时候只会解析到区
-        /*point.lng = 112.995443;//梅岭苑
-        point.lat = 28.143792;*/
         geoc.getLocation(point, function(rs){
           vm.point = rs.point;//===r.point
           vm.currentAddress = rs.address;
           vm.poiKeyword = rs.street||rs.address;
         });
       },
-
       getSuggestion(){
         let ac = new BMap.Autocomplete({"input" : "suggestId","location" : this.map});
         ac.addEventListener("onconfirm", e=> {
@@ -113,6 +127,15 @@
           }
         });
         local.search(val);
+      },
+      onMapClicked(e){
+        console.log(e);//todo: get point with dialog and return
+      },
+      onBackClick(){
+        //todo: cancel
+      },
+      onOkClick(){
+        //todo: get this address and return.
       }
     },
     data(){
@@ -138,8 +161,29 @@
     height: 100%;
     overflow: hidden;
     position: relative;
-    #map{
+    .map-wrapper{
       height: 50%;
+      position: relative;
+    }
+    #map{
+      height: 100%;
+    }
+    img{
+      width: 32px;
+      object-fit: contain;
+    }
+    .position{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-75%);//The bottom of the icon is centered,75  = 50(center) + 25(top)
+      z-index: 100;
+    }
+    .nowposition{
+      position: absolute;
+      right: 20px;
+      bottom:20px;
+      z-index: 100;
     }
     #tips{
       width: 100%;
@@ -158,8 +202,20 @@
       background: #f2f2f2;
       padding: 8px 0;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
+      align-items: center;
 
+      .back{
+        width: 20px;
+        object-fit: contain;
+      }
+      .okBtn{
+        background: #FFDF5C;
+        padding: 5px 12px;
+        border: 1px solid #ffcf6e;
+        color: #333;
+        border-radius: 8px;
+      }
       .ys-search-wrapper{
         width: 68%;
         border-radius: 20px;
