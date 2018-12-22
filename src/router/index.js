@@ -16,6 +16,7 @@ import ModifyDetail from '../views/address/ModifyAddressDetail'
 import AddDetailContainer from '../views/address/AddAddressDetail'
 import Help from '../views/help/HelpList'
 import HelpDetail from '../views/help/HelpDetail'
+import Map from '../views/map/Map'
 
 Vue.use(Router);
 export default new Router({
@@ -93,6 +94,10 @@ export default new Router({
       name:"helpDetail",
       component:HelpDetail,
       props:true
+    },{
+      path:"/map",
+      name:"baiduMap",
+      component:Map,
     },{
       path:"/*",
       redirect:{

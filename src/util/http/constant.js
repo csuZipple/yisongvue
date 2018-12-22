@@ -2,6 +2,7 @@
 // const domain="https://project.sumixer.com/yisong/api";
 const domain="http://10.0.0.16:8889";
 const host = "http://wechat.yisongbld.com";
+const mapAk = "MChiGQjAWZk8vdQ2S8F1MKzoEO9P4jni";
 const GET = {
   Signature:domain+'/wechat/jssdk/signature?url=',
   NearbyStores:domain+'/stores/near',//?lnt=&lat='
