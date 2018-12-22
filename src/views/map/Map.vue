@@ -12,9 +12,8 @@
 
     <div class="ys-search-address">
       <div class="ys-search-wrapper">
-        <img src="../../assets/icon/search.svg" alt="search">
-        <input type="text" title="" id="suggestId" placeholder="定位不准确？试试手动输入">
-        <img src="../../assets/icon/close.svg" alt="">
+        <input type="text" v-model="searchValue" title="" id="suggestId" placeholder="定位不准确？试试手动输入">
+        <img src="../../assets/icon/close.svg" alt="search" @click="searchValue=''">
       </div>
     </div>
 
@@ -25,7 +24,6 @@
 </template>
 
 <script>
-  import AddressInput from "../address/components/AddressInput";
   import AddressItem from "./AddressItem";
   export default {
     name: "Map",
@@ -34,13 +32,14 @@
       this.$nextTick(()=>{
         this.initMaps();
         this.locate();
+        this.getSuggestion();
       })
     },
     methods:{
       initMaps(){
         this.map = new BMap.Map("map");
         let mPoint = new BMap.Point(116.404, 39.915);//Tiananmen Square
-        this.map.centerAndZoom(mPoint,17);
+        this.map.centerAndZoom(mPoint,18);
       },
       locate(){
         let map = this.map;
@@ -51,10 +50,8 @@
             let mk = new BMap.Marker(r.point);
             map.addOverlay(mk);
             map.panTo(r.point);
-            console.log("获取到的定位：",r);
             vm.analyze(r.point);
-          }
-          else {
+          }else {
             console.log('failed ',this.getStatus());
           }
         });
@@ -86,7 +83,6 @@
         /*point.lng = 112.995443;//梅岭苑
         point.lat = 28.143792;*/
         geoc.getLocation(point, function(rs){
-          console.log("逆地址解析:",rs.address);
           vm.point = rs.point;//===r.point
           vm.currentAddress = rs.address;
           vm.poiKeyword = rs.street||rs.address;
@@ -94,15 +90,35 @@
       },
 
       getSuggestion(){
-
+        let ac = new BMap.Autocomplete({"input" : "suggestId","location" : this.map});
+        ac.addEventListener("onconfirm", e=> {
+          let _value = e.item.value;
+          this.searchValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+          this.setPlace(this.searchValue);
+        });
       },
       selectAddress(item){
         console.log("select",item);
+      },
+      setPlace(val){
+        let map = this.map;
+        map.clearOverlays();
+        const vm = this;
+        let local = new BMap.LocalSearch(map, {
+          onSearchComplete(){
+            let pp = local.getResults().getPoi(0).point;
+            map.centerAndZoom(pp, 18);
+            map.addOverlay(new BMap.Marker(pp));
+            vm.analyze(pp);
+          }
+        });
+        local.search(val);
       }
     },
     data(){
       return {
         map:null,
+        searchValue:"",
         currentAddress:"",
         point:{},
         poiKeyword:"",
@@ -131,7 +147,6 @@
       overflow-y: scroll;
       position: relative;
       padding: 1px 12px;
-
     }
     .ys-search-address{
       position: absolute;
@@ -147,21 +162,21 @@
 
       .ys-search-wrapper{
         width: 68%;
-        padding: 8px 12px;
-        background: rgba(0, 0, 0, .06);
         border-radius: 20px;
+        background: rgba(0, 0, 0, .06);
 
         display: flex;
         align-items: center;
         input{
+          padding: 8px 12px;
           background: transparent;
+
+          width: 90%;
+          height: 100%;
         }
 
         img{
-          width: 22px;
-          height: 22px;
-          padding: 3px;
-          margin: 0 5px;
+          width: 12px;
           object-fit: contain;
         }
       }
