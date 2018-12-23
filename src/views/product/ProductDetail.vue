@@ -13,7 +13,14 @@
         </div>
         <div class="product-operation">
           <a class="contact" :href="'tel:' + product.contact">联系商家</a>
-          <a class="btn" href="javascript:;" @click="addToCart">+加入购物车</a>
+          <a class="btn" href="javascript:;" @click.stop="addToCart" v-if="!product.quantity">
+            + 加入购物车
+          </a>
+          <div class="ys-number" v-else>
+            <a href="javascript:;" @click.stop="handleQuantity('-')">-</a>
+            <div>{{product.quantity}}</div>
+            <a href="javascript:;" @click.stop="handleQuantity" >+</a>
+          </div>
         </div>
       </div>
       <p class="info" style="padding: 20px"><span>配送</span> <span>现在下单,预计{{new Date().getHours()}}分钟后送达</span></p>
@@ -41,14 +48,15 @@
     props:['productId'],
     methods:{
       addToCart(){
-        console.log("add to cart");
-      }
+        ++this.product.quantity//add 1 each time
+      },
+      handleQuantity(type){
+        type==='-'?this.product.quantity&&--this.product.quantity:++this.product.quantity;
+      },
     },
-    computed:{
-      product(){
-        //todo: get data from state or network---
-        //mock
-        return {
+    data(){
+      return{
+        product:{
           id:this.productId,
           title:"旺仔小馒头原味16g",
           sales:48,
@@ -58,7 +66,8 @@
           alt:"旺仔小馒头~",
           unit:"袋",
           location:"中国",
-          brand:"旺仔小馒头"
+          brand:"旺仔小馒头",
+          quantity:0,
         }
       }
     }
@@ -124,7 +133,10 @@
       }
 
       .product-operation{
+        display: flex;
+        flex-direction: column;
         justify-content: space-around;
+        align-items: center;
 
         .contact{
           /*border-left: 1px solid #eee;*/
@@ -147,8 +159,38 @@
           }
         }
 
+        .ys-number{
+          width: 80%;
+          padding: 5px;
+          background: #FFE900;
+          box-shadow:1px 1px 3px 0 rgba(186,186,186,0.3);
+          border-radius: 15px;
+
+
+          display: flex;
+
+          div{
+            width: 50%;
+            color: #555555;
+            background: transparent;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          a{
+            width: 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+          }
+        }
+
         .btn{
-          padding: 8px;
+          padding: 5px 8px;
           background: #FFDF5C;
           border-radius:13px;
           color: #333;
