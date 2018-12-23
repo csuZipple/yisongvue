@@ -74,8 +74,9 @@
       align-self: flex-end;
       width: 17vw;
       height: 20px;
-      border: 1px solid #cecece;
-
+      background: #FFE900;
+      box-shadow:1px 1px 3px 0 rgba(186,186,186,0.3);
+      border-radius: 10px;
 
       display: flex;
 
@@ -92,13 +93,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #979797;
-      }
-      a:first-child{
-        border-right: 1px solid #eee;
-      }
-      a:last-child{
-        border-left: 1px solid #eee;
+        color: #ffffff;
       }
     }
 
