@@ -158,7 +158,7 @@
     }
 
     .tips-wrapper{
-      padding: 8px 12px;
+      padding: 8px 0;
       flex: 1 0 auto;
 
       display: flex;
@@ -166,6 +166,7 @@
       justify-content: space-between;
 
       .tips{
+        padding: 0 12px;
         overflow: scroll hidden;
         min-height: 400px; //prevent the soft keyboard from blocking
       }
