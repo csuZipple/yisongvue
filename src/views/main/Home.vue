@@ -26,7 +26,7 @@
       <div v-for="(indexProduct,index) in indexProducts" v-bind:key="index">
         <Divider>{{indexProduct.type}}</Divider>
         <div class="ys-products">
-          <Product v-for="item in indexProduct.products"  :image="item.image" :key="item.name+item.id" :title="item.title" :alt="item.alt" :sales="item.sales" :price="item.price"/>
+          <Product v-for="item in indexProduct.products" @click.native="getProductDetail(item.id)" :image="item.image" :key="item.name+item.id" :title="item.title" :alt="item.alt" :sales="item.sales" :price="item.price"/>
         </div>
       </div>
 
@@ -81,7 +81,6 @@
             console.log("Have I chosen a store? ",Boolean(this.storeId));
               if(!Boolean(this.storeId)){
                 const{latitude,longitude} = await this.setLocation(this);//Why do you need WeChat to return address information?
-                console.log("this is 回调");
                 this.$router.push({
                   path:`/selectStore/${latitude}/${longitude}`
                 })
@@ -91,8 +90,10 @@
                 this.setNotices(this);
                 this.setIndexProducts(this);
               }
-              console.log("request data end@!")
           },
+        getProductDetail(id){
+            this.$router.push({path:"/productDetail/"+id})
+        },
         ...mapActions(["setSwiper",'setLocation','setNotices','setIndexProducts'])
       },
       mounted(){
