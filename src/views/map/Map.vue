@@ -96,11 +96,10 @@
        */
       analyze(point){//point:{lat:"",lng:""}
         const geoc = new BMap.Geocoder();
-        const vm = this;
-        geoc.getLocation(point, function(rs){
-          vm.point = rs.point;//===r.point
-          vm.currentAddress = rs.address;
-          vm.poiKeyword = rs.street||rs.address;
+        geoc.getLocation(point, rs=>{
+          this.point = rs.point;//===r.point
+          this.currentAddress = rs.address;
+          this.poiKeyword = rs.street||rs.address;
         });
       },
       /**
@@ -169,26 +168,28 @@
     .map-wrapper{
       height: 50%;
       position: relative;
-    }
-    #map{
-      height: 100%;
-    }
-    img{
-      width: 32px;
-      object-fit: contain;
-    }
-    .position{
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-75%);//The bottom of the icon is centered,75  = 50(center) + 25(top)
-      z-index: 100;
-    }
-    .nowposition{
-      position: absolute;
-      right: 20px;
-      bottom:20px;
-      z-index: 100;
+
+      #map{
+        height: 100%;
+      }
+      img{
+        width: 32px;
+        object-fit: contain;
+      }
+      .position{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-75%);//The bottom of the icon is centered,75  = 50(center) + 25(top)
+        z-index: 100;
+      }
+      .nowposition{
+        position: absolute;
+        right: 20px;
+        bottom:20px;
+        z-index: 100;
+      }
+
     }
     #tips{
       width: 100%;
