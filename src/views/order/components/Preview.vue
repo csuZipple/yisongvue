@@ -31,7 +31,7 @@
 
           <div class="btn">
             <a href="javascript:;" @click="applySaleAfter">申请售后</a>
-            <a href="tel:10086" @click="call">致电商家</a>
+            <a href="tel:10086">致电商家</a>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@
       },
       applySaleAfter(){
         console.log("callSaleAfter!");
-        this.emit("callSaleAfter")
+        this.$emit("callSaleAfter")
       }
     },
     props:{
