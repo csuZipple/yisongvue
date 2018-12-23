@@ -46,7 +46,7 @@
     },
     watch:{
       list:function (n,o) {
-        if(n.length>1){
+        if(n.length>1&&!this.timer){
           this.timer = setInterval(this.animation,3000);
         }
       }
