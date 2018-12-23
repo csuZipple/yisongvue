@@ -80,7 +80,8 @@
           async requestData(){
             console.log("Have I chosen a store? ",Boolean(this.storeId));
               if(!Boolean(this.storeId)){
-                const{latitude,longitude} = await this.setLocation(this);
+                const{latitude,longitude} = await this.setLocation(this);//Why do you need WeChat to return address information?
+                console.log("this is 回调");
                 this.$router.push({
                   path:`/selectStore/${latitude}/${longitude}`
                 })
@@ -90,6 +91,7 @@
                 this.setNotices(this);
                 this.setIndexProducts(this);
               }
+              console.log("request data end@!")
           },
         ...mapActions(["setSwiper",'setLocation','setNotices','setIndexProducts'])
       },
