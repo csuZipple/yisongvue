@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../store/index'
 import Router from 'vue-router'
 import Container from '../views/Container'
 import Home from '../views/main/Home'
@@ -22,7 +23,7 @@ import Register from '../views/Register'
 
 Vue.use(Router);
 const Order = ()=> import('../views/order/Order');
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path:"/nav",//包含底部导航栏
@@ -116,4 +117,22 @@ export default new Router({
       }
     }
   ]
-})
+});
+
+
+router.beforeEach(function (to, from, next) {
+  if(store){
+    store.state.data.requests.forEach(xhr=>{
+      console.log("终止异步请求");
+      console.log(xhr);
+      xhr.abort();
+    });
+    store.state.data.requests =[];
+  }else{
+    console.log("can't get vuex store");
+  }
+   next();
+});
+
+
+export default router;

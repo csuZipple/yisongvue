@@ -74,7 +74,8 @@ const data = {
   orderList:[
     {
       shopName:"壹送便利店（全丰小区店）",
-      status:0,//['订单交易中','交易完成','未付款']
+      status:0,//['订单交易中','交易完成','未付款'],
+      shopPhone:"13500879965",
       products:[
         {
           id:"123",
@@ -106,6 +107,7 @@ const data = {
     },
     {
       shopName:"壹送便利店（全丰小区店）",
+      shopPhone:"13500879965",
       status:2,
       products:[
         {
@@ -139,6 +141,7 @@ const data = {
   ],
 
   user:{
+    userId:1,
     username:"Zipple",
     phone:18373151083,
     avatar:"",
@@ -153,7 +156,11 @@ const data = {
         extra:"2单元604"
       }
     ]
-  }
+  },
+
+
+  requests:[]
+
 };
 
 const status={

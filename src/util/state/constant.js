@@ -11,6 +11,9 @@ const SET_INDEX_PRODUCTS = "setIndexProducts";
 //cart
 const SET_CART_ITEM_LIST = "setCartItemList";
 
+//order
+const SET_ORDER_LIST = "setOrderList";
+
 //user
 const SET_USER_INFO = "setUserInfo";
 
@@ -24,5 +27,6 @@ export{
   SET_STORENAME,
   SET_NOTICES,
   SET_CART_ITEM_LIST,
-  SET_USER_INFO
+  SET_USER_INFO,
+  SET_ORDER_LIST
 }

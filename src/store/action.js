@@ -7,9 +7,11 @@ import {
   SET_STOREID,
   SET_STORENAME,
   SET_NOTICES,
-  SET_CART_ITEM_LIST
+  SET_CART_ITEM_LIST,
+  SET_ORDER_LIST,
+  SET_USER_INFO
 } from "../util/state/constant";
-import {_get} from "../util/http/util";
+import {_get,_fetch} from "../util/http/util";
 import {GET} from "../util/http/constant";
 import {registerWeixin} from "../util/http/util";
 
@@ -25,9 +27,10 @@ const dataActions = {
     commit(SET_STORENAME,storeName)
   },
   setSwiper({commit,state},context){
-    _get({
+    let xhr = _get({
       url:`${GET.Slides}${state.storeId}`
-    }).then(res=>res.json()).then(data=>{
+    });
+    xhr.then(res=>res.json()).then(data=>{
       let list = [];
       if(data['data']&&data['data'].length){
         data['data'].forEach((item,index)=>{
@@ -46,6 +49,7 @@ const dataActions = {
       context.$toast(`Failed get swiperList! err: ${err}`);
       console.error("Failed get swiperList!",err)
     });
+    state.push(xhr);
   },
   setLocation({commit},context){
     return new Promise((resolve,reject)=>{
@@ -72,7 +76,8 @@ const dataActions = {
     })
   },
   setNotices({commit,state},context){
-    _get({url:`${GET.Notice}${state.storeId}`}).then(res=>res.json()).then(data=>{
+    let xhr = _get({url:`${GET.Notice}${state.storeId}`});
+    xhr.then(res=>res.json()).then(data=>{
       let list =[];
       if(data['data']&&data['data'].length){
         let id = 0;
@@ -102,15 +107,18 @@ const dataActions = {
     }).catch(err=>{
       context.$toast(`network err, ${err}`);
       console.error("failed to get notice."+err);
-    })
+    });
+    state.push(xhr);
   },
   setIndexProducts({commit,state},context){
     const req = GET.Hot(state.storeId);
-      _get({url:req}).then(res=> res.json()).then(data=>{
+      let xhr = _get({url:req});
+      xhr.then(res=> res.json()).then(data=>{
          commit(SET_INDEX_PRODUCTS,data['data'])
       }).catch(err=>{
         console.warn("failed get index products:"+err)
-      })
+      });
+    state.push(xhr);
   },
 
   initCartItemList({commit}){
@@ -162,6 +170,19 @@ const dataActions = {
   saveCart({state}){
     console.log("save cart!");
     localStorage.setItem("cartItemList",JSON.stringify(state.cartItem))
+  },
+
+  setOrderList({state,commit}){
+    console.log("request order list..");
+    let url = GET.Orders(state.user.userId);
+    let xhr = _fetch(url);
+    xhr.then(res=>res.json()).then(data=>{
+      console.log("get order:",data);
+      commit(SET_ORDER_LIST,data.data)
+    }).catch(err=>{
+      console.log("get order list failed! ",err)
+    });
+    state.requests.push(xhr);
   }
 
 

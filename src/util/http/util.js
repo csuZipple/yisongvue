@@ -101,10 +101,30 @@ function registerWeixin(callback){
  */
 function _get(request) {
   const req = createGetRequest(request);
-  return fetch(req);
+  return _fetch(req);
 }
 
 
+let _fetch = (function(fetch){
+  return function(url,options){
+    let abort = null;
+    let abort_promise = new Promise((resolve, reject)=>{
+      abort = () => {
+        reject('abort.');
+        console.info('abort done.');
+      };
+    });
+    let promise = Promise.race([
+      fetch(url,options),
+      abort_promise
+    ]);
+    promise.abort = abort;
+    return promise;
+  };
+})(fetch);
+
+
+
 export{
-  setToken,wxAuth,registerWeixin,_get
+  setToken,wxAuth,registerWeixin,_get,_fetch
 }

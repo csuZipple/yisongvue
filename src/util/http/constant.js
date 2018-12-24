@@ -15,6 +15,18 @@ const GET = {
    */
   Hot:function (storeId) {
     return domain+`/store/${storeId}/goods/hot`
+  },
+  /**
+   * @return {string}
+   */
+  Orders:function (userId) {
+    return domain+`/users/${userId}/orders`;
+  },
+  /**
+   * @return {string}
+   */
+  OrderById:function (userId, orderId) {
+    return domain+`/users/${userId}/orders/${orderId}`;
   }
 };
 export default {

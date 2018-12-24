@@ -30,6 +30,9 @@
   export default {
     name: "Order",
     components: {NoData, OrderItem, Tab},
+    mounted(){
+      this.setOrderList();
+    },
     computed:{
       list(){
         if(this.currentIndex){
@@ -58,7 +61,8 @@
         }else{
           return this.orderList;
         }
-      }
+      },
+      ...mapActions(['setOrderList'])
     },
     data(){
       return{
