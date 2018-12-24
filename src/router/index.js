@@ -121,17 +121,9 @@ const router =  new Router({
 
 
 router.beforeEach(function (to, from, next) {
-  if(store){
-    store.state.data.requests.forEach(xhr=>{
-      console.log("终止异步请求");
-      console.log(xhr);
-      xhr.abort();
-    });
-    store.state.data.requests =[];
-  }else{
-    console.log("can't get vuex store");
-  }
-   next();
+  store.state.data.requests.forEach(xhr=>xhr.abort());
+  store.state.data.requests =[];
+  next();
 });
 
 
