@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Container from '../views/Container'
 import Home from '../views/main/Home'
 import Cart from '../views/cart/cart'
-import Order from '../views/order/Order'
+// import Order from '../views/order/Order'
 import Group from '../views/group/Group'
 import Product from '../views/product/Product'
 import ProductDetail from '../views/product/ProductDetail'
@@ -17,8 +17,11 @@ import AddDetailContainer from '../views/address/AddAddressDetail'
 import Help from '../views/help/HelpList'
 import HelpDetail from '../views/help/HelpDetail'
 import Map from '../views/map/Map'
+import Login from '../views/Login'
+import Register from '../views/Register'
 
 Vue.use(Router);
+const Order = ()=> import('../views/order/Order');
 export default new Router({
   routes: [
     {
@@ -98,6 +101,14 @@ export default new Router({
       path:"/map",
       name:"baiduMap",
       component:Map,
+    },{
+      path:"/login",
+      name:"login",
+      component:Login,
+    },{
+      path:"/register",
+      name:"register",
+      component:Register,
     },{
       path:"/*",
       redirect:{
