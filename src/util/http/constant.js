@@ -22,7 +22,7 @@ export default {
   register:host+"/register",
   auth:domain+"/auth/weixin/",
   refreshToken:domain+"/auth",
-
+  GET
 };
 
 export {
