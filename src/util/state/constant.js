@@ -11,6 +11,9 @@ const SET_INDEX_PRODUCTS = "setIndexProducts";
 //cart
 const SET_CART_ITEM_LIST = "setCartItemList";
 
+//user
+const SET_USER_INFO = "setUserInfo";
+
 export{
   SET_STOREID,
   SET_TOKEN,
@@ -20,5 +23,6 @@ export{
   SET_SWIPER_LIST,
   SET_STORENAME,
   SET_NOTICES,
-  SET_CART_ITEM_LIST
+  SET_CART_ITEM_LIST,
+  SET_USER_INFO
 }

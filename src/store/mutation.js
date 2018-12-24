@@ -1,5 +1,5 @@
 import{SET_STOREID,SET_TOKEN,SET_SWIPER_LIST,SET_LOCATION,SET_INDEX_PRODUCTS,SET_CATEGORIES,SET_STORENAME,SET_NOTICES,
-        SET_CART_ITEM_LIST
+        SET_CART_ITEM_LIST,SET_USER_INFO
 } from "../util/state/constant";
 
 const dataMutations = {
@@ -29,6 +29,9 @@ const dataMutations = {
     },
   [SET_CART_ITEM_LIST](state,list){
     state.cartItem = list;
+  },
+  [SET_USER_INFO](state,obj){
+    state.user = obj;
   }
 
 };
