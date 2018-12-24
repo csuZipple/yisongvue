@@ -16,6 +16,7 @@ import {registerWeixin} from "../util/http/util";
 const dataActions = {
   setToken({commit},token){
     commit(SET_TOKEN,token);
+    //todo: get user info.
   },
   setStoreId({commit},storeId){
     commit(SET_STOREID,storeId);
