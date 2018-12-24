@@ -35,7 +35,9 @@
 <script>
   import {getToken} from "../util/util";
   import {setToken} from "../util/http/util";
-  import {mapActions} from "vuex"
+  import { createNamespacedHelpers } from 'vuex'
+
+  const {mapActions } = createNamespacedHelpers('data');
   import Tabbar from "../components/Tabbar/Tabbar";
   import TabbarItem from "../components/Tabbar/TabbarItem";
   //Check if the local cache needs to restore the previously crashed page
