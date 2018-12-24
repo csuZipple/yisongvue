@@ -33,7 +33,7 @@ function setToken(url,formData,callback,register) {
             localStorage.setItem("token",result.data.token);
             localStorage.setItem("expireTime",result.data.expireTime);
             if(typeof callback==="function"){
-               callback(result.data.token);
+               callback(result.data);
             }
             break;
           case 400:

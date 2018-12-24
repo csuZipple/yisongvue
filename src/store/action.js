@@ -16,9 +16,9 @@ import {GET} from "../util/http/constant";
 import {registerWeixin} from "../util/http/util";
 
 const dataActions = {
-  setToken({commit},token){
-    commit(SET_TOKEN,token);
-    //todo: get user info.
+  async setToken({commit,dispatch},obj){
+      await dispatch('setUserInfo',obj.userId);
+      commit(SET_TOKEN,obj.token);
   },
   setStoreId({commit},storeId){
     commit(SET_STOREID,storeId);
@@ -49,7 +49,7 @@ const dataActions = {
       context.$toast(`Failed get swiperList! err: ${err}`);
       console.error("Failed get swiperList!",err)
     });
-    state.push(xhr);
+    state.requests.push(xhr);
   },
   setLocation({commit},context){
     return new Promise((resolve,reject)=>{
@@ -108,17 +108,17 @@ const dataActions = {
       context.$toast(`network err, ${err}`);
       console.error("failed to get notice."+err);
     });
-    state.push(xhr);
+    state.requests.push(xhr);
   },
   setIndexProducts({commit,state},context){
     const req = GET.Hot(state.storeId);
-      let xhr = _get({url:req});
-      xhr.then(res=> res.json()).then(data=>{
-         commit(SET_INDEX_PRODUCTS,data['data'])
-      }).catch(err=>{
-        console.warn("failed get index products:"+err)
-      });
-    state.push(xhr);
+    let xhr = _get({url:req});
+    xhr.then(res=> res.json()).then(data=>{
+      commit(SET_INDEX_PRODUCTS,data['data'])
+    }).catch(err=>{
+      console.warn("failed get index products:"+err)
+    });
+    state.requests.push(xhr);
   },
 
   initCartItemList({commit}){
@@ -183,8 +183,18 @@ const dataActions = {
       console.log("get order list failed! ",err)
     });
     state.requests.push(xhr);
-  }
+  },
 
+  setUserInfo({state,commit},userId){
+    //don't need abort,because it has already await this result when it be called
+    let url = GET.UserInfo(userId);
+    fetch(url).then(res=>res.json()).then(data=>{
+      console.log("get user info ",data);
+      commit(SET_USER_INFO,data.data);
+    }).catch(err=>{
+      console.log("failed to get user info ",err)
+    })
+  }
 
 };
 export {

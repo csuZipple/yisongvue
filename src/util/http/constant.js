@@ -27,7 +27,18 @@ const GET = {
    */
   OrderById:function (userId, orderId) {
     return domain+`/users/${userId}/orders/${orderId}`;
+  },
+  /**
+   * @return {string}
+   */
+  UserInfo:function(userId){
+    return domain+`/users/${userId}`;
   }
+};
+
+const POST = {
+  VerificationCode:"/messages/wechat",
+  BindPhone:"/users/weixin"
 };
 export default {
   whitelist:"wechat.yisongbld.com",
@@ -37,5 +48,5 @@ export default {
 };
 
 export {
-  GET
+  GET,POST
 }
