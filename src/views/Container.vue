@@ -1,8 +1,6 @@
 <template>
   <div class="ys-index">
-    <keep-alive>
-      <router-view style="padding-bottom: 60px"/>
-    </keep-alive>
+    <router-view style="padding-bottom: 60px"/>
     <tabbar>
       <tabbar-item link="/nav/index" :selected="$route.path === '/nav/index'">
         <img slot="icon" src="../assets/icon/index.svg">

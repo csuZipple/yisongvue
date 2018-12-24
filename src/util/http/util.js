@@ -111,7 +111,6 @@ let _fetch = (function(fetch){
     let abort_promise = new Promise((resolve, reject)=>{
       abort = () => {
         reject('abort.');
-        console.info('abort done.');
       };
     });
     let promise = Promise.race([
