@@ -19,10 +19,9 @@ const GET = {
 };
 export default {
   whitelist:"wechat.yisongbld.com",
-  register:host+"/register",
+  login:host+"/login",
   auth:domain+"/auth/weixin/",
   refreshToken:domain+"/auth",
-  GET
 };
 
 export {

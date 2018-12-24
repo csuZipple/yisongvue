@@ -17,8 +17,9 @@ function wxAuth(){
  * @param url
  * @param formData :code or old token.
  * @param callback
+ * @param register
  */
-function setToken(url,formData,callback) {
+function setToken(url,formData,callback,register) {
   fetch(url, {
     method: 'POST',
     body: formData
@@ -37,7 +38,7 @@ function setToken(url,formData,callback) {
             break;
           case 400:
             //Re-register the user when using the token as a parameter request to return 400 in the background.
-            wxAuth();
+            typeof register==='function'&&register();
             break;
           default:
         }
