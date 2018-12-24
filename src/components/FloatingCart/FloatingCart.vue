@@ -21,20 +21,17 @@
 </template>
 
 <script>
+  import { createNamespacedHelpers } from 'vuex'
+
+  const {mapActions,mapState} = createNamespacedHelpers('data');
   export default {
     name: "FloatingCart",
-    props:{
-      total:{
-        type:Number,
-        default:0
-      }
-    },
     methods:{
       checkOut(){
-        this.$emit("checkout")
+        //todo: to checkout!
       },
       onCartClicked(){
-        this.isActive()&&this.$emit("cartClicked");
+        this.$router.push({path:"/nav/cart"})
       }
     },
     computed:{
@@ -44,7 +41,13 @@
       },
       tip(){
         return this.total-this.tips<0?this.tips-this.total:this.tips;
-      }
+      },
+      total(){
+        return this.cartItem.reduce((t,c)=>{
+          return t+c['price']*c['quantity']
+        },0)
+      },
+      ...mapState(['cartItem'])
     },
     data(){
       return {

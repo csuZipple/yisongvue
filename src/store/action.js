@@ -114,15 +114,56 @@ const dataActions = {
   },
 
   initCartItemList({commit}){
-    let list = JSON.parse(localStorage.getItem("cartItemList"));
+    let list = JSON.parse(localStorage.getItem("cartItemList"))||[];
     console.log("init cart item");
     console.log(list);
     commit(SET_CART_ITEM_LIST,list);
   },
 
-  setCartItemList({commit},list){
+  setCartItemList({commit,dispatch},list){
     commit(SET_CART_ITEM_LIST,list);
+    dispatch('saveCart')
+  },
+
+  addToCart({state,dispatch},product){
+    let flag = false;
+    state.cartItem.filter(item=>{
+      if(item.id===product.id){
+        item.quantity++;
+        flag = true;
+      }
+    });
+    if(!flag){
+      let p = JSON.parse(JSON.stringify(product));
+      p.selected = p.selected ||false;
+      p.quantity = p.quantity || 1;
+      state.cartItem.push(p);
+    }
+    dispatch('saveCart');
+  },
+
+  subToCart({state,dispatch},product){
+    let i = -1;
+    state.cartItem.filter((item,index)=>{
+      if(item.id === product.id){
+        if(item.quantity>1){
+          item.quantity--;
+        }else{
+          i = index;
+        }
+      }
+    });
+    if(i>0){
+      state.cartItem.splice(i,1);
+    }
+    dispatch('saveCart');
+  },
+
+  saveCart({state}){
+    console.log("save cart!");
+    localStorage.setItem("cartItemList",JSON.stringify(state.cartItem))
   }
+
 
 };
 export {

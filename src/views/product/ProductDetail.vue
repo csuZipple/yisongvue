@@ -13,7 +13,7 @@
         </div>
         <div class="product-operation">
           <a class="contact" :href="'tel:' + product.contact">联系商家</a>
-          <a class="btn" href="javascript:;" @click.stop="addToCart" v-if="!product.quantity">
+          <a class="btn" href="javascript:;" @click.stop="addCart" v-if="!product.quantity">
             + 加入购物车
           </a>
           <div class="ys-number" v-else>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="fixed">
-      <FloatingCart v-bind:total="0"/>
+      <FloatingCart/>
     </div>
 
   </div>
@@ -42,17 +42,28 @@
 <script>
   import YsHeader from "../../components/Header";
   import FloatingCart from "../../components/FloatingCart/FloatingCart";
+  import { createNamespacedHelpers } from 'vuex'
+
+  const {mapActions,mapState} = createNamespacedHelpers('data');
   export default {
     name: "ProductDetail",
     components: {FloatingCart, YsHeader},
     props:['productId'],
     methods:{
-      addToCart(){
-        ++this.product.quantity//add 1 each time
+      addCart(){
+        ++this.product.quantity;//add 1 each time
+        this.addToCart(this.product);//todo:构造一个product 对象
       },
       handleQuantity(type){
-        type==='-'?this.product.quantity&&--this.product.quantity:++this.product.quantity;
+        if(type === '-'){
+          this.product.quantity&&--this.product.quantity;
+          this.subToCart(this.product);
+        }else{
+          ++this.product.quantity;
+          this.addToCart(this.product);
+        }
       },
+      ...mapActions(['addToCart','subToCart'])
     },
     data(){
       return{

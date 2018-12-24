@@ -110,6 +110,7 @@
             res[`${key}`]=item;//item must be boolean;
           })
         }
+        this.setCartItemList(this.cartItem);
       },
       ...mapActions(['setCartItemList'])
     },

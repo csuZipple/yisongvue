@@ -13,9 +13,9 @@
     </div>
     <div class="tips-wrapper" v-else>
       <div class="tips">
-        <SearchItem :keyword="keyword" v-for="(item,index) in searchTips" v-bind:key="index" v-bind="item" @add="addToCart" @sub="subToCart"/>
+        <SearchItem :keyword="keyword" v-for="(item,index) in searchTips" v-bind:key="index" v-bind="item" @add="addCart($event,item)" @sub="subCart($event,item)"/>
       </div>
-      <FloatingCart v-bind:total="currentTotal" @checkout="checkOut"/>
+      <FloatingCart/>
     </div>
   </div>
 </template>
@@ -27,7 +27,9 @@
   import {throttle} from "../../util/util";
   import SearchItem from "../../components/ProductItem";
   import FloatingCart from "../../components/FloatingCart/FloatingCart";
+  import { createNamespacedHelpers } from 'vuex'
 
+  const {mapActions,mapState} = createNamespacedHelpers('data');
   export default {
     name: "Search",
     components: {FloatingCart, SearchItem, YsHeader, SearchTips},
@@ -40,30 +42,17 @@
         console.log("throttle input search:",keyword);
         //todo:change this.searchTips to update search item
       },
-      addToCart(item){
-        this.handleTotalChanges(0,item);
+      addCart(item,product){
+        this.addToCart(product);
       },
-      subToCart(item){
-        this.handleTotalChanges(1,item);
-      },
-      handleTotalChanges(type,item){
-        //todo: total will be cart total. re code soon!
-        this.currentTotal = this.searchTips.reduce((total,cur)=>{
-          if(cur['id']===item[0]){
-            return total = !type?total+(+cur['price']):total-cur['price'];
-          }
-          return total;
-        },this.currentTotal);
-        this.updateCart(item);
-      },
-      updateCart(item){//item[id,quantity]
-        //todo:update cart (add or sub) quantity.
-        console.log("update cart next time!");
+      subCart(item,product){
+        this.subToCart(product);
       },
       checkOut(){
         console.log("check out!");
         //todo:check out current item
-      }
+      },
+      ...mapActions(['addToCart','subToCart'])
     },
     data(){
       return{
@@ -111,8 +100,7 @@
             image:"",
             alt:"旺仔小馒头",
           }
-        ],
-        currentTotal:0
+        ]
       }
     },
     watch:{

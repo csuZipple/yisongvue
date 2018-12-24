@@ -37,7 +37,7 @@
   import {setToken} from "../util/http/util";
   import { createNamespacedHelpers } from 'vuex'
 
-  const {mapActions } = createNamespacedHelpers('data');
+  const {mapActions,mapState} = createNamespacedHelpers('data');
   import Tabbar from "../components/Tabbar/Tabbar";
   import TabbarItem from "../components/Tabbar/TabbarItem";
   //Check if the local cache needs to restore the previously crashed page
@@ -46,6 +46,7 @@
     components: {TabbarItem, Tabbar},
     mounted(){
       this.initToken();
+      this.initCartItemList();//todo: it will init every time when enter this page
     },
     methods:{
       //if the locally cached token has not expired,use it to initialize the state
@@ -59,8 +60,8 @@
           this.setToken(initToken);//=> this.$store.dispatch("setToken",initToken)
         }
       },
-      ...mapActions(["setToken"])
-    }
+      ...mapActions(["setToken","initCartItemList"])
+    },
   }
 </script>
 

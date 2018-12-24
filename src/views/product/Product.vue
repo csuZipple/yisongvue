@@ -14,7 +14,7 @@
 
       <div class="item-wrapper">
         <div style="background: #ffffff;overflow: hidden">
-          <ProductItem class="item" small v-for="(item,index) in mockData.products" v-bind:key="index" v-bind="item" @add="addToCart" @sub="subToCart"/>
+          <ProductItem class="item" small v-for="(item,index) in mockData.products" v-bind:key="index" v-bind="item" @add="addCart($event,item)" @sub="subCart($event,item)"/>
         </div>
 
         <Divider style="color: #666666;">这是我的底线</Divider>
@@ -23,7 +23,7 @@
 
     </div>
     <div class="fixed">
-      <FloatingCart v-bind:total="0"/>
+      <FloatingCart/>
     </div>
   </div>
 </template>
@@ -35,6 +35,9 @@
   import FloatingCart from "../../components/FloatingCart/FloatingCart";
   import ProductItem from "../../components/ProductItem";
   import Divider from "../../components/Divider";
+  import { createNamespacedHelpers } from 'vuex'
+
+  const {mapActions,mapState} = createNamespacedHelpers('data');
   export default {
     name: "Product",
     components: {Divider, ProductItem, FloatingCart, TabItem, Tab, YsHeader},
@@ -52,15 +55,16 @@
         //todo:fetch data!
         this.currentCategory = index;
       },
-      addToCart(){
-
+      addCart(item,product){
+        this.addToCart(product);
       },
-      subToCart(){
-
+      subCart(item,product){
+        this.subToCart(product);
       },
       onSubTypeClicked(index){
         this.currentSubType = index;
-      }
+      },
+      ...mapActions(['addToCart','subToCart'])
     },
     data(){
       return{
