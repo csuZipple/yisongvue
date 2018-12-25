@@ -8,13 +8,25 @@ const GET = {
   NearbyStores:domain+'/stores/near',//?lnt=&lat='
   Notice:domain+"/stores/notices/",//?storeId
   Menus:domain+"/stores/menus/",//?storeId
-  FirstCategory:domain+"/categories/rank/first/",
+  FirstCategory:domain+"/category/first/",
+  /**
+   * @return {string}
+   */
+  SecondCategory:function (firstId) {
+    return domain+`/category/${firstId}/second`;
+  },
+  /**
+   * @return {string}
+   */
+  CategoryProduct:function(categoryId){
+    return domain+`/category/${categoryId}/products`;
+  },
   Slides:domain+"/stores/slides/",//?storeId
   /**
    * @return {string}
    */
   Hot:function (storeId) {
-    return domain+`/store/${storeId}/goods/hot`
+    return domain+`/store/${storeId}/products/hot`
   },
   /**
    * @return {string}

@@ -3,13 +3,13 @@
     <YsHeader show-right-icon="" @onRightClicked="search">产品列表</YsHeader>
 
     <Tab v-model="currentCategory" custom-bar-width="35px" prevent-default @on-before-index-change="switchTabItem">
-      <TabItem :selected="index===0" @on-item-click="onItemClick" v-for="(item,index) in mockData.types" v-bind:key="index">{{item.text}}</TabItem>
+      <TabItem :selected="index===0"  v-for="(item,index) in mockData.types" v-bind:key="index">{{item.text}}</TabItem>
     </Tab>
 
     <div class="content">
 
       <div class="tab-wrapper">
-          <div v-for="item in 100" :class="{'active':item===currentSubType}" @click="onSubTypeClicked(item)">{{item}}元特惠</div>
+          <div v-for="(item,index) in mockData.subTypes" :class="{'active':index===currentSubType}" @click="onSubTypeClicked(item,index)">{{item}}元特惠</div>
       </div>
 
       <div class="item-wrapper">
@@ -35,25 +35,65 @@
   import FloatingCart from "../../components/FloatingCart/FloatingCart";
   import ProductItem from "../../components/ProductItem";
   import Divider from "../../components/Divider";
+  import {GET} from "../../util/http/constant";
   import { createNamespacedHelpers } from 'vuex'
 
   const {mapActions,mapState} = createNamespacedHelpers('data');
   export default {
     name: "Product",
     components: {Divider, ProductItem, FloatingCart, TabItem, Tab, YsHeader},
+    mounted(){
+       this.requestData();
+    },
     methods:{
+      async requestData(){
+         let category = await this.getProductTypes();
+         if(category&&category.length){
+           this.getSubProductTypes(category[0].id);
+         }else{
+           console.log("requestData err");
+         }
+      },
+      async getProductTypes(){
+        let url = GET.FirstCategory;
+        fetch(url).then(res=>res.json()).then(res=>{
+          console.log("获取第一分类",res.data);
+          this.mockData.types = res.data;
+          return res.data;//todo: maybe error!
+        }).catch(err=>{
+          console.log("get first category failed!",err);
+        })
+      },
+      getSubProductTypes(id,callback,fail){
+        let url = GET.SecondCategory(id);
+        fetch(url).then(res=>res.json()).then(res=>{
+          this.mockData.subTypes = res.data;
+          typeof callback==='function'&&callback();
+        }).catch(err=>{
+          console.log("get second category error ",err);
+          typeof fail==='function'&&fail();
+        })
+      },
       search(){
         this.$router.push({
           path:`/search`
         })
       },
-      onItemClick(i){
-        console.log("clicked at ",i);
-      },
       switchTabItem(index){
-        console.log("switch to ",index);
-        //todo:fetch data!
-        this.currentCategory = index;
+        //todo:show loading
+        if(this.mockData.types.length){
+          this.$loading({show:true});
+          this.getSubProductTypes(this.mockData.types[index].id,()=>{
+            console.log("switch to ",index);
+            this.currentCategory = index;
+            this.$loading({show:false});
+          },()=>{
+            this.$loading({show:false});
+          });
+        }else{
+          console.log("数据未加载完成..")
+        }
+
       },
       addCart(item,product){
         this.addToCart(product);
@@ -61,8 +101,18 @@
       subCart(item,product){
         this.subToCart(product);
       },
-      onSubTypeClicked(index){
-        this.currentSubType = index;
+      onSubTypeClicked(item,index){
+        this.$loading({show:true});
+        let url = GET.CategoryProduct(item.id);
+        fetch(url).then(res=>res.json()).then(res=>{
+          console.log("获取商品信息成功 ",res.data);
+          this.mockData.products = res.data;
+          this.currentSubType = index;
+          this.$loading({show:false});
+        }).catch(err=>{
+          console.log("获取商品信息失败.",err);
+          this.$loading({show:false});
+        });
       },
       ...mapActions(['addToCart','subToCart'])
     },
@@ -95,6 +145,7 @@
               text:"辣条"
             }
           ],
+          subTypes:[],
           products:[
             {
               id:"123",
