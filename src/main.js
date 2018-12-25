@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 import {Toast} from './plugins/toast/toast'
+import {Loading} from './plugins/loading/loading'
 Vue.use(Toast);
+Vue.use(Loading);
 
 Vue.config.productionTip = false;
 // Todo : register a error handler --- don't support async error
