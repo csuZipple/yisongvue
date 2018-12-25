@@ -1,5 +1,5 @@
 <template>
-  <div class='ys-loading-wrapper' v-if="show">
+  <div class='ys-loading-wrapper'>
     <div class='loading'>
             <span
               :style='{
