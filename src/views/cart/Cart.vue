@@ -39,10 +39,9 @@
       },
       checkOut(){
         if(this.cartItem.length){
-          //todo:go to checkOut
           const list = this.getSelectedCartItemList();
-          if(list.length!==this.cartItem.length){
-            this.$toast("check out!");
+          if(list.length){
+            console.log("checkOut");//todo:go to checkOut
           }else{
             this.$toast("You need to select the item before checkOut.");
           }
@@ -67,14 +66,16 @@
       },
       confirm(){
         const list = this.getSelectedCartItemList();
-        if(list.length!==this.cartItem.length){
+        if(list.length){
           this.showDialog = true;
         }else{
           this.$toast("You need to select the item before deleting.");
         }
       },
       onDelete(){
-        const list = this.getSelectedCartItemList();
+        const list = this.cartItem.filter(item=>{
+          return !item['selected'];
+        });
         this.setCartItemList(list);
         if (!list.length) {
           this.currentRightIndex = 0;
@@ -95,7 +96,7 @@
       },
       getSelectedCartItemList(){
         return this.cartItem.filter(item=>{
-          return !(item['selected']);
+          return item['selected'];
         });
       },
       updateCartItemList(item,key){
