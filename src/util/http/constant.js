@@ -33,6 +33,21 @@ const GET = {
    */
   UserInfo:function(userId){
     return domain+`/users/${userId}`;
+  },
+
+  HotSearch:domain+"/products/hot",
+  /**
+   * @return {string}
+   */
+  ProductDetail:function(id){
+    return domain+`/products/${id}`
+  },
+
+  /**
+   * @return {string}
+   */
+  Search:function (keyword) {
+    return domain+`/search/${keyword}`;
   }
 };
 

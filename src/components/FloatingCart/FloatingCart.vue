@@ -28,7 +28,7 @@
     name: "FloatingCart",
     methods:{
       checkOut(){
-        //todo: to checkout!
+        this.$router.push({path:"/nav/cart"});//todo: check out directly or go to cart page?
       },
       onCartClicked(){
         this.$router.push({path:"/nav/cart"})

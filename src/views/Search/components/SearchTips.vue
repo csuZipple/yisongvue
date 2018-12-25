@@ -5,8 +5,8 @@
       <img v-if="showDelete" src="../../../assets/icon/delete.svg" @click="handleDeleteClicked" alt="删除">
     </p>
     <div class="wrapper">
-      <a class="item" href="javascript:;" @click="search(item.productId)" v-for="(item,index) of data" v-bind:key="index">
-        {{item.name}}
+      <a class="item" href="javascript:;" @click="search(item)" v-for="(item,index) of data" v-bind:key="index">
+        {{item.name||item}}
       </a>
     </div>
   </div>
@@ -37,8 +37,12 @@
       handleDeleteClicked(){
         this.$emit("delete",!this.showDelete)
       },
-      search(productId){
-        console.log("search id: ",productId)
+      search(item){
+        if(item.productId){
+          this.$router.push({path:`/productDetail/${productId}`})
+        }else{
+          this.$emit("onHistoryClicked",item);
+        }
       }
     }
   }

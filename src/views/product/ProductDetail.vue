@@ -42,6 +42,7 @@
 <script>
   import YsHeader from "../../components/Header";
   import FloatingCart from "../../components/FloatingCart/FloatingCart";
+  import {GET} from "../../util/http/constant";
   import { createNamespacedHelpers } from 'vuex'
 
   const {mapActions,mapState} = createNamespacedHelpers('data');
@@ -49,6 +50,9 @@
     name: "ProductDetail",
     components: {FloatingCart, YsHeader},
     props:['productId'],
+    mounted(){
+      this.getProduct(this.productId);
+    },
     methods:{
       addCart(){
         ++this.product.quantity;//add 1 each time
@@ -62,6 +66,15 @@
           ++this.product.quantity;
           this.addToCart(this.product);
         }
+      },
+      getProduct(productId){
+        let url = GET.ProductDetail(productId);
+        fetch(url).then(res=>res.json()).then(res=>{
+          console.log("获取商品详情信息成功,",res.data);
+          this.product = res.data;
+        }).catch(err=>{
+          this.$toast("当前网络错误，获取商品信息失败.",err)
+        })
       },
       ...mapActions(['addToCart','subToCart'])
     },
