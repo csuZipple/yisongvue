@@ -1,12 +1,20 @@
 <template>
   <div id="app">
     <router-view/> <!-- root router == '\/'-->
+    <Loading :show="isLoading"/>
   </div>
 </template>
 
 <script>
+import Loading from "./components/Loading/Loading";
+import { createNamespacedHelpers } from 'vuex'
+const {mapState} = createNamespacedHelpers('data');
 export default {
-  name: 'App'
+  name: 'App',
+  components: {Loading},
+  computed:{
+    ...mapState(['isLoading'])
+  }
 }
 </script>
 

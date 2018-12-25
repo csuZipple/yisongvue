@@ -121,6 +121,7 @@ const router =  new Router({
 
 
 router.beforeEach(function (to, from, next) {
+  store.dispatch('data/hideLoading');
   store.state.data.requests.forEach(xhr=>xhr.abort());
   store.state.data.requests =[];
   next();

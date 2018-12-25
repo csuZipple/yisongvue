@@ -16,6 +16,7 @@ const SET_ORDER_LIST = "setOrderList";
 
 //user
 const SET_USER_INFO = "setUserInfo";
+const SET_SHOW_LOADING = "setShowLoading";
 
 export{
   SET_STOREID,
@@ -28,5 +29,6 @@ export{
   SET_NOTICES,
   SET_CART_ITEM_LIST,
   SET_USER_INFO,
-  SET_ORDER_LIST
+  SET_ORDER_LIST,
+  SET_SHOW_LOADING
 }

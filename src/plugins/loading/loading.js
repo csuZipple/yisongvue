@@ -16,7 +16,9 @@ Loading.install= function (Vue, options) {
       }).$mount();
       document.body.appendChild(component.$el);
     }else{
-      document.body.removeChild(document.querySelector('.ys-loading-wrapper'));
+      if(document.querySelector('.ys-loading-wrapper')){
+        document.body.removeChild(document.querySelector('.ys-loading-wrapper'));
+      }
     }
 
   }

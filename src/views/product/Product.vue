@@ -82,13 +82,13 @@
       switchTabItem(index){
         //todo:show loading
         if(this.mockData.types.length){
-          this.$loading({show:true});
+          this.showLoading();
           this.getSubProductTypes(this.mockData.types[index].id,()=>{
             console.log("switch to ",index);
             this.currentCategory = index;
-            this.$loading({show:false});
+            this.hideLoading();
           },()=>{
-            this.$loading({show:false});
+            this.hideLoading();
           });
         }else{
           console.log("数据未加载完成..")
@@ -102,19 +102,19 @@
         this.subToCart(product);
       },
       onSubTypeClicked(item,index){
-        this.$loading({show:true});
+        this.showLoading();
         let url = GET.CategoryProduct(item.id);
         fetch(url).then(res=>res.json()).then(res=>{
           console.log("获取商品信息成功 ",res.data);
           this.mockData.products = res.data;
           this.currentSubType = index;
-          this.$loading({show:false});
+          this.hideLoading();
         }).catch(err=>{
           console.log("获取商品信息失败.",err);
-          this.$loading({show:false});
+          this.hideLoading();
         });
       },
-      ...mapActions(['addToCart','subToCart'])
+      ...mapActions(['addToCart','subToCart','hideLoading','showLoading'])
     },
     data(){
       return{
@@ -164,6 +164,9 @@
           ],
         }
       }
+    },
+    computed:{
+      ...mapState(['isLoading'])
     }
   }
 </script>

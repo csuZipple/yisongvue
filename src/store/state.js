@@ -70,7 +70,6 @@ const data = {
       selected:false
     }
   ],//cart items will be stored locally -- localStorage
-
   orderList:[
     {
       shopName:"壹送便利店（全丰小区店）",
@@ -159,8 +158,8 @@ const data = {
   },
 
 
-  requests:[]
-
+  requests:[],
+  isLoading:false
 };
 
 const status={

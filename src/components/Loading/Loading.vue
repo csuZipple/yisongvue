@@ -1,5 +1,5 @@
 <template>
-  <div class='ys-loading-wrapper'>
+  <div class='ys-loading-wrapper' v-if="show">
     <div class='loading'>
             <span
               :style='{
@@ -23,7 +23,8 @@
         default: false
       },
       text: {
-        type: String
+        type: String,
+        default:"加载中..."
       },
       duration: {
         type: String,

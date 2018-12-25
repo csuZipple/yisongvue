@@ -9,7 +9,8 @@ import {
   SET_NOTICES,
   SET_CART_ITEM_LIST,
   SET_ORDER_LIST,
-  SET_USER_INFO
+  SET_USER_INFO,
+  SET_SHOW_LOADING
 } from "../util/state/constant";
 import {_get,_fetch} from "../util/http/util";
 import {GET} from "../util/http/constant";
@@ -194,6 +195,13 @@ const dataActions = {
     }).catch(err=>{
       console.log("failed to get user info ",err)
     })
+  },
+
+  hideLoading({commit}){
+    commit(SET_SHOW_LOADING,false);
+  },
+  showLoading({commit}){
+    commit(SET_SHOW_LOADING,true);
   }
 
 };
