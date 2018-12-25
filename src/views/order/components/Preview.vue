@@ -1,23 +1,6 @@
 <template>
   <div class="ys-preview">
-    <template v-if="status===2">
-      <div class="info">
-        <p>订单配送至</p>
-        <div class="address" @click="goMap">
-          <p>{{address}}</p>
-          <img src="../../../assets/icon/right.svg" alt="">
-        </div>
-        <p>{{username}} （{{sex[gender]}}）{{phone}}</p>
-      </div>
-      <p>
-        <span>送达时间</span>
-        <span>尽快送达 ({{time.slice(-5)}})</span>
-      </p>
-      <p>
-        <span>支付方式</span>
-        <span>{{pay[payType]}}</span>
-      </p>
-    </template>
+    <PreviewOrderInfo v-if="status===2" :address="address" :username="username" :gender="gender" :phone="phone" :time="time" :pay-type="payType"/>
     <template v-else>
       <div class="wrapper">
         <div>
@@ -41,8 +24,10 @@
 </template>
 
 <script>
+  import PreviewOrderInfo from "./PreviewOrderInfo";
   export default {
     name: "Preview",
+    components: {PreviewOrderInfo},
     methods:{
       goMap(){
         console.log("see map detail! and modify address maybe@");//todo: map detail
@@ -67,8 +52,6 @@
     },
     data(){
       return{
-        sex:["先生","女士"],
-        pay:["在线支付","货到付款","钱包支付"],
         statusText:['卖家已接单','订单已完成']
       }
     }
