@@ -12,6 +12,7 @@ import User from '../views/user/User'
 import Search from '../views/Search/Search'
 import SelectStore from '../views/SelectStore/SelectStore'
 import OrderDetail from "../views/order/orderDetail"
+import ConfirmOrder from "../views/order/ConfirmOrder"
 import Address from '../views/address/Address'
 import ModifyDetail from '../views/address/ModifyAddressDetail'
 import AddDetailContainer from '../views/address/AddAddressDetail'
@@ -110,6 +111,10 @@ const router =  new Router({
       path:"/register",
       name:"register",
       component:Register,
+    },{
+      path:"/confirmOrder",
+      name:"confirmOrder",
+      component:ConfirmOrder,
     },{
       path:"/*",
       redirect:{

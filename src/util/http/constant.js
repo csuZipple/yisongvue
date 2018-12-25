@@ -1,6 +1,7 @@
 /* constant for http request*/
 // const domain="https://project.sumixer.com/yisong/api";
-const domain="http://10.0.0.16:8889";
+// const domain="http://10.0.0.16:8889";
+const domain="http://10.0.0.14:8888/manager";
 const host = "http://wechat.yisongbld.com";
 const mapAk = "MChiGQjAWZk8vdQ2S8F1MKzoEO9P4jni";
 const GET = {
@@ -64,8 +65,10 @@ const GET = {
 };
 
 const POST = {
-  VerificationCode:"/messages/wechat",
-  BindPhone:"/users/weixin"
+  VerificationCode:domain+"/messages/wechat",
+  BindPhone:domain+"/users/weixin",
+  Orders:domain+"/orders",
+  Test:domain+"/test"
 };
 export default {
   whitelist:"wechat.yisongbld.com",

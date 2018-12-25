@@ -15,6 +15,8 @@
       submit(info){
         console.log("submit!");
         console.log(info);
+        //新增收货地址之后应该返回原地址
+        window.location.href = JSON.parse(localStorage.getItem('currentUrl'));
       }
     }
   }

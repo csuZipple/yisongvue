@@ -22,6 +22,8 @@
   import { createNamespacedHelpers } from 'vuex'
   import Dialog from "../../components/Dialog/Dialog";
   import NoData from "../../components/NoData/NoData";
+  import{wxAuth} from "../../util/http/util";
+
   const { mapState, mapActions } = createNamespacedHelpers('data');
   export default {
     name: "Cart",
@@ -41,7 +43,27 @@
         if(this.cartItem.length){
           const list = this.getSelectedCartItemList();
           if(list.length){
-            console.log("checkOut");//todo:go to checkOut
+            if(Object.keys(this.user).length){
+              if(this.user.addressList.length){
+                this.confirmOrders.userId = this.user.userId;
+                this.confirmOrders.addressId = this.user.addressList.filter(item=>{
+                  return item.default
+                })[0].id;
+                this.confirmOrders.products = list;
+                this.setConfirmOrders(this.confirmOrders);
+                this.$router.push({path:`/confirmOrder`});
+              }else{
+                console.log("当前未绑定地址");
+                this.$toast("您当前未保存地址，请先增加地址~");
+                this.$router.push({path:`/addressDetail/new`});
+              }
+            }else{
+              console.log("当前是未登陆状态");
+              wxAuth();
+            }
+            //check address
+            //userId products addressId
+
           }else{
             this.$toast("You need to select the item before checkOut.");
           }
@@ -113,7 +135,7 @@
         }
         this.setCartItemList(this.cartItem);
       },
-      ...mapActions(['setCartItemList'])
+      ...mapActions(['setCartItemList','setConfirmOrders'])
     },
     data(){
       return{
@@ -137,7 +159,7 @@
           }
         },0)//set init to 0 allows the array index to start at 0.
       },
-      ...mapState(['cartItem'])
+      ...mapState(['cartItem','user','confirmOrders'])
     }
   }
 </script>

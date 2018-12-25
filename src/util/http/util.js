@@ -6,7 +6,7 @@ import wx from 'weixin-jsapi'
 //call when the user needs to place an order(in addition to adding goods to the shopping cart)
 //before this method must be {if{state.token}{}}
 function wxAuth(){
-  //save the current state of the page first
+  console.log("微信授权...begin");
   localStorage.setItem("currentUrl",window.location.href);
   window.location.href = AUTH;
 }

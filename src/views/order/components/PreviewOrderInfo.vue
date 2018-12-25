@@ -10,11 +10,17 @@
     </div>
     <p>
       <span>送达时间</span>
-      <span>尽快送达 ({{time.slice(-5)}})</span>
+      <span>尽快送达  {{time&&time.slice(-5)}}</span>
     </p>
     <p>
       <span>支付方式</span>
-      <span>{{pay[payType]}}</span>
+      <span>{{pay[payType]}}</span> <!--todo: change pay type!-->
+    </p>
+    <p style="border-bottom:none">
+      备注
+    </p>
+    <p>
+      <textarea @input="$emit('input',$event.target.value)" placeholder="您还有别的要求嘛？" :disabled="disabled"></textarea>
     </p>
   </div>
 </template>
@@ -28,7 +34,14 @@
       gender:Number,
       phone:[String,Number],
       time:String,
-      payType:Number
+      payType:{
+        type:Number,
+        default:1
+      },
+      disabled:{
+        type:Boolean,
+        default:true
+      }
     },
     methods: {
       goMap() {
@@ -82,6 +95,13 @@
       justify-content: space-between;
       align-items: center;
       font-size:4vw;
+
+
+      textarea{
+        width:100%;
+        color: #666;
+        resize:none;
+      }
 
       span:last-child{
         color: #F5AC00;

@@ -142,24 +142,40 @@ const data = {
   user:{
     userId:1,
     username:"Zipple",
-    phone:18373151083,
     avatar:"",
     addressList:[
       {
+        id:0,
         contact:"Zipple",
         phone:"18373151083",
         gender:0,
         address:"长沙通泰梅岭苑",
         lat:"",
         lnt:"",
-        extra:"2单元604"
+        extra:"2单元604",
+        default:true,//must have a default address.
       }
     ]
   },
 
 
   requests:[],
-  isLoading:false
+  isLoading:false,
+
+  confirmOrders:{
+    userId:"",
+    addressId:"",
+    time:"",
+    products:[
+      {
+        id:1,
+        quantity:3,
+        //other info
+      }
+    ],
+    note:"",
+    payType:1
+  }
 };
 
 const status={

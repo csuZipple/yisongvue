@@ -10,7 +10,8 @@ import {
   SET_CART_ITEM_LIST,
   SET_ORDER_LIST,
   SET_USER_INFO,
-  SET_SHOW_LOADING
+  SET_SHOW_LOADING,
+  SET_CONFIRM_ORDER
 } from "../util/state/constant";
 import {_get,_fetch} from "../util/http/util";
 import {GET} from "../util/http/constant";
@@ -202,6 +203,9 @@ const dataActions = {
   },
   showLoading({commit}){
     commit(SET_SHOW_LOADING,true);
+  },
+  setConfirmOrders({commit},obj){
+    commit(SET_CONFIRM_ORDER,obj);
   }
 
 };

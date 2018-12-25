@@ -30,7 +30,7 @@ input, select,textarea {
   -webkit-appearance: none;
   appearance:none;
 }
-input:focus{
+input:focus,textarea:focus{
   border: none;
   outline: none;
 }
