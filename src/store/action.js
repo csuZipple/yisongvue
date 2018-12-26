@@ -180,7 +180,11 @@ const dataActions = {
     let xhr = _fetch(url);
     xhr.then(res=>res.json()).then(data=>{
       console.log("get order:",data);
-      commit(SET_ORDER_LIST,data.data)
+      if(data.data){
+        commit(SET_ORDER_LIST,data.data)
+      }else{
+        console.log("获取订单失败--")
+      }
     }).catch(err=>{
       console.log("get order list failed! ",err)
     });

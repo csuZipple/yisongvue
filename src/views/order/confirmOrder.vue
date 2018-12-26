@@ -28,7 +28,6 @@
         console.log("buying...");
         //todo: update cart and pay it
         this.confirmOrders.note = this.note;
-        this.confirmOrders.storeId = this.storeId;
         let token = this.token;
         this.showLoading();
         fetch(POST.Orders, {
@@ -70,11 +69,10 @@
       },
       total(){
         return this.confirmOrders.products.reduce((t,c)=>{
-          console.log(t);
           return t + c['price']*c['quantity'];
         },0)
       },
-      ...mapState(["confirmOrders","user",'storeId','token'])
+      ...mapState(["confirmOrders","user",'token'])
     }
   }
 </script>

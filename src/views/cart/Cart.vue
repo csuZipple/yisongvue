@@ -50,6 +50,7 @@
                   return item.default
                 })[0].id;
                 this.confirmOrders.products = list;
+                this.confirmOrders.storeId = this.storeId;
                 this.setConfirmOrders(this.confirmOrders);
                 this.$router.push({path:`/confirmOrder`});
               }else{
@@ -61,9 +62,6 @@
               console.log("当前是未登陆状态");
               wxAuth();
             }
-            //check address
-            //userId products addressId
-
           }else{
             this.$toast("You need to select the item before checkOut.");
           }
@@ -159,7 +157,7 @@
           }
         },0)//set init to 0 allows the array index to start at 0.
       },
-      ...mapState(['cartItem','user','confirmOrders'])
+      ...mapState(['cartItem','user','confirmOrders','storeId'])
     }
   }
 </script>

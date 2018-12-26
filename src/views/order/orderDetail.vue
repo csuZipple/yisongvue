@@ -1,7 +1,7 @@
 <template>
   <div>
     <YsHeader :show-back="showBack">订单详情</YsHeader>
-    <Preview v-bind="order"/>
+    <Preview v-bind="order" @getOneMore="getOrderAgain"/>
     <Product v-bind:list="product"/>
     <Total @toPay="pay" v-bind:total="order.payPrice" v-bind:agio="order.price-order.payPrice" v-if="order.status===2"/>
     <OrderDetailInfo v-bind="order" v-else/>
@@ -105,7 +105,19 @@
       },
       cashOnDelivery(){
 
-      }
+      },
+      getOrderAgain(){
+        //reset confirmOrders and to confirm order page.
+        this.confirmOrders.userId = this.user.userId;
+        this.confirmOrders.addressId = this.user.addressList.filter(item=>{
+          return item.default
+        })[0].id;
+        this.confirmOrders.storeId = this.storeId;
+        this.confirmOrders.products = this.product;
+        this.setConfirmOrders(this.confirmOrders);
+        this.$router.push({path:"/confirmOrder"})
+      },
+      ...mapActions(['setConfirmOrders'])
     },
     data(){
       return{
@@ -121,7 +133,7 @@
       product(){
         return this.order.products;
       },
-      ...mapState(['orderList','token'])
+      ...mapState(['orderList','token','confirmOrders','user','storeId'])
     }
   }
 </script>
