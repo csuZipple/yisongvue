@@ -63,7 +63,7 @@
               success(res) {
                 if (res.errMsg === 'chooseWXPay:ok') {
                   message.success('支付成功');
-                  //todo: go to success page.
+                  vm.$router.replace({path:`/success/pay/${orderId}`})
                 } else {
                  vm.$toast("支付失败!");
                 }

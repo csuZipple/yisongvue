@@ -56,6 +56,12 @@
         note:""
       }
     },
+    mounted(){
+      if(!this.addressObj){
+        this.$toast("当前页面不允许刷新...");
+        this.$router.back();
+      }
+    },
     computed:{
       addressObj(){
         return this.user.addressList.filter(item=>{

@@ -12,6 +12,7 @@ import User from '../views/user/User'
 import Search from '../views/Search/Search'
 import SelectStore from '../views/SelectStore/SelectStore'
 import OrderDetail from "../views/order/orderDetail"
+import SuccessPay from "../views/order/SuccessPay"
 import ConfirmOrder from "../views/order/ConfirmOrder"
 import Address from '../views/address/Address'
 import ModifyDetail from '../views/address/ModifyAddressDetail'
@@ -115,6 +116,11 @@ const router =  new Router({
       path:"/confirmOrder",
       name:"confirmOrder",
       component:ConfirmOrder,
+    },{
+      path:"/success/pay",
+      name:"SuccessPay",
+      props:true,
+      component:SuccessPay,
     },{
       path:"/*",
       redirect:{
