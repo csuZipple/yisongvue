@@ -68,7 +68,8 @@ const POST = {
   VerificationCode:domain+"/messages/wechat",
   BindPhone:domain+"/users/weixin",
   Orders:domain+"/orders",
-  Test:domain+"/test"
+  WxPay:domain+"/payments/orders/wepay",
+  WxPayFail:domain+"/payments/orders/wepay/fail/",
 };
 export default {
   whitelist:"wechat.yisongbld.com",

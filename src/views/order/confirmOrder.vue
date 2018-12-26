@@ -28,22 +28,28 @@
         console.log("buying...");
         //todo: update cart and pay it
         this.confirmOrders.note = this.note;
+        this.confirmOrders.storeId = this.storeId;
+        let token = this.token;
+        this.showLoading();
         fetch(POST.Orders, {
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Ys-user': token
           },
           method: 'POST',
           body:  JSON.stringify(this.confirmOrders)
         }).then(res=>{
+          this.hideLoading();
           console.log("get returns ",res);
           this.addOrder(res.data);
-          this.$router.replace({path:`/orderDetail/${res.data.orderId}`})
+          this.$router.replace({path:`/orderDetail/${res.data.orderId}`});
         }).catch(err=>{
-          console.log("err post");
+          console.log("err post",err);
+          this.hideLoading();
         });
 
       },
-      ...mapActions(['addOrder'])
+      ...mapActions(['addOrder','showLoading','hideLoading'])
     },
     data(){
       return{
@@ -62,7 +68,7 @@
           return t + c['price']*c['quantity'];
         },0)
       },
-      ...mapState(["confirmOrders","user"])
+      ...mapState(["confirmOrders","user",'storeId','token'])
     }
   }
 </script>
