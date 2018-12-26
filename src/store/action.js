@@ -11,7 +11,9 @@ import {
   SET_ORDER_LIST,
   SET_USER_INFO,
   SET_SHOW_LOADING,
-  SET_CONFIRM_ORDER, ADD_ORDER
+  SET_CONFIRM_ORDER,
+  ADD_ORDER,
+  SET_LOADING_TEXT
 } from "../util/state/constant";
 import {_get,_fetch} from "../util/http/util";
 import {GET} from "../util/http/constant";
@@ -204,9 +206,13 @@ const dataActions = {
 
   hideLoading({commit}){
     commit(SET_SHOW_LOADING,false);
+    commit(SET_LOADING_TEXT,"");
   },
-  showLoading({commit}){
+  showLoading({commit},string){
     commit(SET_SHOW_LOADING,true);
+    if(string&&string!==''){
+      commit(SET_LOADING_TEXT,string);
+    }
   },
   setConfirmOrders({commit},obj){
     commit(SET_CONFIRM_ORDER,obj);

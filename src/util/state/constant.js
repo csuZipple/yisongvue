@@ -18,6 +18,7 @@ const SET_ORDER_LIST = "setOrderList";
 const SET_USER_INFO = "setUserInfo";
 
 const SET_SHOW_LOADING = "setShowLoading";
+const SET_LOADING_TEXT = "setLoadingText";
 
 const SET_CONFIRM_ORDER = "setConfirmOrders";
 const ADD_ORDER = "addOrders";
@@ -37,5 +38,6 @@ export{
   SET_ORDER_LIST,
   SET_SHOW_LOADING,
   SET_CONFIRM_ORDER,
-  ADD_ORDER
+  ADD_ORDER,
+  SET_LOADING_TEXT
 }

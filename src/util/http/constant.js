@@ -13,38 +13,38 @@ const GET = {
   /**
    * @return {string}
    */
-  SecondCategory:function (firstId) {
+  SecondCategory(firstId) {
     return domain+`/category/${firstId}/second`;
   },
   /**
    * @return {string}
    */
-  CategoryProduct:function(categoryId){
+  CategoryProduct(categoryId){
     return domain+`/category/${categoryId}/products`;
   },
   Slides:domain+"/stores/slides/",//?storeId
   /**
    * @return {string}
    */
-  Hot:function (storeId) {
+  Hot(storeId) {
     return domain+`/store/${storeId}/products/hot`
   },
   /**
    * @return {string}
    */
-  Orders:function (userId) {
+  Orders(userId) {
     return domain+`/users/${userId}/orders`;
   },
   /**
    * @return {string}
    */
-  OrderById:function (userId, orderId) {
+  OrderById(userId, orderId) {
     return domain+`/users/${userId}/orders/${orderId}`;
   },
   /**
    * @return {string}
    */
-  UserInfo:function(userId){
+  UserInfo(userId){
     return domain+`/users/${userId}`;
   },
 
@@ -52,14 +52,14 @@ const GET = {
   /**
    * @return {string}
    */
-  ProductDetail:function(id){
+  ProductDetail(id){
     return domain+`/products/${id}`
   },
 
   /**
    * @return {string}
    */
-  Search:function (keyword) {
+  Search(keyword) {
     return domain+`/search/${keyword}`;
   }
 };
@@ -71,6 +71,15 @@ const POST = {
   WxPay:domain+"/payments/orders/wepay",
   WxPayFail:domain+"/payments/orders/wepay/fail/",
 };
+
+const PUT = {
+  /**
+   * @return {string}
+   */
+  AddressDefault(userId,addressId){
+    return domain+`/users/${userId}/address/${addressId}/default`
+  }
+};
 export default {
   whitelist:"wechat.yisongbld.com",
   login:host+"/login",
@@ -79,5 +88,5 @@ export default {
 };
 
 export {
-  GET,POST
+  GET,POST,PUT
 }

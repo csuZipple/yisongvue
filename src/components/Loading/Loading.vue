@@ -34,13 +34,15 @@
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .ys-loading-wrapper{
-    min-width: 140px;
-    height: 80px;
+    padding: 8px 20px;
+    max-width: 80%;
+    min-height: 80px;
     background: rgba(0,0,0,0.8);
     color: #ffffff;
     border-radius:10px;
+    z-index: 20;
 
     position: fixed;
     left: 50%;
@@ -48,19 +50,17 @@
     transform: translate(-50%,-50%);
 
     display: flex;
+    align-items: center;
     justify-content: center;
-  }
-  .ys-loading-wrapper .loading {
-    display: flex;
-    text-align: center;
-    padding-top: 30px;
-    height: 50px;
-    justify-content: space-between;
-  }
-  .ys-loading-wrapper .loading span {
-    margin-top: 0;
-    animation: ease infinite move;
-    display: block;
+
+    .loading {
+      display: flex;
+      justify-content: space-between;
+      span {
+        animation: ease infinite move;
+        display: block;
+      }
+    }
   }
   @keyframes move {
     0% {

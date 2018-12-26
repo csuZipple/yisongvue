@@ -1,6 +1,6 @@
 import {
   SET_STOREID, SET_TOKEN, SET_SWIPER_LIST, SET_LOCATION, SET_INDEX_PRODUCTS, SET_CATEGORIES, SET_STORENAME, SET_NOTICES,
-  SET_CART_ITEM_LIST, SET_USER_INFO, SET_ORDER_LIST, SET_SHOW_LOADING, SET_CONFIRM_ORDER, ADD_ORDER
+  SET_CART_ITEM_LIST, SET_USER_INFO, SET_ORDER_LIST, SET_SHOW_LOADING, SET_CONFIRM_ORDER, ADD_ORDER,SET_LOADING_TEXT
 } from "../util/state/constant";
 
 const dataMutations = {
@@ -39,6 +39,9 @@ const dataMutations = {
   },
   [SET_SHOW_LOADING](state,flag){
     state.isLoading = flag;
+  },
+  [SET_LOADING_TEXT](state,text){
+    state.loadingText = text;
   },
   [SET_CONFIRM_ORDER](state,obj){
     state.confirmOrders = obj;

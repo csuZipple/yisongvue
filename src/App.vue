@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view/> <!-- root router == '\/'-->
-    <Loading :show="isLoading"/>
+    <Loading :show="isLoading" :text="loadingText"/>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   name: 'App',
   components: {Loading},
   computed:{
-    ...mapState(['isLoading'])
+    ...mapState(['isLoading','loadingText'])
   },
   mounted(){
     window.ononline = function() {
