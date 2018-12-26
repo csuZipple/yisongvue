@@ -51,6 +51,7 @@
     font-weight: 300;
     background: rgba(216,216,216,0.2);
     border-radius: 22px;
+    overflow-x: hidden;
 
     li{
       position: absolute;
