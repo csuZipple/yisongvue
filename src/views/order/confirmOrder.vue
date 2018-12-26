@@ -28,7 +28,7 @@
         console.log("buying...");
         //todo: update cart and pay it
         this.confirmOrders.note = this.note;
-        fetch(POST.Test, {
+        fetch(POST.Orders, {
           headers: {
             "Content-Type": "application/json"
           },
@@ -36,11 +36,14 @@
           body:  JSON.stringify(this.confirmOrders)
         }).then(res=>{
           console.log("get returns ",res);
+          this.addOrder(res.data);
+          this.$router.replace({path:`/orderDetail/${res.data.orderId}`})
         }).catch(err=>{
           console.log("err post");
         });
 
-      }
+      },
+      ...mapActions(['addOrder'])
     },
     data(){
       return{

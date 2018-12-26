@@ -11,7 +11,7 @@ import {
   SET_ORDER_LIST,
   SET_USER_INFO,
   SET_SHOW_LOADING,
-  SET_CONFIRM_ORDER
+  SET_CONFIRM_ORDER, ADD_ORDER
 } from "../util/state/constant";
 import {_get,_fetch} from "../util/http/util";
 import {GET} from "../util/http/constant";
@@ -206,6 +206,10 @@ const dataActions = {
   },
   setConfirmOrders({commit},obj){
     commit(SET_CONFIRM_ORDER,obj);
+  },
+
+  addOrder({commit},order){
+    commit(ADD_ORDER,order);
   }
 
 };

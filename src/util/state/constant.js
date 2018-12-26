@@ -16,8 +16,12 @@ const SET_ORDER_LIST = "setOrderList";
 
 //user
 const SET_USER_INFO = "setUserInfo";
+
 const SET_SHOW_LOADING = "setShowLoading";
+
 const SET_CONFIRM_ORDER = "setConfirmOrders";
+const ADD_ORDER = "addOrders";
+
 
 export{
   SET_STOREID,
@@ -32,5 +36,6 @@ export{
   SET_USER_INFO,
   SET_ORDER_LIST,
   SET_SHOW_LOADING,
-  SET_CONFIRM_ORDER
+  SET_CONFIRM_ORDER,
+  ADD_ORDER
 }
