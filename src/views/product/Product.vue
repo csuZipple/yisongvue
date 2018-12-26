@@ -52,14 +52,20 @@
            this.getSubProductTypes(category[0].id);
          }else{
            console.log("requestData err");
+           this.$toast("获取数据异常，刷新试试");
          }
       },
       async getProductTypes(){
         let url = GET.FirstCategory;
         fetch(url).then(res=>res.json()).then(res=>{
-          console.log("获取第一分类",res.data);
-          this.mockData.types = res.data;
-          return res.data;//todo: maybe error!
+          console.log("获取第一分类",res);
+          if(res.data){
+            this.mockData.types = res.data;
+            return res.data;//todo: maybe error!
+          }else{
+            console.log("获取分类失败..使用Mock数据");
+          }
+
         }).catch(err=>{
           console.log("get first category failed!",err);
         })
@@ -71,6 +77,7 @@
           typeof callback==='function'&&callback();
         }).catch(err=>{
           console.log("get second category error ",err);
+          this.$toast("获取子级分类失败，刷新试试");
           typeof fail==='function'&&fail();
         })
       },

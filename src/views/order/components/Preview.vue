@@ -33,11 +33,9 @@
         console.log("see map detail! and modify address maybe@");//todo: map detail
       },
       getOneMore(){
-        console.log("one more order!");
         this.$emit("getOneMore");
       },
       applySaleAfter(){
-        console.log("callSaleAfter!");
         this.$emit("callSaleAfter")
       }
     },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <YsHeader :show-back="showBack">订单详情</YsHeader>
-    <Preview v-bind="order" @getOneMore="getOrderAgain"/>
+    <Preview v-bind="order" @getOneMore="getOrderAgain" @callSaleAfter="applySales"/>
     <Product v-bind:list="product"/>
     <Total @toPay="pay" v-bind:total="order.payPrice" v-bind:agio="order.price-order.payPrice" v-if="order.status===2"/>
     <OrderDetailInfo v-bind="order" v-else/>
@@ -116,6 +116,9 @@
         this.confirmOrders.products = this.product;
         this.setConfirmOrders(this.confirmOrders);
         this.$router.push({path:"/confirmOrder"})
+      },
+      applySales(){
+        //todo: 售后界面
       },
       ...mapActions(['setConfirmOrders'])
     },
