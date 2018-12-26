@@ -26,19 +26,23 @@
       gapWidth:{
         type:Number,
         default:10
+      },
+      coefficientHeight:{
+        type:Number,
+        default:0.8
       }
     },
     created(){
       this.clientWidth = document.documentElement.clientWidth;
       this.clientHeight = document.documentElement.clientHeight;
       this.left = this.clientWidth - this.itemWidth - this.gapWidth;
-      this.top = this.clientHeight*0.8;
+      this.top = this.clientHeight*this.coefficientHeight;
     },
     mounted(){
       window.addEventListener('scroll', this.handleScrollStart);
       this.$nextTick(()=>{
         const div = this.$refs.div;
-        div.addEventListener("touchstart",(e)=>{
+        div.addEventListener("touchstart",()=>{
           div.style.transition = 'none';
         });
         div.addEventListener("touchmove",(e)=>{
@@ -48,7 +52,7 @@
             this.top = touch.clientY - this.itemHeight/2;
           }
         });
-        div.addEventListener("touchend",(e)=>{
+        div.addEventListener("touchend",()=>{
           div.style.transition = 'all 0.3s';
            if(this.left>this.clientWidth/2){
              this.left = this.clientWidth - this.itemWidth - this.gapWidth;
@@ -71,7 +75,7 @@
         this.timer = setTimeout(()=>{
           this.handleScrollEnd();
         },300);
-        this.t1 = document.documentElement.scrollTop || document.body.scrollTop;
+        this.currentTop = document.documentElement.scrollTop || document.body.scrollTop;
         if(this.left>this.clientWidth/2){
           this.left = this.clientWidth - this.itemWidth/2;
         }else{
@@ -79,8 +83,8 @@
         }
       },
       handleScrollEnd(){
-        let temp = document.documentElement.scrollTop || document.body.scrollTop;
-        if(temp === this.t1){
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if(scrollTop === this.currentTop){
           if(this.left>this.clientWidth/2){
             this.left = this.clientWidth - this.itemWidth - this.gapWidth;
           }else{
@@ -93,7 +97,7 @@
     data(){
       return{
         timer:null,
-        t1:0,
+        currentTop:0,
         clientWidth:0,
         clientHeight:0,
         left:0,
