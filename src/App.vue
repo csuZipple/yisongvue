@@ -14,6 +14,14 @@ export default {
   components: {Loading},
   computed:{
     ...mapState(['isLoading'])
+  },
+  mounted(){
+    window.ononline = function() {
+      this.$toast("成功连接网络")
+    };
+    window.onoffline = ()=> {
+     this.$toast("网络已断开，请检查您的网络设置")
+    }
   }
 }
 </script>
