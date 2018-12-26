@@ -5,6 +5,9 @@
     <Product v-bind:list="product"/>
     <Total @toPay="pay" v-bind:total="order.payPrice" v-bind:agio="order.price-order.payPrice" v-if="order.status===2"/>
     <OrderDetailInfo v-bind="order" v-else/>
+    <FloatImgBtn text="返回首页" @onFloatBtnClicked="$router.push({path:'/nav/index'})">
+      <img slot="icon" src="../../assets/icon/index-selected.svg" alt="首页">
+    </FloatImgBtn>
   </div>
 </template>
 
@@ -17,11 +20,12 @@
   import OrderDetailInfo from "./components/OrderDetailInfo";
   import {POST} from "../../util/http/constant";
   import wx from 'weixin-jsapi'
+  import FloatImgBtn from "../../components/FloatImgBtn";
 
   const { mapState, mapActions } = createNamespacedHelpers('data');
   export default {
     name: "orderDetail",
-    components: {OrderDetailInfo, Total, Product, Preview, YsHeader},
+    components: {FloatImgBtn, OrderDetailInfo, Total, Product, Preview, YsHeader},
     props:['orderId'],
     methods:{
       pay(){
