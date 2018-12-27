@@ -51,7 +51,7 @@
       onMapSelected(position){
         this.showMap = false;
         Object.keys(position).forEach(item=>{
-          this.info[item] = position[item]; //Attention: 不要使用对象解构，会覆盖原对象导致失去响应式.
+          item === 'lng'?this.info['lnt'] = position[item]:this.info[item] = position[item]; //Attention: 不要使用对象解构，会覆盖原对象导致失去响应式.
         })
       }
     },
