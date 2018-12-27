@@ -25,6 +25,7 @@ import Register from '../views/Register'
 Vue.use(Router);
 const Order = ()=> import('../views/order/Order');
 const router =  new Router({
+  mode: 'history',
   routes: [
     {
       path:"/nav",//包含底部导航栏
