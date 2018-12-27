@@ -1,5 +1,4 @@
 <template>
-  <!--todo: return address to AddAddressDetail and ModifyAddressDetail by using vuex.-->
   <div class="ys-map">
 
     <div class="map-wrapper">
@@ -162,9 +161,11 @@
 
 <style lang="less" scoped>
   .ys-map{
+    width: 100%;
     height: 100%;
     overflow: hidden;
-    position: relative;
+    position: fixed;
+    z-index: 20;
     .map-wrapper{
       height: 50%;
       position: relative;
