@@ -30,3 +30,7 @@
   bottom: 20px;
   width: 100%;
 }
+
+.tangram-suggestion-main{
+  z-index: 30 !important;
+}
