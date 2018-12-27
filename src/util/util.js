@@ -6,7 +6,9 @@
 function getQueryString(name){
   let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
   let r = window.location.search.substr(1).match(reg);
-  return unescape(r[2]);
+  if(r&&r.length){
+    return unescape(r[2]);
+  }
 }
 
 //get token in localStorage and determine whether the token has expired or not,y and then set token in store.n and do nothing.
