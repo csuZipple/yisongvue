@@ -165,14 +165,13 @@ const dataActions = {
         }
       }
     });
-    if(i>0){
+    if(!~i){
       state.cartItem.splice(i,1);
     }
     dispatch('saveCart');
   },
 
   saveCart({state}){
-    console.log("save cart!");
     localStorage.setItem("cartItemList",JSON.stringify(state.cartItem))
   },
 
