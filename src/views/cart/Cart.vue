@@ -56,6 +56,7 @@
               }else{
                 console.log("当前未绑定地址");
                 this.$toast("您当前未保存地址，请先增加地址~");
+                localStorage.setItem("currentUrl",window.location.href);
                 this.$router.push({path:`/addressDetail/new`});
               }
             }else{

@@ -19,7 +19,9 @@
       formData.append("code", code);
       setToken(httpConfig.auth, formData, async data => {
         await this.setToken({token:data.token,userId:data.userId});
-        window.location.href = JSON.parse(localStorage.getItem('currentUrl'));
+        let url = JSON.parse(localStorage.getItem('currentUrl'));
+        localStorage.removeItem('currentUrl');//clean
+        window.location.href = url;
       }, () => {
         this.$router.push({path: `/register?code=${code}`})
       });

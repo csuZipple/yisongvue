@@ -70,6 +70,12 @@ const POST = {
   Orders:domain+"/orders",
   WxPay:domain+"/payments/orders/wepay",
   WxPayFail:domain+"/payments/orders/wepay/fail/",
+  /**
+   * @return {string}
+   */
+  Address(userId){
+    return domain+`/users/${userId}/address`;
+  }
 };
 
 const PUT = {
