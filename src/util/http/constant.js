@@ -78,6 +78,13 @@ const PUT = {
    */
   AddressDefault(userId,addressId){
     return domain+`/users/${userId}/address/${addressId}/default`
+  },
+  /**
+   * @return {string}
+   */
+  Address(userId,addressId){
+    return domain+`/users/${userId}/address/${addressId}`
+
   }
 };
 export default {

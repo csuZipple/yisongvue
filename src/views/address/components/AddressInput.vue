@@ -1,7 +1,8 @@
 <template>
   <div class="ys-address-input" :class="{'short':shorter}">
-      <span>{{label}}</span>
-      <input type="text" :value="value" @input="$emit('input',$event.target.value)" title="" required :placeholder="placeHolder">
+    <span>{{label}}</span>
+    <input type="text" :value="value" :disabled="shorter" @input="$emit('input',$event.target.value)" title="" required :placeholder="placeHolder">
+    <img src="../../../assets/icon/locate-active.svg" alt="right" v-if="shorter" @click="$emit('onImgBtnClicked')">
   </div>
 </template>
 
@@ -35,6 +36,16 @@
 
     input{
       padding-left:20px;
+    }
+    input:disabled{
+      background: transparent;
+    }
+
+    img{
+      width: 22px;
+      height: 22px;
+      object-fit:contain;
+      margin-left: 10px;
     }
   }
   .short{

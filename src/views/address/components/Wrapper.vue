@@ -1,29 +1,35 @@
 <template>
   <div class="ys-wrapper">
-      <AddressInput v-model="info.username" :label="'联系人'" shorter :place-holder="'请输入用户名'"/>
+      <AddressInput v-model="info.username" :label="'联系人'" :place-holder="'请输入用户名'"/>
       <GenderRadio  @onSelect="onSelect"/>
       <AddressInput v-model="info.phone" :label="'电话'" :place-holder="'18373151083'"/>
-      <AddressInput v-model="info.address" :label="'地址'" shorter :place-holder="'地址'"/>
+      <AddressInput v-model="info.address" :label="'地址'" shorter @onImgBtnClicked="onLocateClicked" :place-holder="'地址'"/>
       <AddressInput v-model="info.addressDetail" :label="'门牌号'" :place-holder="'2单元603'"/>
 
     <div class="btn-wrapper">
       <div :class="['btn',{'active':isActive}]" @click="onOkClicked">确定</div>
     </div>
+
+    <Map v-if="showMap" @cancel="showMap = !showMap" @onMapSelected="onMapSelected"/>
   </div>
 </template>
 
 <script>
   import AddressInput from "./AddressInput";
   import GenderRadio from "./GenderRadio";
+  import Map from "../../map/Map";
+
   export default {
     name: "Wrapper",
-    components: {GenderRadio, AddressInput},
+    components: {GenderRadio, AddressInput,Map},
     props:{
       username:String,
       phone:[String,Number],
       address:String,
       addressDetail:String,
       gender:Number,
+      lat:String,
+      lnt:String
     },
     methods:{
       onOkClicked(){
@@ -38,6 +44,15 @@
         let flag =  phoneTest.test(this.info.phone);
         if(!flag) this.$toast("请输入合法的手机号");
         return flag;
+      },
+      onLocateClicked(){
+        this.showMap = true;
+      },
+      onMapSelected(position){
+        this.showMap = false;
+        Object.keys(position).forEach(item=>{
+          this.info[item] = position[item]; //Attention: 不要使用对象解构，会覆盖原对象导致失去响应式.
+        })
       }
     },
     data(){
@@ -48,7 +63,10 @@
           address:this.address||"",
           addressDetail:this.addressDetail||"",
           gender:this.gender||0,
-        }
+          lat:this.lat||"",
+          lnt:this.lnt||"",
+        },
+        showMap:false
       }
     },
     computed:{

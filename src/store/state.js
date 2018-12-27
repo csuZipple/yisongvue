@@ -146,28 +146,24 @@ const data = {
     addressList:[
       {
         id:0,
-        contact:"Zipple",
         phone:"18373151083",
         gender:0,
         address:"长沙通泰梅岭苑",
         lat:"",
         lnt:"",
-        extra:"2单元604",
+        addressDetail:"2单元604",
         default:true,//must have a default address.
         username:"漠叹尘",
-        addressDetail:"",
       }, {
         id:1,
-        contact:"凌莫莫",
         phone:"18945671256",
         gender:1,
         address:"长沙市雨花区万家丽南路960号 长沙理工大学云塘校区 凌宝宝收",
         lat:"",
         lnt:"",
-        extra:"2单元604",
         default:false,//must have a default address.
         username:"凌莫莫",
-        addressDetail:"",
+        addressDetail:"2单元604 凌莫莫",
       }
     ]
   },

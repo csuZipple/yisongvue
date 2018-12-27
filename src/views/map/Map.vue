@@ -14,10 +14,10 @@
     </div>
 
     <div class="ys-search-address">
-      <img class="back" src="../../assets/icon/back.svg" alt="back" @click="onBackClick">
+      <img class="back" src="../../assets/icon/back.svg" alt="back" @click="$emit('cancel')">
       <div class="ys-search-wrapper">
         <input type="text" v-model="searchValue" title="" id="suggestId" placeholder="定位不准？试试手动输入">
-        <img src="../../assets/icon/close.svg" alt="search" @click="searchValue=''">
+        <img src="../../assets/icon/close.svg" v-show="searchValue!==''" alt="search" @click="searchValue=''">
       </div>
       <a class="okBtn" href="javascript:;" @click="onOkClick">确定</a>
     </div>
@@ -92,13 +92,15 @@
        * Attention: 解析地址会有异常--有时候会解析正确，有时候只会解析到区
        * point.lng = (112.995443,28.143792);//梅岭苑
        * @param point lng and lat
+       * @param success 回调函数
        */
-      analyze(point){//point:{lat:"",lng:""}
+      analyze(point,success){//point:{lat:"",lng:""}
         const geoc = new BMap.Geocoder();
         geoc.getLocation(point, rs=>{
           this.point = rs.point;//===r.point
           this.currentAddress = rs.address;
           this.poiKeyword = rs.street||rs.address;
+          typeof success === 'function' && success();
         });
       },
       /**
@@ -111,9 +113,6 @@
           this.searchValue = _value.province + _value.city + _value.district + _value.street + _value.business;
           this.setPlace(this.searchValue);
         });
-      },
-      selectAddress(item){
-        //todo: return item the same as onOkClicked function
       },
       setPlace(val){
         let map = this.map;
@@ -130,15 +129,24 @@
         local.search(val);
       },
       onMapClicked(e){
-        console.log(e);//todo: get point with dialog and return
+        this.analyze(e.point,()=>{
+          let address = this.currentAddress;
+          this.$emit("onMapSelected",{address,...e.point})
+        });
       },
-      onBackClick(){
-        //todo: cancel
+      selectAddress(item){
+        this.analyze(item.point,()=>{
+          let address = this.currentAddress;
+          this.$emit("onMapSelected",{address,...item.point})
+        });
       },
       onOkClick(){
-        //todo: get this address and return.
-        console.log("已选中当前位置!");
-        console.log(this.currentAddress,this.point)
+        if(Object.keys(this.point).length){
+          let address = this.currentAddress;
+          this.$emit("onMapSelected",{address,...this.point})
+        }else{
+          console.error("获取经纬度失败")
+        }
       }
     },
     data(){
@@ -165,6 +173,8 @@
     height: 100%;
     overflow: hidden;
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: 20;
     .map-wrapper{
       height: 50%;
@@ -198,6 +208,7 @@
       overflow-y: scroll;
       position: relative;
       padding: 1px 12px;
+      background: #ffffff;
     }
     .ys-search-address{
       position: absolute;
