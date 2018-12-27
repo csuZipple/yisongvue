@@ -30,6 +30,7 @@
         this.confirmOrders.note = this.note;
         let token = this.token;
         this.showLoading();
+        this.updateCart();
         fetch(POST.Orders, {
           headers: {
             "Content-Type": "application/json",
@@ -48,7 +49,16 @@
         });
 
       },
-      ...mapActions(['addOrder','showLoading','hideLoading'])
+      updateCart(){
+        let ids = this.products.map(it=>{
+          return it.id;
+        });
+        let newCartItemList = this.cartItem.filter(item=>{
+            return ids.includes(item.id);
+        });
+        this.setCartItemList(newCartItemList);
+      },
+      ...mapActions(['addOrder','showLoading','hideLoading','setCartItemList'])
     },
     data(){
       return{
@@ -72,7 +82,10 @@
           return t + c['price']*c['quantity'];
         },0)
       },
-      ...mapState(["confirmOrders","user",'token'])
+      products(){
+        return this.confirmOrders.products
+      },
+      ...mapState(["confirmOrders","user",'token','cartItem'])
     }
   }
 </script>
