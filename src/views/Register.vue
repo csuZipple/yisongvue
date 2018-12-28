@@ -55,10 +55,12 @@
           console.log("获取服务端响应..",res);
           if(res.code===200){
             this.$router.push({path:"/login"});
+            this.showMessageCode = false;
           }
         }).catch(err=>{
           console.log("绑定手机失败",err);
           this.hideLoading();
+          this.showMessageCode = false;
         })
       },
       getVerificationCode(){
