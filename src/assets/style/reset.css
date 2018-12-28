@@ -29,6 +29,7 @@ input, select,textarea {
   border: 0;
   -webkit-appearance: none;
   appearance:none;
+  caret-color:#F8C907;
 }
 input:focus,textarea:focus{
   border: none;
