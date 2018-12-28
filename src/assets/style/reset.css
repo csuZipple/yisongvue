@@ -31,7 +31,7 @@ input, select,textarea {
   appearance:none;
   caret-color:#F8C907;
 }
-input:focus,textarea:focus{
+input:focus,textarea:focus,button:focus{
   border: none;
   outline: none;
 }
