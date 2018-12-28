@@ -5,7 +5,7 @@
               :style='{
                 padding: "0 3px",
                 animationDuration: duration.indexOf("s") === -1 ? duration + "s" : duration ,
-                animationDelay: parseInt(duration)/text.length*index +"s"
+                animationDelay: parseInt(duration)*index/(text.length*2) +"s"
               }'
               v-for="(char,index) in text">
               {{char}}
