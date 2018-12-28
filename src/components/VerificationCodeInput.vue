@@ -33,7 +33,9 @@
         this.currentIndex === this.amount && this.$emit("onCompleted",this.code.join(""))
       },
       onDelete(e,index){
-        this.currentIndex = index-1;
+        if(e.target.value===''){
+          this.currentIndex = index-1;
+        }
       },
       validateNumber(val){
         return val.replace(/\D/g,'');
@@ -43,11 +45,6 @@
       return{
         code:[],
         currentIndex:0
-      }
-    },
-    watch:{
-      code(code){
-        console.log("change!",code);
       }
     }
   }
