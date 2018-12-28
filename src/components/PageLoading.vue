@@ -3,7 +3,7 @@
     <img src="../assets/image/loading.png" alt="loading">
     <figcaption>
       <p>
-        努力加载中
+        {{text}}
         <span v-for="i in 3" :style='{
                 animationDuration: "1s",
                 animationDelay:i/3+"s"
@@ -17,6 +17,12 @@
 <script>
   export default {
     name: "PageLoading",
+    props:{
+      text:{
+        type:String,
+        default:"加载中"
+      }
+    }
   }
 </script>
 
@@ -39,6 +45,7 @@
         text-align: center;
         animation: ease infinite move;
         opacity: 0;
+        font-size: 4vw;
       }
     }
 
