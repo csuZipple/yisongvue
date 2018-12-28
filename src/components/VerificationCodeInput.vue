@@ -1,7 +1,7 @@
 <template>
   <div class="ys-verification">
     <div class="input-wrapper" v-for="item in amount" :key="item">
-      <input type="text" title="code" v-focus="(item - 1) === currentIndex" maxlength="1" @input="handleInput($event,(item-1))" v-model="code[item-1]">
+      <input type="text" title="code" v-focus="(item - 1) === currentIndex" maxlength="1" @input="handleInput($event,(item-1))" @keyup.delete="onDelete($event,(item-1))"  v-model="code[item-1]">
     </div>
   </div>
 </template>
@@ -17,9 +17,6 @@
     },
     directives: {
       focus: {
-        inserted: function (el,obj) {
-          obj.value && el.focus();
-        },
         componentUpdated: function(el,obj) {
           obj.value && el.focus();
         }
@@ -34,6 +31,9 @@
         e.target.value = this.validateNumber(e.target.value);
         e.target.value!==''&& ++this.currentIndex;
         this.currentIndex === this.amount && this.$emit("onCompleted",this.code.join(""))
+      },
+      onDelete(e,index){
+        this.currentIndex = index-1;
       },
       validateNumber(val){
         return val.replace(/\D/g,'');
