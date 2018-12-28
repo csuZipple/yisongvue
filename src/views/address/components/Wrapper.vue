@@ -18,6 +18,7 @@
   import AddressInput from "./AddressInput";
   import GenderRadio from "./GenderRadio";
   import Map from "../../map/Map";
+  import{validatePhone} from "../../../util/util";
 
   export default {
     name: "Wrapper",
@@ -40,8 +41,7 @@
         this.info.gender = gender;
       },
       validate(){
-        const phoneTest = /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
-        let flag =  phoneTest.test(this.info.phone);
+        let flag =  validatePhone(this.info.phone);
         if(!flag) this.$toast("请输入合法的手机号");
         return flag;
       },
