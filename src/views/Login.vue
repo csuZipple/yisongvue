@@ -1,7 +1,5 @@
 <template>
-  <div>
-    正在登陆中---
-  </div>
+  <PageLoading text="登录中"/>
 </template>
 
 <script>
@@ -9,10 +7,12 @@
   import httpConfig from "../util/http/constant";
   import {getQueryString} from "../util/util";
   import { createNamespacedHelpers } from 'vuex'
+  import PageLoading from "../components/PageLoading";
 
   const { mapActions } = createNamespacedHelpers('data');
   export default {
     name: "login",
+    components: {PageLoading},
     mounted: function () {
       let code = getQueryString("code");
       if(code&&code!==''){
