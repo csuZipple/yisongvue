@@ -58,13 +58,13 @@
 
 <style lang="less" scoped>
   .ys-number-input{
-    padding: 12px 9px;
+    min-width: 80%;
+    padding: 12px 0;
     margin: 12px 0;
     box-sizing: content-box;
     border-bottom: 1px solid #D6D6D6;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
 
     position: relative;
@@ -97,6 +97,7 @@
       bottom: 0;
       right: 0;
       opacity: 0;
+      z-index: -1;
     }
 
   }
@@ -105,6 +106,7 @@
 
     &:after{
       opacity: 1;
+      z-index: 1;
       transform: translateY(100%);
     }
   }
